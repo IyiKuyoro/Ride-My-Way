@@ -1,0 +1,141 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    background: #e8e5ff;
+}
+
+/* Global */
+.container{
+    overflow: hidden;
+}
+
+ul{
+    margin: 0;
+    padding: 0;    
+}
+
+/* Header */
+header {
+    background: #7768ff;
+    color: black;
+    padding: 0 40px 0 40px;
+    border-bottom: 5px solid #4c4b4f; 
+    min-height: 70px;
+}
+
+header a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+}
+
+header li{
+    float: left;
+    display: inline;
+    padding: 0 15px 0 15px;
+}
+
+header nav{
+    float: right;
+    margin-top: 50px;
+    padding: 0;
+}
+
+header #brand{    
+    float: left;
+    margin-top: 20px;
+}
+
+header #brand h1{
+    margin: 0;
+    padding: 0;
+}
+
+header #brand h5{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header #logo{
+    height: 125px;
+    float: left;
+    margin-right: 10px;
+    padding: 0;
+}
+
+#welcome{
+    background: url(../images/welcomeimage.jpg) no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+    float: left;
+}
+
+#welcome .container{
+    width: 60%;    
+    float: left;
+    margin-left: 50px;
+}
+
+aside{
+    padding: 10px;
+    margin: 25px 25px 0 0;
+    float: right;
+    background: #cccccc;
+}
+
+aside .sign-in input{
+    width: 90%;
+    padding: 8px;
+    margin: 7px;
+}
+
+aside label{
+    margin: 7px;
+}
+
+aside button{
+    width: 95%;
+    padding: 8px;
+    margin: 7px;
+    background: #2bff2e;
+    color: black;
+    border: none;
+    font-size: 20px;
+}
+
+footer{    
+    padding: 20px;
+    margin-top: 20px;
+    color: black;
+    background: #cccccc;
+}
+
+footer p{
+    float: left;
+}
+
+footer .container{
+    padding: 20px
+}
+
+footer .images{
+    margin: 0 auto;
+    width: 100px;
+}
+
+footer img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-top: 20px;
+}
+
+footer ul{
+    float: right;
+    text-decoration: none;
+    margin-top: 20px;
+}
