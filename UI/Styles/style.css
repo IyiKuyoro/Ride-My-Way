@@ -18,7 +18,7 @@ ul{
 }
 
 /* Header */
-header {
+header .container{
     background: #3fccff;
     color: black;
     padding: 0 80px 0 40px;
@@ -71,6 +71,23 @@ header #logo{
     padding: 0;
 }
 
+#nonhomeheader {
+    margin-top: -100px;
+}
+
+#nonhomeheader nav{
+    margin-top: 30px;
+    font-size: 17px;
+}
+
+#nonhomeheader img{
+    height: 60px;
+    float: left;
+    margin: 10px 0 10px 10px;
+    padding: 0;
+}
+
+/* Welcome message section */
 #welcome{
     background: url(../Images/welcomeimage.jpg) no-repeat fixed;
     background-size: 100%;
@@ -85,6 +102,7 @@ header #logo{
     margin-left: 50px;
 }
 
+/* Sign In */
 aside{
     min-width: 380px;
     min-height: 300px;
@@ -95,7 +113,7 @@ aside{
     color: #006da0;
 }
 
-aside .sign-in input{
+aside .sign-in input, #signup-form input, .sign-up select{
     width: 90%;
     padding: 8px;
     margin: 7px;
@@ -105,7 +123,7 @@ aside label{
     margin: 7px;
 }
 
-aside button{
+button{
     width: 95%;
     padding: 8px;
     margin: 20px 7px 20px 7px;
@@ -115,10 +133,34 @@ aside button{
     font-size: 20px;
 }
 
-aside p{
+aside p, #signup-form p{
     font-size: 15px;
     text-align: center;
     margin: 0;
+}
+
+/* Sign Up */
+#signup-form{
+    margin: 0 auto;
+    width: 70%;
+    margin-top: 100px;
+    color: #006da0;
+}
+
+#signup-form select{
+    width: 92%;
+}
+
+#signup-form label{
+    margin-left: 8px;
+}
+
+#signup-form button{
+    width: 92%;
+}
+
+#signup-form p{
+    margin-left: -70px;
 }
 
 section #services{
@@ -140,11 +182,12 @@ section .service-card{
 }
 
 footer{    
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
     margin-top: 20px;
     color: black;
     background: #cccccc;
     font-size: 15px;
+    height: 40px;
 }
 
 footer p{
