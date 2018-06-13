@@ -12,6 +12,11 @@ body{
     overflow: hidden;
 }
 
+.current{
+    color: #041666;
+    font-weight: bold;
+}
+
 ul{
     margin: 0;
     padding: 0;    
@@ -33,6 +38,10 @@ header a{
     text-decoration: none;
     text-transform: uppercase;
     color: black;
+}
+
+header a:hover{
+    text-decoration: underline blue;
 }
 
 header li{
