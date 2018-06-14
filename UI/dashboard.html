@@ -7,16 +7,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./styles/style.css">
     </head>
-    <body>
+    <body class="diff-bg">
         <header>
             <div id="dashboard-header" class="container">
                 <img id="logo2" src="./images/logo.png">
                 <nav>
-                    <u>
+                    <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="AboutUs.html">About Us</a></li>
                         <li><a href="ContactUs.html">Contact Us</a></li>
-                    </u>
+                        
+                        <li>
+                            <div>
+                                <ul>
+                                    <li>Offered: 4</li>
+                                    <li>Taken: 1</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </header>
@@ -35,21 +44,22 @@
             </ul>
         </div>
 
-        <div id="user-profile" class="container">
-            <img class="center" src="./images/profilepics.png">
-            <h3>Bola Oke</h3>
+        <div id="find-rd" class=" container">
+            <div class="user-info">
+                <img class="center" src="./images/profilepics.png">
+                <ul>
+                    <li class="bold">Bola Oke</li>
+                    <li>Mobile Number</li>
+                    <li>example@ridemyway.com</li>
+                    <li><button id="edit-pro">Edit Profile</button></li>
+                </ul>
+            </div>
 
-            <section>                
-                <div class="figures">
-                    <p>Rides Offered</p>
-                    <h2>4</h2>
-                </div>
-                <div class="figures">
-                    <p>Rides Taken</p>
-                    <h2>1</h2>
-                </div>
-            </section>
-            <table>
+            <div>
+                <h3>Offered</h3>
+            </div>
+
+            <table id="ridesTbl">
                 <tr>
                     <th>S/N</th>
                     <th>Type</th>
@@ -104,7 +114,7 @@
             </div>
         </div>
 
-        <footer class="dash-foot">
+        <footer class="dash-foot spe-ft">
             <div>
                 <p>Ride My Way &copy; 2018</p>
                 
