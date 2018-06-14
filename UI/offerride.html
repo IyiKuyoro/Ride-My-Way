@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ride My Way | Offer Ride </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./styles/style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    </head>
+    <body class="container diff-bg">
+        <header>
+            <div id="dashboard-header" class="container">
+                <img id="logo2" src="./images/logo.png">
+                <nav>
+                    <u>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="AboutUs.html">About Us</a></li>
+                        <li><a href="ContactUs.html">Contact Us</a></li>
+                    </u>
+                </nav>
+            </div>
+        </header>
+
+        <div class="userfeatures">
+            <div>
+                <img class="features-icon centered" src="./images/icon_fulllist.png">
+                <img id="profile-pics" src="./images/profilepics.png">
+            </div>
+            <ul>
+                <li><a href="dashboard.html">Profile</li>
+                <li><a href="rideoffers.html">Ride Offers</a></li>
+                <li><a class="current" href="offerride.html">Offer a Ride</a></li>
+                <li><a href="reviewrequests.html">Review Request</a></li>
+                <li><a id="sign-out" href="index.html">Sign Out</a></li>
+            </ul>
+        </div>
+
+        <div id="find-rd" class="container">
+            <h1>Offer a Ride</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sagittis iaculis. Nulla sit amet sodales nisi. Vestibulum non est dui. Sed dignissim ipsum non eros aliquam, et dignissim ex porta. Etiam dolor lacus, egestas sit amet dictum at, lacinia eu velit. Morbi facilisis ligula id condimentum laoreet.</p>
+            <form>
+                <div>
+                    <label>Origin</label>
+                    <input type="text" required>
+                </div>
+                <div>
+                    <label>Destination</label>
+                    <input type="text" required>
+                </div>
+                <div>
+                    <label>Time</label>
+                    <input type="datetime" required>
+                </div>
+                <div>
+                    <label>Allow Stop?</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Space</label>
+                    <input type="number" required>
+                </div>
+                <div>
+                    <label>Proposed Route</label>
+                    <textarea spellcheck="true" placeholder="Describe the route you will be taking."></textarea>
+                </div>
+
+                <input class="button" type="submit" value="Offer">
+            </form>
+        </div>
+
+        <div id="ridedetails" class="container userfeatures">          
+            <img id="close" src="./images/icon_close.png">
+            <div>
+                <img id="profile-pics" src="./images/profilepics.png">
+                <h3>Driver's Name</h3>
+                <p id="rdOff">Rides Offered: XXXX</p>
+            </div>
+            <ul>
+                <li><span class="bold">From: </span><span>location</span></li>
+                <li><span class="bold">To: </span><span>location</span></li>
+                <li><span class="bold">Time: </span><span>time</span></li>
+                <li><span class="bold">Space: </span><span>number</span></li>
+                <li><span class="bold">Will Stop? </span><span>Yes/No</span></li>
+                <li>
+                    <p class="bold">Proposed Route:</p>
+                    <p>description</p>
+                </li>
+            </ul>
+            <button id="request-ride">Request</button>
+        </div>
+
+        <footer class="dash-foot">
+            <div>
+                <p>Ride My Way &copy; 2018</p>
+                
+                <div class="images">
+                    <a href="#"><img src="./images/icon_facebook.png"></a>
+                    <a href="#"><img src="./images/icon_twitter.png"></a>
+                </div>
+
+                <ul>
+                    <li><a>Help</a></li>
+                </ul>
+            </div>
+        </footer>
+        <script src="./scripts/main.js"></script>
+    </body>
+</html>

@@ -9,17 +9,25 @@ body{
 }
 
 .diff-bg{        
-    background: url("../images/welcomeimage.jpg") no-repeat;
+    background: url("../images/welcomeimage.jpg") no-repeat fixed;
     background-size: 100%;
 }
 
 /* Global */
-.bold{
-    font-weight: bold;
+input,
+select,
+#search {
+    width: 90%;
+    padding: 8px;
+    margin: 7px;
 }
 
-.container{
-    overflow: hidden;
+select{
+    width: 93.5%;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 .current{
@@ -44,9 +52,10 @@ header .container{
     border-bottom: 5px solid #006da0; 
     min-height: 70px;
     position: fixed;
-    margin-top: -20px;
+    margin-top: 0px;
     width: 100%;
     z-index: 3;
+    top: 0;
 }
 
 header a{
@@ -103,6 +112,10 @@ header #logo{
     font-size: 17px;
 }
 
+#dashboard-header #stats{
+    list-style-type: circle;
+}
+
 #logo2{
     height: 60px;
     float: left;
@@ -125,13 +138,13 @@ header #logo{
 
 /* User Features */
 .userfeatures, #ridedetails{
-    padding: 110px 0 0 15px;
-    /* align-items: flex-start; */
+    padding: 20px 0 0 15px;
     width: 280px;
+    height: 100%;
     background: #006da0;
     display: block;    
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 80px;
     bottom: 0;
 }
 
@@ -216,45 +229,6 @@ header #logo{
     text-align: center;
 }
 
-#user-profile{
-    float: right;
-    margin: 110px 50px 0 0;
-    width: 73%;
-}
-
-#user-profile img{
-    width: 150px;
-    margin: 0;
-    position: relative;
-    left: 43%;
-    margin-right: -50%;
-}
-
-#user-profile h3{
-    position: relative;
-    text-align: center;
-}
-
-#user-profile h2, #user-profile p{
-    margin: 0;
-    padding-top: 10px;
-}
-
-#user-profile p{
-    border-bottom: 1px solid #006da0;
-    padding-bottom: 10px;
-}
-
-#user-profile .figures{
-    background: white;
-    /* border-radius: 10px; */
-    width: 130px;
-    padding: 0 5px 0 5px;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
 #more{
     font-size: 16px;
     position: relative;
@@ -263,7 +237,9 @@ header #logo{
 }
 
 #find-rd{
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
 }
 
 #find-rd #search{
@@ -279,6 +255,12 @@ header #logo{
     color: white;
 }
 
+#find-rd h3{
+    display: inline;
+    text-align: center;
+    color: white;
+}
+
 #find-rd p{
     color: white;
     max-width: 60%;
@@ -290,6 +272,58 @@ header #logo{
 #find-rd #more{
     margin-left: 10.5%;
     color: white;
+}
+
+#find-rd form{
+    color: white;
+    margin-left: 15%;
+    border: 1px solid white;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: 41%;
+    padding: 20px;
+}
+
+#find-rd form textarea{
+    min-height: 150px;
+    width: 90%;
+    padding: 10px;
+    margin: 0 0 0 5px;
+    font-size: 16px;
+}
+
+#find-rd form .button{
+    width: 95%;
+    padding: 8px;
+    margin: 20px 7px 20px 7px;
+    background: #037ef1;
+    color: black;
+    border: none;
+    font-size: 20px;
+}
+
+#find-rd .user-info{
+    position: relative;
+    margin-top: 130px;
+    left: 30%;
+}
+
+#find-rd img{
+    width: 150px;
+    float: left;
+}
+
+#find-rd .user-info ul{
+    color: white;
+    list-style: none;
+    margin-left: 200px;
+    padding-top: 15px;
+}
+
+#edit-pro{
+    width: fit-content;
+    margin: 0;
+    background: #3fccff;
 }
 
 #ridesTbl{
@@ -349,15 +383,6 @@ aside{
     float: right;
     background: #bfeaff;
     color: #006da0;
-}
-
-aside .sign-in input, 
-#signup-form input, 
-.sign-up select, 
-#search {
-    width: 90%;
-    padding: 8px;
-    margin: 7px;
 }
 
 aside label{
@@ -440,9 +465,14 @@ section .service-card{
     color: black;
     background: #cccccc;
     font-size: 15px;
-    
-    position:absolute;
     bottom:0;
+    position: relative;
+    z-index: 3;
+}
+
+.spe-ft{
+    position: fixed;
+    bottom: 0;
 }
 
 footer p{
