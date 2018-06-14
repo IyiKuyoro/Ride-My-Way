@@ -8,7 +8,16 @@ body{
     height: 100%;
 }
 
+.diff-bg{        
+    background: url("../images/welcomeimage.jpg") no-repeat;
+    background-size: 100%;
+}
+
 /* Global */
+.bold{
+    font-weight: bold;
+}
+
 .container{
     overflow: hidden;
 }
@@ -115,9 +124,9 @@ header #logo{
 
 
 /* User Features */
-.userfeatures{
+.userfeatures, #ridedetails{
     padding: 110px 0 0 15px;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     width: 280px;
     background: #006da0;
     display: block;    
@@ -132,11 +141,6 @@ header #logo{
     margin-right: 10px;
 }
 
-.userfeatures h3{
-    display: inline;
-    margin-left: 5px;
-}
-
 .userfeatures ul{
     margin: 0 auto;
     width: 85%;
@@ -145,6 +149,11 @@ header #logo{
 
 .userfeatures a{
     color: #006da0;
+}
+
+#sign-out{
+    color: rgb(32, 3, 66);
+    margin: 0 auto;
 }
 
 .userfeatures li{    
@@ -157,6 +166,54 @@ header #logo{
 
 #profile-pics{
     max-width: 60px;
+    margin: 0;
+    position: relative;
+    left: 24%;
+    margin-right: -50%;
+}
+
+#ridedetails{
+    background: #3fccff;
+    padding-right: 20px;
+    left: 100%;
+}
+
+#ridedetails #close{
+    width: 30px;
+}
+
+#ridedetails h3{
+    text-align: center;
+    margin: 0;
+    font-size: 25px;
+}
+
+#ridedetails #profile-pics{
+    left: 38%;
+}
+
+#ridedetails ul{
+    /* background: white; */
+    border-top: solid #006da0;
+    padding: 20px;
+}
+
+#ridedetails li{
+    background: none;
+    margin: 0;
+    font-size: medium;
+    text-align: left;
+}
+
+#ridedetails p{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#ridedetails #rdOff{
+    margin-top: 5px;
+    text-align: center;
 }
 
 #user-profile{
@@ -205,6 +262,50 @@ header #logo{
     margin-right: -50%;
 }
 
+#find-rd{
+    overflow-y: scroll;
+}
+
+#find-rd #search{
+    max-width: 300px;
+    margin-left: 47%;
+    margin-bottom: 0;
+}
+
+#find-rd h1{
+    text-align: center;
+    margin-top: 120px;
+    margin-left: 15%;
+    color: white;
+}
+
+#find-rd p{
+    color: white;
+    max-width: 60%;
+    text-align: center;
+    margin-left: 27.5%;
+    margin-top: -30px;
+}
+
+#find-rd #more{
+    margin-left: 10.5%;
+    color: white;
+}
+
+#ridesTbl{
+    position: relative;
+    margin-top: 30px;
+    left: 30%;
+} 
+
+.vrBtn{
+    height: 30px;
+    width: fit-content;
+    font-size: 15px;
+    background: #006da0;
+    margin: 2px;
+}
+
 table{
     margin: 0;
     position: absolute;
@@ -219,6 +320,7 @@ table{
 th, td{
     padding: 3px;
     border-bottom: 1px solid #f2f2f2;
+    vertical-align: center;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
@@ -249,7 +351,10 @@ aside{
     color: #006da0;
 }
 
-aside .sign-in input, #signup-form input, .sign-up select{
+aside .sign-in input, 
+#signup-form input, 
+.sign-up select, 
+#search {
     width: 90%;
     padding: 8px;
     margin: 7px;
