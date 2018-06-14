@@ -68,7 +68,6 @@ a:hover{
 }
 
 header li{
-    float: left;
     display: inline;
     padding: 0 15px 0 15px;
 }
