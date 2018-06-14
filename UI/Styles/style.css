@@ -103,10 +103,6 @@ header #logo{
     padding: 0;
 }
 
-#nonhomeheader {
-    margin-top: -100px;
-}
-
 #nonhomeheader nav{
     margin-top: 30px;
     font-size: 17px;
