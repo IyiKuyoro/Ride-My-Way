@@ -6,6 +6,7 @@
         <title>Ride My Way | Welcome</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./styles/style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
@@ -16,11 +17,11 @@
                     <h5>Simply tag along</h5>
                 </div>
                 <nav>
-                    <u>
+                    <ul>
                         <li><a class="current" href="index.html">Home</a></li>
                         <li><a href="AboutUs.html">About Us</a></li>
                         <li><a href="ContactUs.html">Contact Us</a></li>
-                    </u>
+                    </ul>
                 </nav>
             </div>
         </header>
@@ -41,7 +42,7 @@
                         <label>Password</label>
                         <input type="password" placeholder="XXXXXXXX">
                     </div>
-                    <button class="button" type="submit">sign-in</button>
+                    <button id="sign-in-btn" class="button">sign-in</button>
                 </form>
                 <p>I don't have an account and will like to <a href="signup.html">sign-up</a></p>
             </aside>
@@ -70,7 +71,7 @@
             </div>
         </section>
 
-        <footer>
+        <footer class="norm-foot">
             <div>
                 <p>Ride My Way &copy; 2018</p>
                 
@@ -84,5 +85,6 @@
                 </ul>
             </div>
         </footer>
+        <script src="./scripts/main.js"></script>         
     </body>
 </html>
