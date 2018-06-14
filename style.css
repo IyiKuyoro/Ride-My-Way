@@ -9,7 +9,7 @@ body{
 }
 
 .diff-bg{        
-    background: url("../images/welcomeimage.jpg") no-repeat fixed;
+    background: url("welcomeimage.jpg") no-repeat fixed;
     background-size: 100%;
 }
 
@@ -357,7 +357,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 /* Welcome message section */
 #welcome{
-    background: url(../Images/welcomeimage.jpg) no-repeat fixed;
+    background: url("welcomeimage.jpg") no-repeat fixed;
     background-size: 100%;
     color: #ffffff;
     float: left;
