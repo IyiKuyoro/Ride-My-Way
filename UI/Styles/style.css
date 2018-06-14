@@ -326,7 +326,18 @@ header #logo{
     position: relative;
     margin-top: 30px;
     left: 30%;
-} 
+}
+
+#message{
+    background: #006da0;
+    height: 80px;
+    width: fit-content;
+    padding: 10px;
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    visibility: hidden;
+}
 
 .vrBtn{
     height: 30px;
@@ -334,6 +345,22 @@ header #logo{
     font-size: 15px;
     background: #006da0;
     margin: 2px;
+}
+
+.accept{
+    height: 30px;
+    width: fit-content;
+    font-size: 15px;
+    background: #38d379;
+    margin: 2px;
+}
+
+.reject{
+    height: 30px;
+    width: fit-content;
+    font-size: 15px;
+    margin: 2px;
+    background: rgb(231, 54, 54);
 }
 
 table{
