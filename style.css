@@ -527,7 +527,7 @@ footer ul{
     margin-right: 30px
 }
 
-@media(max-width: 768px){
+@media(max-width: 800px){
     header .container{
         padding: 0 5px 0 5px;
     }
@@ -583,5 +583,55 @@ footer ul{
         min-height: fit-content;
         margin-right: 5%;
         font-size: 18px;
+    }
+
+    .userfeatures{
+        width: 50px; 
+    }
+    
+    .userfeatures .features-icon{
+        width: 25px;
+        padding-bottom: 0;
+        margin: 0;
+    }
+    
+    .userfeatures ul{
+        margin: 0;
+        margin-left: -10%;
+        width: 90%;
+    }
+    
+    .userfeatures li{
+        left: 0;
+        margin: 10% 0 10% 0;
+        overflow: hidden;
+    }
+    
+    #profile-pics{
+        max-width: 50px;
+        position: relative;
+        left: -6px;
+    }
+
+    .diff-bg{
+        background-size: 310%;
+    }
+
+    #find-rd #search{
+        margin-left: 30%;
+    }
+
+    #ridesTbl{
+        position: relative;
+        z-index: 0;
+    }
+
+    #find-rd{
+        overflow-x: scroll;
+    }
+
+    #find-rd form{
+        margin-left: 18%;
+        width: 70%;
     }
 }
