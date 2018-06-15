@@ -527,7 +527,7 @@ footer ul{
     margin-right: 30px
 }
 
-@media(max-width: 900px){
+@media(max-width: 768px){
     header .container{
         padding: 0 5px 0 5px;
     }
@@ -569,16 +569,19 @@ footer ul{
     }
 
     aside{
+        float: none;
+        display: flow-root;
         min-width: 350px;
         min-height: 280px;
-        margin-right: 18px;
+        margin: 0 10% 0 10%;
         font-size: 17px;
     }
     
     section .service-card{
         width: 80%;
+        float: none;
         min-height: fit-content;
-        margin: 10px;
+        margin-right: 5%;
         font-size: 18px;
     }
 }
