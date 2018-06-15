@@ -4,8 +4,8 @@ $('#sign-in-btn').click(function(event){
     window.location.replace('dashboard.html');
 });
 
-$('.vrBtn').click(function(event){
-    $('#ridedetails').css('left', '80%');
+$('.vrBtn').click(function(event){    
+    $('#ridedetails').css('left', '0');
 });
 
 $('#close').click(function(event){
