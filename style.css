@@ -526,3 +526,59 @@ footer ul{
     margin-top: 20px;
     margin-right: 30px
 }
+
+@media(max-width: 900px){
+    header .container{
+        padding: 0 5px 0 5px;
+    }
+    
+    header #brand{
+        display: none;
+    }
+    
+    header #logo{
+        height: 50px;
+        float: left;
+        margin: 10px 0 0 10px;
+    }
+
+    header li{
+        display: inline;
+        font-size: 15px;
+        margin: 0;
+    }
+    
+    header nav{
+        float: right;
+        padding: 0;
+        margin-right: -5px;
+        margin-top: 25px;
+    }
+
+    #welcome{
+        margin-top: 55px;
+        width: 100%;
+        background-size: 310%;
+    }
+    
+    #welcome .container{
+        width: 80%;    
+        margin-left: 50px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    aside{
+        min-width: 350px;
+        min-height: 280px;
+        margin-right: 18px;
+        font-size: 17px;
+    }
+    
+    section .service-card{
+        width: 80%;
+        min-height: fit-content;
+        margin: 10px;
+        font-size: 18px;
+    }
+}
