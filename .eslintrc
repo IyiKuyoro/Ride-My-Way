@@ -10,6 +10,6 @@
         "jasmine": true
     },
     "rules": {
-        "linebreak-style": "warn"
+        "linebreak-style": "off"
     }
 }
