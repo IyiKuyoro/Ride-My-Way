@@ -1,8 +1,19 @@
-export default class User {
+export default class Ride {
   generateID() {
     this.rideID = `R_${Math.random().toString(36).substr(2, 9)}`;
   }
 
+  /**
+   * Create a new instance of a ride
+   *
+   * @param {string} userID The drivers userID
+   * @param {string} origin The origin of the ride
+   * @param {string} destination The destination of the ride
+   * @param {string} time The time of departure
+   * @param {bool} stops Will the driver be making stops
+   * @param {number} avaSpace The avaliable space on the ride
+   * @param {string} description A description of the proposed route
+   */
   constructor(userID, origin, destination, time, stops, avaSpace, description) {
     this.generateID();
     this.driverID = userID;
