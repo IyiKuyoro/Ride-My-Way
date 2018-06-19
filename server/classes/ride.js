@@ -1,10 +1,6 @@
 export default class User {
-  generateID() {
-    this.rideID = `R_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  constructor(userID, origin, destination, time, stops, avaSpace, description) {
-    this.generateID();
+  constructor(rideID, userID, origin, destination, time, stops, avaSpace, description) {
+    this.rideID = rideID;
     this.driverID = userID;
     this.orgin = origin;
     this.destination = destination;
