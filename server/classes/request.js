@@ -1,7 +1,7 @@
 export default class Request {
-  constructor(rideID, userID, destination) {
-    this.rideID = rideID;
+  constructor(userID, destination) {
     this.requesterID = userID;
     this.destination = destination;
+    this.status = 'pending';
   }
 }
