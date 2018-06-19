@@ -26,7 +26,6 @@ app.get('/api/v1/rides', (req, res) => {
 
 app.post('/api/v1/rides/:rideId/requests', (req, res) => {
   const request = req.body;
-  console.log(req.body);
   rides.forEach((element) => {
     if (element.rideID === req.params.rideId) {
       element.addRequest(request);
