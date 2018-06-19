@@ -1,6 +1,6 @@
 export default class Ride {
   generateID() {
-    this.rideID = `R_${Math.random().toString(36).substr(2, 9)}`;
+    this.rideID = `R_${Math.floor(Math.random() * 9000000000) + 1000000000}`;
   }
 
   /**

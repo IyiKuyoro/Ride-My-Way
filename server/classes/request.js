@@ -1,5 +1,4 @@
 export default class Request {
-
   /**
    * Create a new instance of a ride
    *

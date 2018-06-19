@@ -1,6 +1,6 @@
 export default class User {
   generateID() {
-    this.userID = `U_${Math.random().toString(36).substr(2, 9)}`;
+    this.userID = `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`;
   }
 
   /**
