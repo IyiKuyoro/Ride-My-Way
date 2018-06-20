@@ -2,35 +2,34 @@ import Ride from './classes/ride';
 import User from './classes/user';
 
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
 
 // Just some mock users for testing purposes
-const u1 = new User('Jide', 'Dayo', 'Male', '08/03/1990', '0801472689', 'JideDayo@ridemyway.com');
-const u2 = new User('James', 'Ikechukwu', 'Male', '08/07/1993', '08073901746', 'JamesIK@ridemyway.com');
-const u3 = new User('Francis', 'Odebala', 'Male', '18/11/1985', '08927839810', 'FrancisO@ridemyway.com');
-const u4 = new User('Okon', 'Johnson', 'Male', '12/05/1990', '09094782319', 'Okon@ridemyway.com');
+const user = new User('Jide', 'Dayo', 'Male', '08/03/1990', '0801472689', 'JideDayo@ridemyway.com');
 
 // Array to hold the rides
 const rides = [
-  // Just some mock rides for testing purposes
-  new Ride(u1.userID, 'Ikeja', 'Musin', '9:30AM', true, 3, 'Ikeja to Mushin via Oshodi'),
-  new Ride(u2.userID, 'Lagos', 'Enugu', '12:00PM', false, 2, 'Non-stop to enugu'),
-  new Ride(u3.userID, 'Ikorodu', 'Idumota', '1:45pm', false, 3),
-  new Ride(u4.userID, 'Magodo', 'Iyana-Ipaja', '3:00PM', true, 3, 'Going via Ogba and Agege'),
 ];
 
-app.get('/api/v1/rides', (req, res) => {
-  res.json(rides);
-});
+app.post('/api/v1/rides', (req, res) => {
+  const ride = req.body;
+  const hasOrigin = Object.prototype.hasOwnProperty.call(ride, 'origin');
+  const hasDestination = Object.prototype.hasOwnProperty.call(ride, 'destination');
+  const hasTime = Object.prototype.hasOwnProperty.call(ride, 'time');
+  const hasAllowStops = Object.prototype.hasOwnProperty.call(ride, 'allowStops');
+  const hasAvaliableSpace = Object.prototype.hasOwnProperty.call(ride, 'avaliableSpace');
+  const hasDescription = Object.prototype.hasOwnProperty.call(ride, 'description');
 
-app.get('/api/v1/rides/:rideId', (req, res) => {
-  rides.forEach((element) => {
-    if (element.rideID === req.params.rideId) {
-      res.json(element);
-    }
-  });
-  res.status(404).send('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
+  if (hasOrigin && hasDestination && hasTime && hasAllowStops &&
+    hasAvaliableSpace && hasDescription) {
+    rides.push(new Ride(user.userID, ride.origin, ride.destination, ride.time, ride.allowStops, ride.avaliableSpace, ride.description));
+    res.json(rides[rides.length - 1]);
+  } else {
+    res.status(400).send('The information you provided doesn\'t conform.');
+  }
 });
 
 app.listen(3000);
