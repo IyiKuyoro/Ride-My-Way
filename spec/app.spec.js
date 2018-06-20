@@ -1,5 +1,5 @@
 const Request = require('request');
-const server = require('../server/app');
+require('../server/app');
 
 describe('Server', () => {
   describe('POST-Requests', () => {
