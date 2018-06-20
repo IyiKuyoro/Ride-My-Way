@@ -34,4 +34,8 @@ app.post('/api/v1/rides/:rideId/requests', (req, res) => {
   res.json(rides);
 });
 
-app.listen(3000);
+const server = app.listen(3000, () => {
+  console.log(`Listening on port ${server.address().port} ...`);
+});
+
+export default server;
