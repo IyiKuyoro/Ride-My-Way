@@ -26,12 +26,19 @@ app.get('/api/v1/rides', (req, res) => {
 
 app.post('/api/v1/rides/:rideId/requests', (req, res) => {
   const request = req.body;
-  rides.forEach((element) => {
-    if (element.rideID === req.params.rideId) {
-      element.addRequest(request);
-    }
-  });
-  res.json(rides);
+  const hasRequesterID = Object.prototype.hasOwnProperty.call(request, 'requesterID');
+  const hasDestination = Object.prototype.hasOwnProperty.call(request, 'destination');
+
+  if (hasRequesterID && hasDestination) {
+    rides.forEach((element) => {
+      if (element.rideID === req.params.rideId) {
+        element.addRequest(request);
+      }
+    });
+    res.json(rides);
+  } else {
+    res.status(400).send('Invalid data.');
+  }
 });
 
 const server = app.listen(3000, () => {
