@@ -21,7 +21,21 @@ const rides = [
 ];
 
 app.get('/api/v1/rides', (req, res) => {
-  res.send(rides);
+  res.json(rides);
+});
+
+app.get('/api/v1/rides/:rideId', (req, res) => {
+  let success = false;
+  rides.forEach((element) => {
+    if (element.rideID === req.params.rideId) {
+      success = true;
+      res.json(element);
+    }
+  });
+
+  if (!success) {
+    res.status(404).send('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
+  }
 });
 
 app.listen(3000);
