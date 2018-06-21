@@ -17,7 +17,7 @@ export default class Ride {
   constructor(userID, origin, destination, time, stops, avaSpace, description) {
     this.generateID();
     this.driverID = userID;
-    this.orgin = origin;
+    this.origin = origin;
     this.destination = destination;
     this.time = time;
     this.allowStops = stops;
