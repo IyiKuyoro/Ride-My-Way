@@ -1,4 +1,4 @@
-# Ride-My-Way [![Build Status](https://travis-ci.org/IyiKuyoro/Ride-My-Way.svg?branch=API-POST-Request)](https://travis-ci.org/IyiKuyoro/Ride-My-Way)
+# Ride-My-Way [![Build Status](https://travis-ci.org/IyiKuyoro/Ride-My-Way.svg?branch=API-POST-Request)](https://travis-ci.org/IyiKuyoro/Ride-My-Way) [![Coverage Status](https://coveralls.io/repos/github/IyiKuyoro/Ride-My-Way/badge.svg?branch=API-POST-Request)](https://coveralls.io/github/IyiKuyoro/Ride-My-Way?branch=API-POST-Request)
 A carpooling web application.
 
 This is a simple web application that helps users find riders or drivers typically going in the same direction as them.
