@@ -25,9 +25,6 @@ describe('Server', () => {
         done();
       });
     });
-    after(() => {
-      process.exit();
-    });
 
     it('Add correct request', () => {
       assert.equal(data.body[0].requests[0], { requesterID: 'U_4782937582', destination: 'Mushin' });
