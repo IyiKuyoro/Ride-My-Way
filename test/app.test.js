@@ -10,7 +10,7 @@ describe('Server', () => {
       done();
     });
   });
-  describe('POST Requests', () => {
+  describe('POST Requests Success', () => {
     before((done) => {
       Request({
         url: `http://localhost:3000/api/v1/rides/${data.firstRideID}/requests`,
@@ -27,11 +27,14 @@ describe('Server', () => {
     });
 
     it('Add correct request', () => {
-      assert.equal(data.body[0].requests[0], { requesterID: 'U_4782937582', destination: 'Mushin' });
+      const hasRequesterID = Object.prototype.hasOwnProperty.call(data.body[0].requests[0], 'requesterID');
+      const hasDestination = Object.prototype.hasOwnProperty.call(data.body[0].requests[0], 'destination');
+      assert.equal(hasRequesterID, true);
+      assert.equal(hasDestination, true);
     });
   });
 
-  describe('POST Requests', () => {
+  describe('POST Requests Error', () => {
     data = {};
     before((done) => {
       Request({
@@ -53,7 +56,7 @@ describe('Server', () => {
 
     it('Invalid Data', () => {
       assert.equal(data.status, 400);
-      assert.equal(data.body, 'Invalid data. Required data shoule be in the form "{"requesterID": "U_XXXXXXXXXX","destination": "Place"}"');
+      assert.equal(data.body, 'Invalid data.');
     });
   });
 });
