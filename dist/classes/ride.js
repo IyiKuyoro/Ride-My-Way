@@ -12,7 +12,7 @@ var Ride = function () {
   _createClass(Ride, [{
     key: "generateID",
     value: function generateID() {
-      this.rideID = "R_" + Math.random().toString(36).substr(2, 9);
+      this.rideID = "R_" + (Math.floor(Math.random() * 9000000000) + 1000000000);
     }
 
     /**
@@ -34,7 +34,7 @@ var Ride = function () {
 
     this.generateID();
     this.driverID = userID;
-    this.orgin = origin;
+    this.origin = origin;
     this.destination = destination;
     this.time = time;
     this.allowStops = stops;

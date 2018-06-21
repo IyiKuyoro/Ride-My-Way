@@ -26,7 +26,21 @@ var rides = [
 new _ride2.default(u1.userID, 'Ikeja', 'Musin', '9:30AM', true, 3, 'Ikeja to Mushin via Oshodi'), new _ride2.default(u2.userID, 'Lagos', 'Enugu', '12:00PM', false, 2, 'Non-stop to enugu'), new _ride2.default(u3.userID, 'Ikorodu', 'Idumota', '1:45pm', false, 3), new _ride2.default(u4.userID, 'Magodo', 'Iyana-Ipaja', '3:00PM', true, 3, 'Going via Ogba and Agege')];
 
 app.get('/api/v1/rides', function (req, res) {
-  res.send(rides);
+  res.json(rides);
+});
+
+app.get('/api/v1/rides/:rideId', function (req, res) {
+  var success = false;
+  rides.forEach(function (element) {
+    if (element.rideID === req.params.rideId) {
+      success = true;
+      res.json(element);
+    }
+  });
+
+  if (!success) {
+    res.status(404).send('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
+  }
 });
 
 app.listen(3000);
