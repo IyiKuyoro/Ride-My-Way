@@ -1,10 +1,11 @@
 const Request = require('request');
-const server = require('../server/app');
+require('../server/app');
+const assert = require('assert');
 
 describe('Server', () => {
   describe('POST-Requests', () => {
     const data = {};
-    beforeAll((done) => {
+    before((done) => {
       Request.get('http://localhost:3000/api/v1/rides', (error, res, body) => {
         data.status = res.statusCode;
         data.rides = JSON.parse(body);
@@ -12,12 +13,12 @@ describe('Server', () => {
       });
     });
 
-    it('Status 200', () => {
-      expect(data.status).toBe(200);
+    it('Should return status 200', () => {
+      assert.equal(data.status, 200);
     });
 
     it('Number of rides', () => {
-      expect(data.rides.length).toEqual(4);
+      assert.equal(data.rides.length, 4);
     });
   });
 });
