@@ -4,7 +4,7 @@
   "description": "\u0016A carpooling web application.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "nyc mocha --compilers js:babel-core/register",
     "start": "nodemon bin/dev",
     "clean": "rm -rf dist",
     "build": "npm run clean && mkdir dist && babel server -s -d dist",
@@ -38,6 +38,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "nyc": "^12.0.2"
   }
 }
