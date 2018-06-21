@@ -29,6 +29,7 @@
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "mocha": "^5.2.0",
     "request": "^2.87.0"
   },
   "devDependencies": {
@@ -37,7 +38,6 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
-    "jasmine": "^3.1.0",
     "nodemon": "^1.17.5"
   }
 }
