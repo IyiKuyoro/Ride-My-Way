@@ -12,6 +12,9 @@ describe('Server', () => {
         done();
       });
     });
+    after(() => {
+      process.exit();
+    });
 
     it('Should return status 200', () => {
       assert.equal(data.status, 200);
