@@ -2,8 +2,10 @@ import Ride from './classes/ride';
 import User from './classes/user';
 
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
 
 // Just some mock users for testing purposes
 const u1 = new User('Jide', 'Dayo', 'Male', '08/03/1990', '0801472689', 'JideDayo@ridemyway.com');
@@ -60,7 +62,26 @@ app.post('/api/v1/rides', (req, res) => {
   }
 });
 
+app.post('/api/v1/rides/:rideId/requests', (req, res) => {
+  const request = req.body;
+  const hasRequesterID = Object.prototype.hasOwnProperty.call(request, 'requesterID');
+  const hasDestination = Object.prototype.hasOwnProperty.call(request, 'destination');
+
+  if (hasRequesterID && hasDestination) {
+    rides.forEach((element) => {
+      if (element.rideID === req.params.rideId) {
+        element.addRequest(request);
+      }
+    });
+    res.json(rides);
+  } else {
+    res.status(400).send('Invalid data.');
+  }
+});
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
+
+export default server;
