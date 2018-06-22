@@ -42,7 +42,25 @@ app.get('/api/v1/rides/:rideId', (req, res) => {
   }
 });
 
+app.post('/api/v1/rides', (req, res) => {
+  const ride = req.body;
+  const hasOrigin = Object.prototype.hasOwnProperty.call(ride, 'origin');
+  const hasDestination = Object.prototype.hasOwnProperty.call(ride, 'destination');
+  const hasTime = Object.prototype.hasOwnProperty.call(ride, 'time');
+  const hasAllowStops = Object.prototype.hasOwnProperty.call(ride, 'allowStops');
+  const hasAvaliableSpace = Object.prototype.hasOwnProperty.call(ride, 'avaliableSpace');
+  const hasDescription = Object.prototype.hasOwnProperty.call(ride, 'description');
+
+  if (hasOrigin && hasDestination && hasTime && hasAllowStops &&
+    hasAvaliableSpace && hasDescription) {
+    rides.push(new Ride(u1.userID, ride.origin, ride.destination, ride.time, ride.allowStops, ride.avaliableSpace, ride.description));
+    res.json(rides[rides.length - 1]);
+  } else {
+    res.status(400).send('The information you provided doesn\'t conform.');
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`App is running on port ${PORT}`);
+  console.log(`App is running on port ${PORT}`);
 });
