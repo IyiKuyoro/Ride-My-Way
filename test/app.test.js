@@ -2,45 +2,13 @@ const Request = require('request');
 require('../server/app');
 const assert = require('assert');
 
-
 let data = {};
 describe('Server', () => {
+  data = {};
   before((done) => {
     Request.get('http://localhost:3000/api/v1/rides', (error, res, body) => {
       data.firstRideID = JSON.parse(body)[0].rideID;
       done();
-    });
-  });
-  describe('GET Ride', () => {
-    before((done) => {
-      Request.get(`http://localhost:3000/api/v1/rides/${data.firstRideID}`, (error, res, body) => {
-        data.status = res.statusCode;
-        data.body = JSON.parse(body);
-        done();
-      });
-    });
-    after(() => {
-      process.exit();
-    });
-    it('Reponse has all properties of a ride object', () => {
-      const hasRideID = Object.prototype.hasOwnProperty.call(data.body, 'rideID');
-      const hasDriverID = Object.prototype.hasOwnProperty.call(data.body, 'driverID');
-      const hasOrigin = Object.prototype.hasOwnProperty.call(data.body, 'origin');
-      const hasDestination = Object.prototype.hasOwnProperty.call(data.body, 'destination');
-      const hasTime = Object.prototype.hasOwnProperty.call(data.body, 'time');
-      const hasAllowStops = Object.prototype.hasOwnProperty.call(data.body, 'allowStops');
-      const hasAvaliableSpace = Object.prototype.hasOwnProperty.call(data.body, 'avaliableSpace');
-      const hasDescription = Object.prototype.hasOwnProperty.call(data.body, 'description');
-      const hasRidersID = Object.prototype.hasOwnProperty.call(data.body, 'ridersID');
-      assert.equal(hasRideID, true);
-      assert.equal(hasDriverID, true);
-      assert.equal(hasOrigin, true);
-      assert.equal(hasDestination, true);
-      assert.equal(hasTime, true);
-      assert.equal(hasAllowStops, true);
-      assert.equal(hasAvaliableSpace, true);
-      assert.equal(hasDescription, true);
-      assert.equal(hasRidersID, true);
     });
   });
   describe('POST Requests Success', () => {
@@ -66,6 +34,7 @@ describe('Server', () => {
       assert.equal(hasDestination, true);
     });
   });
+
   describe('POST Requests Error', () => {
     data = {};
     before((done) => {
@@ -82,10 +51,47 @@ describe('Server', () => {
         done();
       });
     });
-
     it('Invalid Data', () => {
       assert.equal(data.status, 400);
       assert.equal(data.body, 'Invalid data.');
+    });
+  });
+});
+
+describe('Server', () => {
+  before((done) => {
+    Request.get('http://localhost:3000/api/v1/rides', (error, res, body) => {
+      data.firstRideID = JSON.parse(body)[0].rideID;
+      done();
+    });
+  });
+  describe('GET Ride', () => {
+    before((done) => {
+      Request.get(`http://localhost:3000/api/v1/rides/${data.firstRideID}`, (error, res, body) => {
+        data.status = res.statusCode;
+        data.body = JSON.parse(body);
+        done();
+      });
+    });
+    it('Reponse has all properties of a ride object', () => {
+      const hasRideID = Object.prototype.hasOwnProperty.call(data.body, 'rideID');
+      const hasDriverID = Object.prototype.hasOwnProperty.call(data.body, 'driverID');
+      const hasOrigin = Object.prototype.hasOwnProperty.call(data.body, 'origin');
+      const hasDestination = Object.prototype.hasOwnProperty.call(data.body, 'destination');
+      const hasTime = Object.prototype.hasOwnProperty.call(data.body, 'time');
+      const hasAllowStops = Object.prototype.hasOwnProperty.call(data.body, 'allowStops');
+      const hasAvaliableSpace = Object.prototype.hasOwnProperty.call(data.body, 'avaliableSpace');
+      const hasDescription = Object.prototype.hasOwnProperty.call(data.body, 'description');
+      const hasRequests = Object.prototype.hasOwnProperty.call(data.body, 'requests');
+      assert.equal(hasRideID, true);
+      assert.equal(hasDriverID, true);
+      assert.equal(hasOrigin, true);
+      assert.equal(hasDestination, true);
+      assert.equal(hasTime, true);
+      assert.equal(hasAllowStops, true);
+      assert.equal(hasAvaliableSpace, true);
+      assert.equal(hasDescription, true);
+      assert.equal(hasRequests, true);
     });
   });
 });
@@ -120,7 +126,7 @@ describe('POST Offer Success', () => {
     const hasAllowStops = Object.prototype.hasOwnProperty.call(data.body, 'allowStops');
     const hasAvaliableSpace = Object.prototype.hasOwnProperty.call(data.body, 'avaliableSpace');
     const hasDescription = Object.prototype.hasOwnProperty.call(data.body, 'description');
-    const hasRidersID = Object.prototype.hasOwnProperty.call(data.body, 'ridersID');
+    const hasRequests = Object.prototype.hasOwnProperty.call(data.body, 'requests');
     assert.equal(hasRideID, true);
     assert.equal(hasDriverID, true);
     assert.equal(hasOrigin, true);
@@ -129,7 +135,7 @@ describe('POST Offer Success', () => {
     assert.equal(hasAllowStops, true);
     assert.equal(hasAvaliableSpace, true);
     assert.equal(hasDescription, true);
-    assert.equal(hasRidersID, true);
+    assert.equal(hasRequests, true);
   });
 
   it('Status code 200', () => {
@@ -137,7 +143,7 @@ describe('POST Offer Success', () => {
   });
 });
 
-describe('POST Offer Success', () => {
+describe('POST Offer Error', () => {
   before((done) => {
     Request({
       url: 'http://localhost:3000/api/v1/rides',
@@ -157,8 +163,7 @@ describe('POST Offer Success', () => {
   after(() => {
     process.exit();
   });
-
-  it('Add correct offer', () => {
+  it('Refuses request', () => {
     assert.equal(data.body, 'The information you provided doesn\'t conform.');
   });
 

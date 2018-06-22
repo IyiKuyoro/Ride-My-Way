@@ -23,6 +23,10 @@ export default class Ride {
     this.allowStops = stops;
     this.avaliableSpace = avaSpace;
     this.description = description;
-    this.ridersID = [];
+    this.requests = [];
+  }
+
+  addRequest(request) {
+    this.requests.push(request);
   }
 }
