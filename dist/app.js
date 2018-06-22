@@ -32,7 +32,7 @@ var rides = [
 new _ride2.default(u1.userID, 'Ikeja', 'Musin', '9:30AM', true, 3, 'Ikeja to Mushin via Oshodi'), new _ride2.default(u2.userID, 'Lagos', 'Enugu', '12:00PM', false, 2, 'Non-stop to enugu'), new _ride2.default(u3.userID, 'Ikorodu', 'Idumota', '1:45pm', false, 3), new _ride2.default(u4.userID, 'Magodo', 'Iyana-Ipaja', '3:00PM', true, 3, 'Going via Ogba and Agege')];
 
 app.get('/', function (req, res) {
-  res.send('server is running, kindly use api endpoints.');
+  res.send('server is running, kindly use api endpoints.\n  GET /api/v1/rides\n  GET /api/v1/rides/:rideId\n  POST /api/v1/rides\n  POST /api/v1/rides/:rideId/requests');
 });
 
 app.get('/api/v1/rides', function (req, res) {

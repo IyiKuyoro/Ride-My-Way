@@ -23,7 +23,11 @@ const rides = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('server is running, kindly use api endpoints.');
+  res.send(`server is running, kindly use api endpoints.
+  GET /api/v1/rides
+  GET /api/v1/rides/:rideId
+  POST /api/v1/rides
+  POST /api/v1/rides/:rideId/requests`);
 });
 
 app.get('/api/v1/rides', (req, res) => {
