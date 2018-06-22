@@ -43,5 +43,8 @@ app.get('/api/v1/rides/:rideId', function (req, res) {
   }
 });
 
-app.listen(3000);
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+  console.log('Our app is running on port ' + PORT);
+});
 //# sourceMappingURL=app.js.map
