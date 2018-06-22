@@ -20,6 +20,10 @@ const rides = [
   new Ride(u4.userID, 'Magodo', 'Iyana-Ipaja', '3:00PM', true, 3, 'Going via Ogba and Agege'),
 ];
 
+app.get('/', (req, res) => {
+  res.send('server is running, kindly use api endpoints.');
+});
+
 app.get('/api/v1/rides', (req, res) => {
   res.json(rides);
 });
@@ -40,5 +44,5 @@ app.get('/api/v1/rides/:rideId', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Our app is running on port ${PORT}`);
+    console.log(`App is running on port ${PORT}`);
 });
