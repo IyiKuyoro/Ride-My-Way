@@ -40,8 +40,15 @@ var Ride = function () {
     this.allowStops = stops;
     this.avaliableSpace = avaSpace;
     this.description = description;
-    this.ridersID = [];
+    this.requests = [];
   }
+
+  _createClass(Ride, [{
+    key: "addRequest",
+    value: function addRequest(request) {
+      this.requests.push(request);
+    }
+  }]);
 
   return Ride;
 }();
