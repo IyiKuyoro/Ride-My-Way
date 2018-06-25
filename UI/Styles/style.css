@@ -68,7 +68,6 @@ a:hover{
 }
 
 header li{
-    float: left;
     display: inline;
     padding: 0 15px 0 15px;
 }
@@ -392,24 +391,26 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 
 #welcome .container{
-    width: 60%;    
+    width: 45%;    
     float: left;
-    margin-left: 50px;
+    margin: 20px 0 0 12.5%;
 }
 
 /* Sign In */
 aside{
-    min-width: 380px;
-    min-height: 300px;
+    width: 25%;
+    min-height: 250px;
     padding: 10px;
-    margin: 30px 50px 0 0;
+    margin: 100px 12.5% 0 0;
     float: right;
     background: #bfeaff;
     color: #006da0;
+    font-size: 12px;
 }
 
 aside label{
     margin: 7px;
+    font-size: 16px;
 }
 
 button{
@@ -419,7 +420,7 @@ button{
     background: #037ef1;
     color: black;
     border: none;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 aside p, #signup-form p{
