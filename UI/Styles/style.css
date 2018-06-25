@@ -452,22 +452,45 @@ aside p, #signup-form p{
     margin-left: -70px;
 }
 
-section #services{
-    float: left;
-    margin: 20px 40px 20px 40px;
-    padding-left: 15px;
+#servicesHeader{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #006da0;
 }
 
-section .service-card{
-    width: 20%;
-    min-height: 320px;
+section #services{
+    float: left;
+    margin: 20px 0 20px 12.5%;
+    font-size: 15px;
+    width: 75%;
+}
+
+#services h2{
+    font-size: 17px;
+}
+
+.service-card{
+    /*The next tree lines of code was gotten from stack overflow. 
+    https://stackoverflow.com/questions/779434/how-do-i-prevent-the-padding-property-from-changing-width-or-height-in-css*/
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+
+    width: 22%;
+    margin-right: 4%;
+    min-height: 220px;
     background: #bfeaff;
+    opacity: 0.6;
     border-radius: 5px;
-    padding: 0 5px 0 5px;
-    margin: 30px;
+    padding: 0 2% 0 2%;
     text-align: center;
     float: left;
     color: black;
+}
+
+#lastCard{
+    margin-right: 0;
 }
 
 .norm-foot{
