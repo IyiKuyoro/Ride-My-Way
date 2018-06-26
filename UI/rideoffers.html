@@ -22,6 +22,10 @@
             </div>
         </header>
 
+        <div id="msgRegion" class="visibility">
+            
+        </div>
+
         <div class="container userfeatures">
             <div>
                 <img class="features-icon centered" src="./images/icon_fulllist.png">
@@ -56,7 +60,7 @@
                 <td>Magodo</td>
                 <td>9:30AM 26/06/2002</td>
                 <td>3</td>
-                <td><button>View</button></td>
+                <td><button class="vrBtn">View</button></td>
             </tr>
             <tr>
                 <td>2</td>
@@ -65,30 +69,31 @@
                 <td>Maryland</td>
                 <td>10:00PM 26/06/2002</td>
                 <td>2</td>
-                <td><button>View</button></td>
+                <td><button class="vrBtn">View</button></td>
             </tr>
         </table>
-
-        <div id="ridedetails" class="container userfeatures">          
-            <img id="close" src="./images/icon_close.png">
-            <div>
-                <img id="profile-pics" src="./images/profilepics.png">
-                <h3>Driver's Name</h3>
-                <p id="rdOff">Rides Offered: XXXX</p>
+        <div class="screen visibility">
+            <div id="ridedetails" class="visibility">          
+                <img id="close" src="./images/icon_close.png">
+                <div>
+                    <img id="profile-pics" src="./images/profilepics.png">
+                    <h3>Driver's Name</h3>
+                    <p id="rdOff">Rides Offered: XXXX</p>
+                </div>
+                <ul>
+                    <li><span class="bold">From: </span><span>location</span></li>
+                    <li><span class="bold">To: </span><span>location</span></li>
+                    <li><span class="bold">Time: </span><span>time</span></li>
+                    <li><span class="bold">Space: </span><span>number</span></li>
+                    <li><span class="bold">Will Stop? </span><span>Yes/No</span></li>
+                    <li>
+                        <p class="bold">Proposed Route: </p>
+                        <p>description</p>
+                    </li>
+                </ul>
+                <button id="request-ride">Request</button>
             </div>
-            <ul>
-                <li><span class="bold">From: </span><span>location</span></li>
-                <li><span class="bold">To: </span><span>location</span></li>
-                <li><span class="bold">Time: </span><span>time</span></li>
-                <li><span class="bold">Space: </span><span>number</span></li>
-                <li><span class="bold">Will Stop? </span><span>Yes/No</span></li>
-                <li>
-                    <p class="bold">Proposed Route: </p>
-                    <p>description</p>
-                </li>
-            </ul>
-            <button id="request-ride">Request</button>
-        </div>
+        </div>        
 
         <footer class="dash-foot spe-ft">
             <div>
@@ -104,5 +109,6 @@
                 </ul>
             </div>
         </footer>
+        <script src="./scripts/rideOffers.js" type=""></script>
     </body>
 </html>
