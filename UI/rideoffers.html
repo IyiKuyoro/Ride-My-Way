@@ -3,21 +3,21 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Ride My Way | Offers </title>
+        <title>Ride My Way | DashBoard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./styles/style.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
-    <body class="container diff-bg">
+    <body class="diff-bg">
         <header>
             <div id="dashboard-header" class="container">
                 <img id="logo2" src="./images/logo.png">
                 <nav>
-                    <u>
+                    <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="AboutUs.html">About Us</a></li>
                         <li><a href="ContactUs.html">Contact Us</a></li>
-                    </u>
+                        <li><img id="notification" src="./images/icon_notification.png"></li>
+                    </ul>
                 </nav>
             </div>
         </header>
@@ -29,6 +29,7 @@
             </div>
             <ul>
                 <li><a href="dashboard.html">Profile</li>
+                <li><a href="friends.html">Friends</li>
                 <li><a class="current" href="rideoffers.html">Ride Offers</a></li>
                 <li><a href="offerride.html">Offer a Ride</a></li>
                 <li><a href="reviewrequests.html">Review Request</a></li>
@@ -37,85 +38,36 @@
         </div>
 
         <div id="find-rd" class="container">
-            <h1>Find a Ride</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sagittis iaculis. Nulla sit amet sodales nisi. Vestibulum non est dui. Sed dignissim ipsum non eros aliquam, et dignissim ex porta. Etiam dolor lacus, egestas sit amet dictum at, lacinia eu velit. Morbi facilisis ligula id condimentum laoreet.</p>
-            <input id="search" type="text" placeholder="Search">
-            <table id="ridesTbl">
-                <tr>
-                    <th>S/N</th>
-                    <th>Driver</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Time</th>
-                    <th>Space</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Jide Dayo</td>
-                    <td>Ikeja</td>
-                    <td>Musin</td>
-                    <td>9:30AM</td>
-                    <td>3</td>
-                    <td>
-                        <button class="vrBtn">View</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Jide Dayo</td>
-                    <td>Ikeja</td>
-                    <td>Musin</td>
-                    <td>9:30am</td>
-                    <td>3</td>
-                    <td>
-                        <button class="vrBtn">View</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>James Ikechukwu</td>
-                    <td>Lagos</td>
-                    <td>Enugu</td>
-                    <td>12:00pm</td>
-                    <td>2</td>
-                    <td>
-                        <button class="vrBtn">View</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Francis Odebala</td>
-                    <td>Ikorodu</td>
-                    <td>Idumota</td>
-                    <td>1:45pm</td>
-                    <td>3</td>
-                    <td>
-                        <button class="vrBtn">View</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Okon Johnson</td>
-                    <td>Magodo</td>
-                    <td>Iyana-Ipaja</td>
-                    <td>3:00pm</td>
-                    <td>4</td>
-                    <td>
-                        <button class="vrBtn">View</button>
-                    </td>
-                </tr>
-            </table>
-            <div id="more">
-                <a>&lt;&lt;&lt;Prev</a>
-                <span>-</span>
-                <a>1</a>
-                <span>-</span>
-                <a>2</a>
-                <span>-</span>
-                <a>Next&gt;&gt;&gt;</a>
-            </div>
+            <h1 class="heading">Ride Offers</h1>
         </div>
+        <table id="offeres">
+            <tr>
+                <th>S/N</th>
+                <th>Driver</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Time/Date</th>
+                <th>Avaliable Space</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Samuel John</td>
+                <td>Ikeja</td>
+                <td>Magodo</td>
+                <td>9:30AM 26/06/2002</td>
+                <td>3</td>
+                <td><button>View</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>David Goldsmith</td>
+                <td>VI</td>
+                <td>Maryland</td>
+                <td>10:00PM 26/06/2002</td>
+                <td>2</td>
+                <td><button>View</button></td>
+            </tr>
+        </table>
 
         <div id="ridedetails" class="container userfeatures">          
             <img id="close" src="./images/icon_close.png">
@@ -138,7 +90,7 @@
             <button id="request-ride">Request</button>
         </div>
 
-        <footer class="dash-foot">
+        <footer class="dash-foot spe-ft">
             <div>
                 <p>Ride My Way &copy; 2018</p>
                 
@@ -152,6 +104,5 @@
                 </ul>
             </div>
         </footer>
-        <script src="./scripts/main.js"></script>
     </body>
 </html>
