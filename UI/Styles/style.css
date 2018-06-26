@@ -4,7 +4,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 1.5;
-    background: #e8e5ff;
+    background: rgb(22, 22, 22);
     height: 100%;
 }
 
@@ -70,21 +70,22 @@ a:hover{
 header li{
     display: inline;
     padding: 0 15px 0 15px;
+    font-size: 15px;
 }
 
 header nav{
     float: right;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-right: 80px;
     padding: 0;
 }
 
 header #brand{    
     float: left;
-    margin-top: 20px;
+    margin-top: 17px;
 }
 
-header #brand h1{
+header #brand h3{
     margin: 0;
     padding: 0;
 }
@@ -96,9 +97,9 @@ header #brand h5{
 }
 
 header #logo{
-    height: 125px;
+    height: 70px;
     float: left;
-    margin-right: 10px;
+    margin: 10px 10px 10px 0;
     padding: 0;
 }
 
@@ -387,13 +388,13 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     background-size: 100%;
     color: #ffffff;
     float: left;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 #welcome .container{
     width: 45%;    
     float: left;
-    margin: 20px 0 0 12.5%;
+    margin: 50px 0 0 12.5%;
 }
 
 /* Sign In */
@@ -401,7 +402,7 @@ aside{
     width: 25%;
     min-height: 250px;
     padding: 10px;
-    margin: 100px 12.5% 0 0;
+    margin: 130px 12.5% 0 0;
     float: right;
     background: #bfeaff;
     color: #006da0;
@@ -417,7 +418,7 @@ button{
     width: 95%;
     padding: 8px;
     margin: 20px 7px 20px 7px;
-    background: #037ef1;
+    background: #006da0;
     color: black;
     border: none;
     font-size: 16px;
@@ -495,13 +496,13 @@ section #services{
 }
 
 .norm-foot{
-    width:100%;
-    height:40px; 
+    width:100%; 
     padding: 10px 0 20px 0;
-    margin-top: 20px;
     color: black;
-    background: #cccccc;
+    background: #e8e5ff;
     font-size: 15px;
+    display: block;
+    float: left;
 }
 
 .dash-foot {
@@ -529,7 +530,8 @@ footer p{
 }
 
 footer .container{
-    padding: 20px
+    padding: 20px;
+    background:#e8e5ff;
 }
 
 footer .images{
