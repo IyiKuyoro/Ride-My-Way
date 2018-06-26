@@ -16,19 +16,15 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="AboutUs.html">About Us</a></li>
                         <li><a href="ContactUs.html">Contact Us</a></li>
-                        
-                        <li>
-                            <div>
-                                <ul>
-                                    <li>Offered: 4</li>
-                                    <li>Taken: 1</li>
-                                </ul>
-                            </div>
-                        </li>
+                        <li><img id="notification" src="./images/icon_notification.png"></li>
                     </ul>
                 </nav>
             </div>
         </header>
+
+        <div id="msgRegion" class="visibility">
+
+        </div>
 
         <div class="container userfeatures">
             <div>
@@ -37,6 +33,7 @@
             </div>
             <ul>
                 <li><a class="current" href="dashboard.html">Profile</li>
+                <li><a href="friends.html">Friends</li>
                 <li><a href="rideoffers.html">Ride Offers</a></li>
                 <li><a href="offerride.html">Offer a Ride</a></li>
                 <li><a href="reviewrequests.html">Review Request</a></li>
@@ -44,75 +41,179 @@
             </ul>
         </div>
 
-        <div id="find-rd" class=" container">
+        <div class="dashboard container">
             <div class="user-info">
                 <img class="center" src="./images/profilepics.png">
                 <ul>
                     <li class="bold">Bola Oke</li>
-                    <li>Mobile Number</li>
+                    <li>090824672186</li>
                     <li>example@ridemyway.com</li>
                     <li><button id="edit-pro">Edit Profile</button></li>
                 </ul>
+                <div class="info-cards">
+                    <h3>Offered</h3>
+                    <h2>10</h2>
+                </div>
+                <div class="info-cards">
+                    <h3>Joined</h3>
+                    <h2>15</h2>
+                </div>
+                <div class="info-cards">
+                    <h3>Friends</h3>
+                    <h2>4</h2>
+                </div>
             </div>
-
-            <div>
-                <h3>Offered</h3>
-            </div>
-
-            <table id="ridesTbl">
-                <tr>
-                    <th>S/N</th>
-                    <th>Type</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Date</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Offered</td>
-                    <td>Lekki</td>
-                    <td>Ikeja</td>
-                    <td>26/06/2002</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Taken</td>
-                    <td>Ojota</td>
-                    <td>Oshodi</td>
-                    <td>29/06/2002</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Offered</td>
-                    <td>Ikeja</td>
-                    <td>Agbowo, Ibadan</td>
-                    <td>30/06/2002</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Offered</td>
-                    <td>Sango</td>
-                    <td>Bodija</td>
-                    <td>31/06/2002</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Offered</td>
-                    <td>Bodija</td>
-                    <td>Ikeja, Lagos</td>
-                    <td>2/07/2002</td>
-                </tr>
-            </table>
-            <div id="more">
-                <a>&lt;&lt;&lt;Prev</a>
-                <span>-</span>
-                <a>1</a>
-                <span>-</span>
-                <a>2</a>
-                <span>-</span>
-                <a>Next&gt;&gt;&gt;</a>
-            </div>
+            <h2 class="heading">Ride History</h2>
         </div>
+        <table id="ridesTbl">
+            <tr>
+                <th>S/N</th>
+                <th>Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Offered</td>
+                <td>Lekki</td>
+                <td>Ikeja</td>
+                <td>26/06/2002</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Taken</td>
+                <td>Ojota</td>
+                <td>Oshodi</td>
+                <td>29/06/2002</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Offered</td>
+                <td>Ikeja</td>
+                <td>Agbowo, Ibadan</td>
+                <td>30/06/2002</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Offered</td>
+                <td>Sango</td>
+                <td>Bodija</td>
+                <td>31/06/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Offered</td>
+                <td>Bodija</td>
+                <td>Ikeja, Lagos</td>
+                <td>2/07/2002</td>
+            </tr>
+        </table>
 
         <footer class="dash-foot spe-ft">
             <div>
@@ -128,5 +229,6 @@
                 </ul>
             </div>
         </footer>
+        <script src="./scripts/main.js" type="script"></script>
     </body>
 </html>
