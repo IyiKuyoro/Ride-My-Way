@@ -3,6 +3,10 @@ import users from '../model/usersmodel';
 import Ride from '../model/classes/ride';
 
 const controller = {
+  get: (req, res) => {
+    res.send('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
+  },
+
   getRides: (req, res) => {
     res.json(rides);
   },
