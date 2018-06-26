@@ -1,7 +1,12 @@
 $('#sign-in-btn').click(function(event){
-    event.preventDefault();
-    console.log("Me");
-    window.location.replace('dashboard.html');
+    const email = document.getElementById('emailField');
+    const password = document.getElementById('passwordField');
+
+    if( email.value !== "" && password.value !== ""){
+        //dummy log in
+        event.preventDefault();
+        window.location.replace('dashboard.html');
+    }
 });
 
 $('.vrBtn').click(function(event){    
