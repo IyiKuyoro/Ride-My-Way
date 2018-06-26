@@ -435,23 +435,44 @@ aside p, #signup-form p{
     margin: 0 auto;
     width: 70%;
     margin-top: 100px;
+    margin-bottom: 100px;
     color: #006da0;
 }
 
+#signup-form h2{
+    text-align: center;
+    font-size: 18px;
+}
+
+#signup-form div{
+    float: left;
+    width: 50%;
+}
+
 #signup-form select{
-    width: 92%;
+    width: 88.2%;
+}
+
+#signup-form input{
+    width: 85%;
 }
 
 #signup-form label{
     margin-left: 8px;
+    font-size: 15px;
 }
 
 #signup-form button{
-    width: 92%;
+    margin-left: 12.5%;
+    width: 75%;
 }
 
 #signup-form p{
-    margin-left: -70px;
+    text-align: center;
+}
+
+#signupErrMsg{
+    color: red;
 }
 
 #servicesHeader{
