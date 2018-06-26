@@ -19,6 +19,10 @@ var _ride2 = _interopRequireDefault(_ride);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var controller = {
+  get: function get(req, res) {
+    res.send('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
+  },
+
   getRides: function getRides(req, res) {
     res.json(_ridesmodel2.default);
   },

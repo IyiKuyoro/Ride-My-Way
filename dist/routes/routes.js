@@ -14,6 +14,7 @@ var express = require('express');
 
 var apiRoutes = express.Router();
 
+apiRoutes.get('/', _controller2.default.get);
 apiRoutes.get('/api/v1/rides', _controller2.default.getRides);
 apiRoutes.get('/api/v1/rides/:rideId', _controller2.default.getSpecificRide);
 apiRoutes.post('/api/v1/rides', _controller2.default.postRide);
