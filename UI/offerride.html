@@ -5,30 +5,32 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Ride My Way | Offer Ride </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./styles/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
     <body class="container diff-bg">
         <header>
-            <div id="dashboard-header" class="container">
-                <img id="logo2" src="logo.png">
-                <nav>
-                    <u>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="AboutUs.html">About Us</a></li>
-                        <li><a href="ContactUs.html">Contact Us</a></li>
-                    </u>
-                </nav>
-            </div>
-        </header>
+                <div id="dashboard-header" class="container">
+                    <img id="logo2" src="./images/logo.png">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="AboutUs.html">About Us</a></li>
+                            <li><a href="ContactUs.html">Contact Us</a></li>
+                            <li><img id="notification" src="./images/icon_notification.png"></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
 
         <div class="userfeatures">
             <div>
-                <img class="features-icon centered" src="icon_fulllist.png">
-                <img id="profile-pics" src="profilepics.png">
+                <img class="features-icon centered" src="./images/icon_fulllist.png">
+                <img id="profile-pics" src="./images/profilepics.png">
             </div>
             <ul>
                 <li><a href="dashboard.html">Profile</li>
+                <li><a href="friends.html">Friends</li>
                 <li><a href="rideoffers.html">Ride Offers</a></li>
                 <li><a class="current" href="offerride.html">Offer a Ride</a></li>
                 <li><a href="reviewrequests.html">Review Request</a></li>
@@ -41,30 +43,26 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sagittis iaculis. Nulla sit amet sodales nisi. Vestibulum non est dui. Sed dignissim ipsum non eros aliquam, et dignissim ex porta. Etiam dolor lacus, egestas sit amet dictum at, lacinia eu velit. Morbi facilisis ligula id condimentum laoreet.</p>
             <form>
                 <div>
-                    <label>Origin</label>
+                    <label>Origin</label><br>
                     <input type="text" required>
                 </div>
                 <div>
-                    <label>Destination</label>
+                    <label>Destination</label><br>
                     <input type="text" required>
                 </div>
                 <div>
-                    <label>Time</label>
-                    <input type="datetime" required>
-                </div>
-                <div>
-                    <label>Allow Stop?</label>
-                    <select>
+                    <label>Time</label><br>
+                    <input class="smaller" type="datetime" required>
+                    <label>Allow Stop?</label><br>
+                    <select class="smaller">
                         <option>Yes</option>
                         <option>No</option>
                     </select>
+                    <label>Space</label><br>
+                    <input class="smaller" type="number" required>
                 </div>
                 <div>
-                    <label>Space</label>
-                    <input type="number" required>
-                </div>
-                <div>
-                    <label>Proposed Route</label>
+                    <label>Proposed Route</label><br>
                     <textarea spellcheck="true" placeholder="Describe the route you will be taking."></textarea>
                 </div>
 
@@ -72,34 +70,13 @@
             </form>
         </div>
 
-        <div id="ridedetails" class="container userfeatures">          
-            <img id="close" src="icon_close.png">
-            <div>
-                <img id="profile-pics" src="profilepics.png">
-                <h3>Driver's Name</h3>
-                <p id="rdOff">Rides Offered: XXXX</p>
-            </div>
-            <ul>
-                <li><span class="bold">From: </span><span>location</span></li>
-                <li><span class="bold">To: </span><span>location</span></li>
-                <li><span class="bold">Time: </span><span>time</span></li>
-                <li><span class="bold">Space: </span><span>number</span></li>
-                <li><span class="bold">Will Stop? </span><span>Yes/No</span></li>
-                <li>
-                    <p class="bold">Proposed Route:</p>
-                    <p>description</p>
-                </li>
-            </ul>
-            <button id="request-ride">Request</button>
-        </div>
-
-        <footer class="dash-foot">
+        <footer class="dash-foot spe-ft">
             <div>
                 <p>Ride My Way &copy; 2018</p>
                 
                 <div class="images">
-                    <a href="#"><img src="icon_facebook.png"></a>
-                    <a href="#"><img src="icon_twitter.png"></a>
+                    <a href="#"><img src="./images/icon_facebook.png"></a>
+                    <a href="#"><img src="./images/icon_twitter.png"></a>
                 </div>
 
                 <ul>
@@ -107,6 +84,6 @@
                 </ul>
             </div>
         </footer>
-        <script src="main.js"></script>
+        <script src="./script/main.js"></script>
     </body>
 </html>
