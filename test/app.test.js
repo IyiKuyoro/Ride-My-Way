@@ -1,10 +1,11 @@
+import userModel from '../server/model/usersmodel';
+
 const Request = require('request');
 require('../server/app');
 const assert = require('assert');
 
-let data = {};
 describe('Server', () => {
-  data = {};
+  let data = {};
   before((done) => {
     Request.get('http://localhost:3000/api/v1/rides', (error, res, body) => {
       data.firstRideID = JSON.parse(body)[0].rideID;
@@ -59,6 +60,7 @@ describe('Server', () => {
 });
 
 describe('Server', () => {
+  const data = {};
   before((done) => {
     Request.get('http://localhost:3000/api/v1/rides', (error, res, body) => {
       data.firstRideID = JSON.parse(body)[0].rideID;
@@ -96,8 +98,8 @@ describe('Server', () => {
   });
 });
 
-data = {};
 describe('POST Offer Success', () => {
+  const data = {};
   before((done) => {
     Request({
       url: 'http://localhost:3000/api/v1/rides',
@@ -144,6 +146,7 @@ describe('POST Offer Success', () => {
 });
 
 describe('POST Offer Error', () => {
+  const data = {};
   before((done) => {
     Request({
       url: 'http://localhost:3000/api/v1/rides',
@@ -169,5 +172,36 @@ describe('POST Offer Error', () => {
 
   it('Status code 400', () => {
     assert.equal(data.status, 400);
+  });
+});
+
+// Tests for challenge 3
+describe('Post user sign-up', () => {
+  const data = {};
+  before((done) => {
+    Request({
+      url: 'http://localhost:3000/api/v1/auth/signup',
+      method: 'POST',
+      json: {
+        FirstName: 'Test',
+        LastName: 'User',
+        Sex: 'Male',
+        DOB: '05/01/1872',
+        MobileNumber: 9054387612,
+        EmailAddress: 'test.user@example.com',
+        Password: 'qwerty',
+      },
+    }, (error, res, body) => {
+      data.status = res.statusCode;
+      data.body = body;
+      done();
+    });
+    after(() => {
+      userModel.delete('test.user@example.com');
+      process.exit();
+    });
+    it('User was added', () => {
+      assert.equal(userModel.findUser(), true);
+    });
   });
 });
