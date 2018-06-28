@@ -8,14 +8,14 @@ const validEmail = (email) => {
 };
 
 const controller = {
+  postSuccess: false,
   postSignUp: (req, res) => {
-    let success = false;
     if (validEmail(req.body.EmailAddress)) {
-      success = users.addUser(req.body);
-      console.log(success);
+      users.addUser(req.body);
+      console.log(controller.postSuccess);
     }
 
-    if (success) {
+    if (controller.postSuccess) {
       const response = {
         token: '',
         status: 'Success',

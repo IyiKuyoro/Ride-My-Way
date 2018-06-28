@@ -1,13 +1,12 @@
-const pg = require('pg');
+const { Client } = require('pg');
 
-const config = {
+const client = new Client({
   host: 'localhost',
   port: '5432',
   user: 'postgres',
   password: 'passcode',
   database: 'ridemyway',
-};
+});
+client.connect();
 
-const pool = pg.Pool(config);
-
-export default pool;
+export default client;
