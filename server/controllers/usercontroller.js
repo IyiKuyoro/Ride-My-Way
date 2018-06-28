@@ -37,10 +37,9 @@ const controller = {
               const response = {
                 token: '',
                 status: 'Success',
-                body: 'user added to database',
+                data: result.rows[0],
               };
               res.json(response);
-              console.log(result.rows[0]);
             }
           });
         });
