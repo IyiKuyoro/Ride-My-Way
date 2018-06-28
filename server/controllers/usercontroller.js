@@ -56,8 +56,7 @@ const controller = {
                   LastName: result.rows[0].LastName,
                   Sex: result.rows[0].Sex,
                   DOB: result.rows[0].DOB,
-                  PhoneNumber: result.rows[0].PhoneNumber,
-                  EmailNumber: result.rows[0].EmailAddress,
+                  EmailAddress: result.rows[0].EmailAddress,
                 },
               };
               res.json(response);
