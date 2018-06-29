@@ -7,6 +7,7 @@ const { expect } = chai;
 
 chai.expect();
 
+//  James helped me understand how Chai works.
 describe('Server', () => {
   describe('Challenge one - GET Requests', () => {
     let data = {};
