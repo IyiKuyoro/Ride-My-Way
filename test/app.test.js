@@ -58,13 +58,12 @@ describe('Server', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('token');
           expect(res.body.data).to.have.property('FirstName');
-          expect(res.body).to.have.property('LastName');
-          expect(res.body).to.have.property('Sex');
-          expect(res.body).to.have.property('DOB');
-          expect(res.body).to.have.property('EmailAddress');
+          expect(res.body.data).to.have.property('LastName');
+          expect(res.body.data).to.have.property('Sex');
+          expect(res.body.data).to.have.property('DOB');
+          expect(res.body.data).to.have.property('EmailAddress');
           done();
         });
-      process.exit();
     });
   });
 });
