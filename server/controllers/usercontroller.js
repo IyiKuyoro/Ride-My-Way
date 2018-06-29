@@ -1,11 +1,10 @@
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 // import users from '../model/dbUserModels';
 import client from '../model/db';
 
-require('dotenv').config();
-
-const jwt = require('jsonwebtoken');
-
-const bcrypt = require('bcrypt');
+dotenv.config();
 
 const validEmail = (email) => {
   if (email) {
@@ -14,7 +13,7 @@ const validEmail = (email) => {
   return false;
 };
 
-const genID = () => `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`;
+const genID = () => `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`; //  Got this from a web source I can't remember now.
 const controller = {
   postSuccess: false,
   postSignUp: (req, res) => {
