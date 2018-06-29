@@ -1,8 +1,8 @@
+import bcrypt from 'bcrypt';
 import client from './db';
 import controller from '../controllers/usercontroller';
 
-const bcrypt = require('bcrypt');
-
+// goten from a source online I forgot to document.
 const genID = () => `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`;
 
 const user = {
