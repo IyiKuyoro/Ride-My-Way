@@ -1,7 +1,6 @@
+import express from 'express';
 import controller from '../controllers/controller';
 import userController from '../controllers/usercontroller';
-
-const express = require('express');
 
 const apiRoutes = express.Router();
 
