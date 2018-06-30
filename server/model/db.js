@@ -1,11 +1,10 @@
 import { Client } from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const client = new Client({
-  host: 'localhost',
-  port: '5432',
-  user: 'postgres',
-  password: 'passcode',
-  database: 'ridemyway',
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 
