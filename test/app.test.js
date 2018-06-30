@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server/app';
+import controller from '../server/controllers/usercontroller';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -9,9 +10,17 @@ chai.expect();
 
 //  James helped me understand how Chai works.
 describe('Server', () => {
-  describe('Challenge two - GET Requests', () => {
+  describe('Challenge two tests', () => {
     let data = {};
-    it('GET /api/v1/rides', (done) => {
+    it('GET /', (done) => {
+      chai.request(server)
+        .get('/')
+        .end((err, res) => {
+          expect(res.text).to.equal('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
+          done();
+        });
+    });
+    it('GET /api/v1/rides (Success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
         .end((err, res) => {
@@ -21,15 +30,7 @@ describe('Server', () => {
           done();
         });
     });
-    it('GET /', (done) => {
-      chai.request(server)
-        .get('/')
-        .end((err, res) => {
-          expect(res.text).to.equal('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
-          done();
-        });
-    });
-    it('GET /api/v1/rides/:rideID', (done) => {
+    it('GET /api/v1/rides/:rideID (Success)', (done) => {
       chai.request(server)
         .get(`/api/v1/rides/${data.body[0].rideID}`)
         .end((err, res) => {
@@ -47,7 +48,18 @@ describe('Server', () => {
           done();
         });
     });
-    it('POST /api.v1.rides/:rideID/requests', (done) => {
+    it('GET /api/v1/rides/:rideID (Fail)', (done) => {
+      chai.request(server)
+        .get('/api/v1/rides/kdidhsvs')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.a('object');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
+          done();
+        });
+    });
+    it('POST /api.v1.rides/:rideID/requests (Success)', (done) => {
       chai.request(server)
         .post(`/api/v1/rides/${data.body[0].rideID}/requests`)
         .send({
@@ -60,7 +72,21 @@ describe('Server', () => {
           done();
         });
     });
-    it('POST /api.v1.rides', (done) => {
+    it('POST /api/v1/rides/:rideID/requests (Fail)', (done) => {
+      chai.request(server)
+        .post(`/api/v1/rides/${data.body[0].rideID}/requests`)
+        .send({
+          destination: 'Mushin',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.a('object');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Invalid data.');
+          done();
+        });
+    });
+    it('POST /api.v1.rides (Success)', (done) => {
       chai.request(server)
         .post('/api/v1/rides')
         .send({
@@ -84,10 +110,29 @@ describe('Server', () => {
           done();
         });
     });
+    it('POST /api/v1/rides (Fail)', (done) => {
+      chai.request(server)
+        .post('/api/v1/rides')
+        .send({
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'Musin via Ikeja and Oshodi',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.a('object');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('The information you provided doesn\'t conform.');
+          done();
+        });
+    });
   });
-  
-  describe('Challenge three - POST User Sign-Up', () => {
-    it('POST /api/v1/auth/signup', (done) => {
+  describe('', () => {
+    after((done) => {
+      controller.deleteTestUser('test.user@example.com', done);
+    });
+    it('SignUp with complete data = success', (done) => {
       chai.request(server)
         .post('/api/v1/auth/signup')
         .send({
