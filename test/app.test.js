@@ -90,7 +90,7 @@ describe('Server', () => {
   // because I needed to adjust the timeout
   // it dosn't work with es6
   describe('Challenge three - POST User Sign-Up', function () {
-    this.timeout(5000);
+    this.timeout(30000);
     it('POST /api/v1/auth/signup', (done) => {
       chai.request(server)
         .post('/api/v1/auth/signup')
