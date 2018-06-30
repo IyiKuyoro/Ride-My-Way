@@ -21,7 +21,11 @@ const controller = {
     });
 
     if (!success) {
-      res.status(404).send('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
+      res.status(404);
+      res.json({
+        status: 'fail',
+        message: 'Information not found. Perhaps try to get the avaliable rides first and select an ID.',
+      });
     }
   },
 
@@ -38,7 +42,11 @@ const controller = {
       });
       res.json(rides);
     } else {
-      res.status(400).send('Invalid data.');
+      res.status(400);
+      res.json({
+        status: 'fail',
+        message: 'Invalid data.',
+      });
     }
   },
 
@@ -56,7 +64,11 @@ const controller = {
       rides.push(new Ride(users[0].userID, ride.origin, ride.destination, ride.time, ride.allowStops, ride.avaliableSpace, ride.description));
       res.json(rides[rides.length - 1]);
     } else {
-      res.status(400).send('The information you provided doesn\'t conform.');
+      res.status(400);
+      res.json({
+        status: 'fail',
+        message: 'The information you provided doesn\'t conform.',
+      });
     }
   },
 };
