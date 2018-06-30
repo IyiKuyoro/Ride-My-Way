@@ -5,7 +5,7 @@ dotenv.config();
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: !process.env.LOCAL,
+  ssl: !process.env.LOCAL === 'local',
 });
 client.connect();
 
