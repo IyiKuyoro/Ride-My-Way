@@ -30,6 +30,7 @@ const controller = {
           const values = [genID(), req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0];
           client.query(text, values, (error1, result) => {
             if (error1) {
+              console.log(error1);
               res.json({
                 status: 'Fail',
                 message: 'Could not add user to database',
