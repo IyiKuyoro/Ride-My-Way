@@ -9,7 +9,7 @@ chai.expect();
 
 //  James helped me understand how Chai works.
 describe('Server', () => {
-  describe('Challenge one - GET Requests', () => {
+  describe('Challenge two - GET Requests', () => {
     let data = {};
     it('GET /api/v1/rides', (done) => {
       chai.request(server)
@@ -86,7 +86,11 @@ describe('Server', () => {
     });
   });
 
-  describe('Challenge two - POST User Sign-Up', () => {
+  // I had to use the es5 function here
+  // because I needed to adjust the timeout
+  // it dosn't work with es6
+  describe('Challenge three - POST User Sign-Up', function () {
+    this.timeout(5000);
     it('POST /api/v1/auth/signup', (done) => {
       chai.request(server)
         .post('/api/v1/auth/signup')
