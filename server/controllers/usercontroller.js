@@ -130,15 +130,9 @@ const controller = {
     }
   },
   deleteTestUser: (email, callback) => {
-    helper.validEmail(email, (response) => {
-      if (response) {
-        const sql = `DELETE FROM public."Users" WHERE "EmailAddress" = '${email}'`;
-        client.query(sql, () => {
-          callback();
-        });
-      } else {
-        callback();
-      }
+    const sql = `DELETE FROM public."Users" WHERE "EmailAddress" = '${email}'`;
+    client.query(sql, () => {
+      callback();
     });
   },
 };
