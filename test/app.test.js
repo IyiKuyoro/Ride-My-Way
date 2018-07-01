@@ -157,6 +157,8 @@ describe('Server', () => {
           done();
         });
     });
+  });
+  describe('', () => {
     it('LogIn existing user (success)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/login')
