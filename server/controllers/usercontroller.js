@@ -83,7 +83,7 @@ const controller = {
         } else {
           bcrypt.compare(req.body.Password, result.rows[0].Password, (error, same) => {
             if (error || !same) {
-              throw error;
+              throw error || same;
             } else {
               const token = jwt.sign(
                 {

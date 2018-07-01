@@ -103,7 +103,7 @@ var controller = {
         } else {
           _bcrypt2.default.compare(req.body.Password, result.rows[0].Password, function (error, same) {
             if (error || !same) {
-              throw error;
+              throw error || same;
             } else {
               var token = _jsonwebtoken2.default.sign({
                 userId: result.rows[0].ID
