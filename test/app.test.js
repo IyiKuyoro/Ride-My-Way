@@ -129,20 +129,12 @@ describe('Server', () => {
     });
   });
   describe('Challenge three tests', () => {
-    after((done) => {
-      controller.deleteTestUser('test.user@example.com', done);
-    });
-    it('SignUp with complete data (success)', (done) => {
+    it('LogIn existing user (success)', (done) => {
       chai.request(server)
-        .post('/api/v1/auth/signup')
+        .post('/api/v1/auth/login')
         .send({
-          FirstName: 'Test',
-          LastName: 'User',
-          Sex: 'Male',
-          DOB: '05/01/1872',
-          PhoneNumber: 9054387612,
-          EmailAddress: 'test.user@example.com',
-          Password: 'qwerty',
+          EmailAddress: 'DummyData@example.com',
+          Password: 'qwerty'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -159,12 +151,20 @@ describe('Server', () => {
     });
   });
   describe('', () => {
-    it('LogIn existing user (success)', (done) => {
+    after((done) => {
+      controller.deleteTestUser('test.user@example.com', done);
+    });
+    it('SignUp with complete data (success)', (done) => {
       chai.request(server)
-        .post('/api/v1/auth/login')
+        .post('/api/v1/auth/signup')
         .send({
-          EmailAddress: 'DummyData@example.com',
-          Password: 'qwerty'
+          FirstName: 'Test',
+          LastName: 'User',
+          Sex: 'Male',
+          DOB: '05/01/1872',
+          PhoneNumber: 9054387612,
+          EmailAddress: 'test.user@example.com',
+          Password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
