@@ -82,7 +82,7 @@ const controller = {
         if (err || result.rowCount === 0) {
           throw err;
         } else {
-          bcrypt.compare(req.body.Password, result.row[0].Password, (error, same) => {
+          bcrypt.compare(req.body.Password, result.rows[0].Password, (error, same) => {
             if (error || !same) {
               throw error;
             } else {
