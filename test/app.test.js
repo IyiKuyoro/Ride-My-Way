@@ -128,7 +128,7 @@ describe('Server', () => {
         });
     });
   });
-  describe('', () => {
+  describe('Challenge three tests', () => {
     after((done) => {
       controller.deleteTestUser('test.user@example.com', done);
     });
