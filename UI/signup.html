@@ -21,45 +21,60 @@
             </div>
         </header>
 
+        <div id="notification" class="visibility">
+            
+        </div>
+
         <section>
             <div id="signup-form">
                 <h2>User Sign-Up</h2>
                 <form class="sign-up">
                     <div>
                         <label>First Name</label>
-                        <input type="text" placeholder="James">
+                        <br>
+                        <input id="first-name" type="text" placeholder="James" required>
                     </div>
                     <div>
                         <label>Last Name</label>
-                        <input type="text" placeholder="Bond">
+                        <br>
+                        <input id="last-name" type="text" placeholder="Bond" required>
                     </div>
                     <div>
                         <label>Sex</label><br>
-                        <select>
+                        <select id="sex" required>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
+                    </div>
                     <div>
                         <label>Date of Birth</label>
-                        <input type="date">
+                        <br>
+                        <input id="DOB" type="date" required>
                     </div>
                     <div>
                         <label>Phone Number</label>
-                        <input type="tel">
+                        <br>
+                        <input id="phone-number" type="number" required>
                     </div>
                     <div>
                         <label>Email Address</label>
-                        <input type="email" placeholder="example@ridemyway.com">
+                        <br>
+                        <input id="email" type="email" placeholder="example@ridemyway.com" required>
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="password" placeholder="XXXXXXX">
+                        <br>
+                        <input id="password" type="password" placeholder="XXXXXXX" required>
                     </div>
                     <div>
                         <label>Confirm Password</label>
-                        <input type="password" placeholder="XXXXXXXX">
+                        <br>
+                        <input id="password-confirm" type="password" placeholder="XXXXXXXX" required>
                     </div>
-                    <button class="button" type="submit">Submit</button>
+                    <div>
+                        <p id="signupErrMsg"></p>
+                    </div>
+                    <button id="sign-up-btn" class="button" type="submit">Submit</button>
                 </form>
                 <p>I have an account: <a href="index.html">sign-in</a></p>
             </div>
@@ -79,5 +94,6 @@
                 </ul>
             </div>
         </footer>
+        <script src="./scripts/main.js" type=""></script>
     </body>
 </html>

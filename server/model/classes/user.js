@@ -1,8 +1,4 @@
 export default class User {
-  generateID() {
-    this.userID = `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`;
-  }
-
   /**
    * Create a new instance of a ride
    *
@@ -13,8 +9,8 @@ export default class User {
    * @param {number} mobileNumber The mobile number of the user
    * @param {string} email The email address of the user
    */
-  constructor(firstName, lastName, sex, dateOfBirth, mobileNumber, email) {
-    this.generateID();
+  constructor(userID, firstName, lastName, sex, dateOfBirth, mobileNumber, email) {
+    this.userID = userID;
     this.firstName = firstName;
     this.lastName = lastName;
     this.sex = sex;
