@@ -74,11 +74,10 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status") VALUES ($1, $2, $3) RETURNING *;';
-          const values = [req.params.rideId, req.body.requesterID, 'pending'];
+          const sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status", "RequesterName", "MobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+          const values = [req.params.rideId, req.body.requesterID, 'pending', `${req.body.FirstName} ${req.body.LastName}`, req.body.MobileNumber];
           client.query(sqlInsert, values, (error, result) => {
             if (error) {
-              console.log(error);
               res.status(403);
               res.json({
                 message: 'Unauthorized'
@@ -87,7 +86,6 @@ const controller = {
               const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${result.rows[0].ID}}') Where "ID" = '${req.params.rideId}';`;
               client.query(sqlUpdate, (inError) => {
                 if (inError) {
-                  console.log(inError);
                   res.status(403);
                   res.json({
                     message: 'Unauthorized'
@@ -107,6 +105,36 @@ const controller = {
       res.status(403);
       res.json({
         message: 'Forbiden'
+      });
+    }
+  },
+  getRequests: (req, res) => {
+    try {
+      jwt.verify(req.headers.jwt, process.env.KEY, null, (err) => {
+        if (err) {
+          res.status(403);
+          res.json({
+            message: 'Forbiden'
+          });
+        } else {
+          const sql = `SELECT * FROM public."Requests" Where "RideID" = '${req.params.rideId}';`;
+          client.query(sql, (error, result) => {
+            if (error || result.rowCount === 0) {
+              res.status(400);
+              res.json({
+                message: 'Cannot get requests'
+              });
+            } else {
+              res.status(200);
+              res.json(result);
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(500);
+      res.json({
+        message: 'Application error'
       });
     }
   }
