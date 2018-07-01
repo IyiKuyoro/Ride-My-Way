@@ -28,9 +28,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
-var genID = function genID() {
-  return 'U_' + (Math.floor(Math.random() * 9000000000) + 1000000000);
-}; //  Got this from a web source I can't remember now.
 var controller = {
   postSignUp: function postSignUp(req, res) {
     _helper2.default.validEmail(req.body.EmailAddress, function (valid) {
@@ -44,8 +41,8 @@ var controller = {
               if (err) {
                 throw err;
               }
-              var text = 'INSERT INTO public."Users" ("ID", "FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesOffered", "RidesTaken", "Friends") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
-              var values = [genID(), req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0];
+              var text = 'INSERT INTO public."Users" ("FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesTaken", "RidesOffered", "Friends", "AccountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
+              var values = [req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0, 'Active'];
               _db2.default.query(text, values, function (error1, result) {
                 if (error1) {
                   res.status(400);
