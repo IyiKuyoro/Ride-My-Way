@@ -7,8 +7,9 @@ const helpers = {
       client.query(sql, (err, res) => {
         if (res.rowCount === 1) {
           callback(false);
+        } else {
+          callback(true);
         }
-        callback(true)
       });
     }
   },
