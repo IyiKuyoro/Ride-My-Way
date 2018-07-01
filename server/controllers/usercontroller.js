@@ -47,9 +47,11 @@ const controller = {
                       ID: result.rows[0].ID,
                       FirstName: result.rows[0].FirstName,
                       LastName: result.rows[0].LastName,
-                      Sex: result.rows[0].Sex,
-                      DOB: result.rows[0].DOB,
+                      MobileNumber: result.rows[0].MobileNumber,
                       EmailAddress: result.rows[0].EmailAddress,
+                      RidesTaken: result.rows[0].RidesTaken,
+                      RidesOffered: result.rows[0].RidesOffered,
+                      Friends: result.rows[0].Friends,
                     },
                   };
                   res.json(response);
