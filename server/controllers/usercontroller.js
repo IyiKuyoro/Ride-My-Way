@@ -6,7 +6,6 @@ import client from '../model/db';
 
 dotenv.config();
 
-const genID = () => `U_${Math.floor(Math.random() * 9000000000) + 1000000000}`; //  Got this from a web source I can't remember now.
 const controller = {
   postSignUp: (req, res) => {
     helper.validEmail(req.body.EmailAddress, (valid) => {
@@ -20,8 +19,8 @@ const controller = {
               if (err) {
                 throw err;
               }
-              const text = 'INSERT INTO public."Users" ("ID", "FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesOffered", "RidesTaken", "Friends") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
-              const values = [genID(), req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0];
+              const text = 'INSERT INTO public."Users" ("FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesTaken", "RidesOffered", "Friends", "AccountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
+              const values = [req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0, 'Active'];
               client.query(text, values, (error1, result) => {
                 if (error1) {
                   res.status(400);
