@@ -128,32 +128,32 @@ describe('Server', () => {
         });
     });
   });
-  describe('', () => {
-    after((done) => {
-      controller.deleteTestUser('test.user@example.com', done);
-    });
-    it('SignUp with complete data = success', (done) => {
-      chai.request(server)
-        .post('/api/v1/auth/signup')
-        .send({
-          FirstName: 'Test',
-          LastName: 'User',
-          Sex: 'Male',
-          DOB: '05/01/1872',
-          PhoneNumber: 9054387612,
-          EmailAddress: 'test.user@example.com',
-          Password: 'qwerty',
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('token');
-          expect(res.body.data).to.have.property('FirstName');
-          expect(res.body.data).to.have.property('LastName');
-          expect(res.body.data).to.have.property('Sex');
-          expect(res.body.data).to.have.property('DOB');
-          expect(res.body.data).to.have.property('EmailAddress');
-          done();
-        });
-    });
-  });
+  // describe('', () => {
+  //   after((done) => {
+  //     controller.deleteTestUser('test.user@example.com', done);
+  //   });
+  //   it('SignUp with complete data = success', (done) => {
+  //     chai.request(server)
+  //       .post('/api/v1/auth/signup')
+  //       .send({
+  //         FirstName: 'Test',
+  //         LastName: 'User',
+  //         Sex: 'Male',
+  //         DOB: '05/01/1872',
+  //         PhoneNumber: 9054387612,
+  //         EmailAddress: 'test.user@example.com',
+  //         Password: 'qwerty',
+  //       })
+  //       .end((err, res) => {
+  //         expect(res.statusCode).to.equal(200);
+  //         expect(res.body).to.have.property('token');
+  //         expect(res.body.data).to.have.property('FirstName');
+  //         expect(res.body.data).to.have.property('LastName');
+  //         expect(res.body.data).to.have.property('Sex');
+  //         expect(res.body.data).to.have.property('DOB');
+  //         expect(res.body.data).to.have.property('EmailAddress');
+  //         done();
+  //       });
+  //   });
+  // });
 });

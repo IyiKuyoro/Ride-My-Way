@@ -1,15 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import apiRoutes from './routes/routes';
+// import express from 'express';
+// import bodyParser from 'body-parser';
+// import apiRoutes from './routes/routes';
 
-const app = express();
-app.use(bodyParser.json());
+// const app = express();
+// app.use(bodyParser.json());
 
-app.use(apiRoutes);
+// app.use(apiRoutes);
 
-const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
-  console.log(`App is running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 3000;
+// const server = app.listen(PORT, () => {
+//   console.log(`App is running on port ${PORT}`);
+// });
 
-export default server;
+// export default server;
