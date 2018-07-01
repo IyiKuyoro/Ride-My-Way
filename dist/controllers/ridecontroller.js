@@ -90,20 +90,18 @@ var controller = {
             message: 'Forbiden'
           });
         } else {
-          var sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status") VALUES ($1, $2, $3) RETURNING *;';
-          var values = [req.params.rideId, req.body.requesterID, 'pending'];
+          var sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status", "RequesterName", "MobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+          var values = [req.params.rideId, req.body.requesterID, 'pending', req.body.FirstName + ' ' + req.body.LastName, req.body.MobileNumber];
           _db2.default.query(sqlInsert, values, function (error, result) {
             if (error) {
-              console.log(error);
               res.status(403);
               res.json({
                 message: 'Unauthorized'
               });
             } else {
-              var sqlUpdate = 'UPDATE public."Rides" SET "Requests" = array_cat("Requests", \'{' + result.rows[0].RideID + '}\') Where "ID" = \'' + req.params.rideId + '\';';
+              var sqlUpdate = 'UPDATE public."Rides" SET "Requests" = array_cat("Requests", \'{' + result.rows[0].ID + '}\') Where "ID" = \'' + req.params.rideId + '\';';
               _db2.default.query(sqlUpdate, function (inError) {
                 if (inError) {
-                  console.log(inError);
                   res.status(403);
                   res.json({
                     message: 'Unauthorized'
@@ -123,6 +121,36 @@ var controller = {
       res.status(403);
       res.json({
         message: 'Forbiden'
+      });
+    }
+  },
+  getRequests: function getRequests(req, res) {
+    try {
+      _jsonwebtoken2.default.verify(req.headers.jwt, process.env.KEY, null, function (err) {
+        if (err) {
+          res.status(403);
+          res.json({
+            message: 'Forbiden'
+          });
+        } else {
+          var sql = 'SELECT * FROM public."Requests" Where "RideID" = \'' + req.params.rideId + '\';';
+          _db2.default.query(sql, function (error, result) {
+            if (error || result.rowCount === 0) {
+              res.status(400);
+              res.json({
+                message: 'Cannot get requests'
+              });
+            } else {
+              res.status(200);
+              res.json(result);
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(500);
+      res.json({
+        message: 'Application error'
       });
     }
   }
