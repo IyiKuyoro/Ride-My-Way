@@ -146,7 +146,7 @@ describe('Server', () => {
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('token');
+          expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('FirstName');
           expect(res.body.data).to.have.property('LastName');
           expect(res.body.data).to.have.property('MobileNumber');
@@ -168,7 +168,7 @@ describe('Server', () => {
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('token');
+          expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('FirstName');
           expect(res.body.data).to.have.property('LastName');
           expect(res.body.data).to.have.property('MobileNumber');
