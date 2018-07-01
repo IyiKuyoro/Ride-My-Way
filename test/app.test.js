@@ -11,22 +11,12 @@ chai.expect();
 //  James helped me understand how Chai works.
 describe('Server', () => {
   describe('Challenge two tests', () => {
-    let data = {};
+    const data = {};
     it('GET /', (done) => {
       chai.request(server)
         .get('/')
         .end((err, res) => {
           expect(res.text).to.equal('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
-          done();
-        });
-    });
-    it('GET /api/v1/rides (Success)', (done) => {
-      chai.request(server)
-        .get('/api/v1/rides')
-        .end((err, res) => {
-          data = res;
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.lengthOf(4);
           done();
         });
     });
@@ -146,6 +136,23 @@ describe('Server', () => {
           expect(res.body.data).to.have.property('RidesTaken');
           expect(res.body.data).to.have.property('RidesOffered');
           expect(res.body.data).to.have.property('Friends');
+          done();
+        });
+    });
+    it('Get all avaliable ride (success)', (done) => {
+      chai.request(server)
+        .get('/api/v1/rides')
+        .auth('JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzk0NDIzODEzNjUiLCJpYXQiOjE1MzA0NDQ1NTEsImV4cCI6MTUzMDQ0ODE1MX0.LaRpqdHUCWhsAX2mSlzmB2dN9ezIMsZ5nVaLaMPdtc8')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body[0].data).to.have.property('RideID');
+          expect(res.body[0].data).to.have.property('DriverID');
+          expect(res.body[0].data).to.have.property('Origin');
+          expect(res.body[0].data).to.have.property('Destination');
+          expect(res.body[0].data).to.have.property('Time');
+          expect(res.body[0].data).to.have.property('AllowStops');
+          expect(res.body[0].data).to.have.property('AvaliableSpace');
+          expect(res.body[0].data).to.have.property('Description');
           done();
         });
     });
