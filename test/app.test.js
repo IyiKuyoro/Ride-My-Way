@@ -66,7 +66,7 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          EmailAddress: 'DummyData@example.com',
+          EmailAddress: 'FirstTestDriver@example.com',
           Password: 'qwerty'
         })
         .end((err, res) => {
@@ -85,11 +85,11 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
-          expect(res.body[0]).to.have.property('DriverID');
+          expect(res.body[0]).to.have.property('DirverID');
           expect(res.body[0]).to.have.property('Origin');
           expect(res.body[0]).to.have.property('Destination');
           expect(res.body[0]).to.have.property('Time');
@@ -101,12 +101,12 @@ describe('Server', () => {
     });
     it('Get specific ride', (done) => {
       chai.request(server)
-        .get('/api/v1/rides/R_0000000001')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
+        .get('/api/v1/rides/1')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
-          expect(res.body).to.have.property('DriverID');
+          expect(res.body).to.have.property('DirverID');
           expect(res.body).to.have.property('Origin');
           expect(res.body).to.have.property('Destination');
           expect(res.body).to.have.property('Time');
@@ -118,10 +118,10 @@ describe('Server', () => {
     });
     it('Post ride request', (done) => {
       chai.request(server)
-        .post('/api/v1/rides/R_0000000001/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
+        .post('/api/v1/rides/1/requests')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
         .send({
-          requesterID: 'U_5677440769'
+          requesterID: '9'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);

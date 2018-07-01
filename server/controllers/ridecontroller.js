@@ -74,8 +74,9 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sql = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${req.body.requesterID}}') Where "ID" = '${req.params.rideId}';`;
-          client.query(sql, (error, result) => {
+          const sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status") VALUES ($1, $2, $3) RETURNING *;';
+          const values = [req.params.rideId, req.body.requesterID, 'pending'];
+          client.query(sqlInsert, values, (error, result) => {
             if (error) {
               console.log(error);
               res.status(403);
@@ -83,9 +84,20 @@ const controller = {
                 message: 'Unauthorized'
               });
             } else {
-              res.status(200);
-              res.json({
-                message: 'Request Sent'
+              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${result.rows[0].RideID}}') Where "ID" = '${req.params.rideId}';`;
+              client.query(sqlUpdate, (inError) => {
+                if (inError) {
+                  console.log(inError);
+                  res.status(403);
+                  res.json({
+                    message: 'Unauthorized'
+                  });
+                } else {
+                  res.status(200);
+                  res.json({
+                    message: 'Request Sent'
+                  });
+                }
               });
             }
           });
