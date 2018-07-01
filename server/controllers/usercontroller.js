@@ -128,6 +128,51 @@ const controller = {
       });
     }
   },
+  postRide: (req, res) => {
+    try {
+      const sqlInsert = 'INSERT INTO public."Rides" ("DirverID", "Origin", "Destination", "Time", "AllowStops", "AvaliableSpace", "Description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+      const values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
+      client.query(sqlInsert, values, (error) => {
+        if (error) {
+          res.status(500);
+          res.json({
+            status: 'fail',
+            message: 'Cannot save ride offer'
+          });
+        } else {
+          const sqlSelect = `SELECT * FROM public."Rides" Where "DirverID" = ${req.body.driverID};`;
+          client.query(sqlSelect, (er, re) => {
+            if (er) {
+              res.status(500);
+              res.json({
+                status: 'fail',
+                message: 'Cannot save ride offer'
+              });
+            } else {
+              const sqlUpdate = `UPDATE public."Users" SET "RidesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverID}';`;
+              client.query(sqlUpdate, (inError) => {
+                if (inError) {
+                  res.json({
+                    message: 'Something went wrong'
+                  });
+                } else {
+                  res.status(200);
+                  res.json({
+                    message: 'Ride offer saved'
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.json({
+        status: 'fail',
+        message: 'Cannot save ride offer',
+      });
+    }
+  },
   deleteTestUser: (email, callback) => {
     const sql = `DELETE FROM public."Users" WHERE "EmailAddress" = '${email}'`;
     client.query(sql, () => {
