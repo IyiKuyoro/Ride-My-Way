@@ -79,11 +79,19 @@ const controller = {
       const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.EmailAddress}'`;
       client.query(sql, (err, result) => {
         if (err || result.rows.length === 0) {
-          throw err || result;
+          res.status(401);
+          res.json({
+            status: 'fail',
+            message: 'Unauthorized',
+          });
         } else {
           bcrypt.compare(req.body.Password, result.rows[0].Password, (error, same) => {
             if (error || !same) {
-              throw error || same;
+              res.status(401);
+              res.json({
+                status: 'fail',
+                message: 'Unauthorized',
+              });
             } else {
               const token = jwt.sign(
                 {

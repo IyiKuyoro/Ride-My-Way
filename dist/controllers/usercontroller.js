@@ -99,11 +99,19 @@ var controller = {
       var sql = 'SELECT * FROM public."Users" WHERE "EmailAddress" = \'' + req.body.EmailAddress + '\'';
       _db2.default.query(sql, function (err, result) {
         if (err || result.rows.length === 0) {
-          throw err || result;
+          res.status(401);
+          res.json({
+            status: 'fail',
+            message: 'Unauthorized'
+          });
         } else {
           _bcrypt2.default.compare(req.body.Password, result.rows[0].Password, function (error, same) {
             if (error || !same) {
-              throw error || same;
+              res.status(401);
+              res.json({
+                status: 'fail',
+                message: 'Unauthorized'
+              });
             } else {
               var token = _jsonwebtoken2.default.sign({
                 userId: result.rows[0].ID
