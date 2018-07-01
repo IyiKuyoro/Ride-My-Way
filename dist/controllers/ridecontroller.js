@@ -90,8 +90,9 @@ var controller = {
             message: 'Forbiden'
           });
         } else {
-          var sql = 'UPDATE public."Rides" SET "Requests" = array_cat("Requests", \'{' + req.body.requesterID + '}\') Where "ID" = \'' + req.params.rideId + '\';';
-          _db2.default.query(sql, function (error, result) {
+          var sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status") VALUES ($1, $2, $3) RETURNING *;';
+          var values = [req.params.rideId, req.body.requesterID, 'pending'];
+          _db2.default.query(sqlInsert, values, function (error, result) {
             if (error) {
               console.log(error);
               res.status(403);
@@ -99,9 +100,20 @@ var controller = {
                 message: 'Unauthorized'
               });
             } else {
-              res.status(200);
-              res.json({
-                message: 'Request Sent'
+              var sqlUpdate = 'UPDATE public."Rides" SET "Requests" = array_cat("Requests", \'{' + result.rows[0].RideID + '}\') Where "ID" = \'' + req.params.rideId + '\';';
+              _db2.default.query(sqlUpdate, function (inError) {
+                if (inError) {
+                  console.log(inError);
+                  res.status(403);
+                  res.json({
+                    message: 'Unauthorized'
+                  });
+                } else {
+                  res.status(200);
+                  res.json({
+                    message: 'Request Sent'
+                  });
+                }
               });
             }
           });
