@@ -157,12 +157,12 @@ describe('Server', () => {
           done();
         });
     });
-    it('LogIn existing user (success)', () => {
+    it('LogIn existing user (success)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
           EmailAddress: 'DummyData@example.com',
-          Password: 'IamTheDummy'
+          Password: 'qwerty'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -174,6 +174,7 @@ describe('Server', () => {
           expect(res.body.data).to.have.property('RidesTaken');
           expect(res.body.data).to.have.property('RidesOffered');
           expect(res.body.data).to.have.property('Friends');
+          done();
         });
     });
   });
