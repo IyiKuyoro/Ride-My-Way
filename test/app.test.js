@@ -20,35 +20,6 @@ describe('Server', () => {
           done();
         });
     });
-    it('GET /api/v1/rides/:rideID (Success)', (done) => {
-      chai.request(server)
-        .get(`/api/v1/rides/${data.body[0].rideID}`)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.a('object');
-          expect(res.body).to.have.property('rideID');
-          expect(res.body).to.have.property('driverID');
-          expect(res.body).to.have.property('origin');
-          expect(res.body).to.have.property('destination');
-          expect(res.body).to.have.property('time');
-          expect(res.body).to.have.property('allowStops');
-          expect(res.body).to.have.property('avaliableSpace');
-          expect(res.body).to.have.property('description');
-          expect(res.body).to.have.property('requests');
-          done();
-        });
-    });
-    it('GET /api/v1/rides/:rideID (Fail)', (done) => {
-      chai.request(server)
-        .get('/api/v1/rides/kdidhsvs')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body).to.be.a('object');
-          expect(res.body.status).to.equal('fail');
-          expect(res.body.message).to.equal('Information not found. Perhaps try to get the avaliable rides first and select an ID.');
-          done();
-        });
-    });
     it('POST /api.v1.rides/:rideID/requests (Success)', (done) => {
       chai.request(server)
         .post(`/api/v1/rides/${data.body[0].rideID}/requests`)
@@ -153,6 +124,23 @@ describe('Server', () => {
           expect(res.body[0]).to.have.property('AllowStops');
           expect(res.body[0]).to.have.property('AvaliableSpace');
           expect(res.body[0]).to.have.property('Description');
+          done();
+        });
+    });
+    it('Get specific ride', (done) => {
+      chai.request(server)
+        .get('/api/v1/rides/R_0000000001')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTM2MTgsImV4cCI6MTUzMDQ1NzIxOH0.nvSFvUbXS9iVsstMZDLa8hYVl5UUQTsBkGROym-PQMU')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.have.property('ID');
+          expect(res.body).to.have.property('DriverID');
+          expect(res.body).to.have.property('Origin');
+          expect(res.body).to.have.property('Destination');
+          expect(res.body).to.have.property('Time');
+          expect(res.body).to.have.property('AllowStops');
+          expect(res.body).to.have.property('AvaliableSpace');
+          expect(res.body).to.have.property('Description');
           done();
         });
     });
