@@ -55,21 +55,22 @@ var controller = {
                   });
                 } else {
                   var token = _jsonwebtoken2.default.sign({
-                    email: result.rows[0].EmailAddress,
                     userId: result.rows[0].ID
                   }, process.env.KEY, {
                     expiresIn: '1h'
                   });
                   var response = {
-                    token: token,
                     status: 'Success',
                     data: {
+                      token: token,
                       ID: result.rows[0].ID,
                       FirstName: result.rows[0].FirstName,
                       LastName: result.rows[0].LastName,
-                      Sex: result.rows[0].Sex,
-                      DOB: result.rows[0].DOB,
-                      EmailAddress: result.rows[0].EmailAddress
+                      MobileNumber: result.rows[0].MobileNumber,
+                      EmailAddress: result.rows[0].EmailAddress,
+                      RidesTaken: result.rows[0].RidesTaken,
+                      RidesOffered: result.rows[0].RidesOffered,
+                      Friends: result.rows[0].Friends
                     }
                   };
                   res.json(response);
@@ -92,6 +93,49 @@ var controller = {
         });
       }
     });
+  },
+  postLogIn: function postLogIn(req, res) {
+    try {
+      var sql = 'SELECT * FROM public."Users" WHERE "EmailAddress" = \'' + req.body.EmailAddress + '\'';
+      _db2.default.query(sql, function (err, result) {
+        if (err || result.rowCount === 0) {
+          throw err;
+        } else {
+          _bcrypt2.default.compare(req.body.Password, result.rows[0].Password, function (error, same) {
+            if (error || !same) {
+              throw error;
+            } else {
+              var token = _jsonwebtoken2.default.sign({
+                userId: result.rows[0].ID
+              }, process.env.KEY, {
+                expiresIn: '1h'
+              });
+              var response = {
+                status: 'success',
+                data: {
+                  token: token,
+                  ID: result.rows[0].ID,
+                  FirstName: result.rows[0].FirstName,
+                  LastName: result.rows[0].LastName,
+                  MobileNumber: result.rows[0].MobileNumber,
+                  EmailAddress: result.rows[0].EmailAddress,
+                  RidesTaken: result.rows[0].RidesTaken,
+                  RidesOffered: result.rows[0].RidesOffered,
+                  Friends: result.rows[0].Friends
+                }
+              };
+              res.json(response);
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(401);
+      res.json({
+        status: 'fail',
+        message: 'Unauthorized'
+      });
+    }
   },
   deleteTestUser: function deleteTestUser(email, callback) {
     _helper2.default.validEmail(email, function (response) {
