@@ -17,8 +17,9 @@ var helpers = {
       _db2.default.query(sql, function (err, res) {
         if (res.rowCount === 1) {
           callback(false);
+        } else {
+          callback(true);
         }
-        callback(true);
       });
     }
   }
