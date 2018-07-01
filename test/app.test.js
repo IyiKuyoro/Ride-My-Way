@@ -129,10 +129,32 @@ describe('Server', () => {
     });
   });
   describe('Challenge three tests', () => {
+    it('LogIn existing user (success)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/login')
+        .send({
+          EmailAddress: 'DummyData@example.com',
+          Password: 'qwerty'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.data).to.have.property('token');
+          expect(res.body.data).to.have.property('FirstName');
+          expect(res.body.data).to.have.property('LastName');
+          expect(res.body.data).to.have.property('MobileNumber');
+          expect(res.body.data).to.have.property('EmailAddress');
+          expect(res.body.data).to.have.property('RidesTaken');
+          expect(res.body.data).to.have.property('RidesOffered');
+          expect(res.body.data).to.have.property('Friends');
+          done();
+        });
+    });
+  });
+  describe('', () => {
     after((done) => {
       controller.deleteTestUser('test.user@example.com', done);
     });
-    it('SignUp with complete data = success', (done) => {
+    it('SignUp with complete data (success)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/signup')
         .send({
@@ -146,12 +168,14 @@ describe('Server', () => {
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('token');
+          expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('FirstName');
           expect(res.body.data).to.have.property('LastName');
-          expect(res.body.data).to.have.property('Sex');
-          expect(res.body.data).to.have.property('DOB');
+          expect(res.body.data).to.have.property('MobileNumber');
           expect(res.body.data).to.have.property('EmailAddress');
+          expect(res.body.data).to.have.property('RidesTaken');
+          expect(res.body.data).to.have.property('RidesOffered');
+          expect(res.body.data).to.have.property('Friends');
           done();
         });
     });
