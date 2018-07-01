@@ -129,7 +129,7 @@ describe('Server', () => {
     });
   });
   describe('Challenge three tests', () => {
-    after((done) => {
+    afterEach((done) => {
       controller.deleteTestUser('test.user@example.com', done);
     });
     it('SignUp with complete data = success', (done) => {
