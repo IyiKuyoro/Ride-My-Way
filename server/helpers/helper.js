@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import client from '../model/db';
 
 const helpers = {
