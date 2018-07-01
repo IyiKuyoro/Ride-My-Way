@@ -142,10 +142,10 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .auth('JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzk0NDIzODEzNjUiLCJpYXQiOjE1MzA0NDQ1NTEsImV4cCI6MTUzMDQ0ODE1MX0.LaRpqdHUCWhsAX2mSlzmB2dN9ezIMsZ5nVaLaMPdtc8')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzk0NDIzODEzNjUiLCJpYXQiOjE1MzA0NDQ1NTEsImV4cCI6MTUzMDQ0ODE1MX0.LaRpqdHUCWhsAX2mSlzmB2dN9ezIMsZ5nVaLaMPdtc8')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body[0].data).to.have.property('RideID');
+          expect(res.body[0].data).to.have.property('ID');
           expect(res.body[0].data).to.have.property('DriverID');
           expect(res.body[0].data).to.have.property('Origin');
           expect(res.body[0].data).to.have.property('Destination');
