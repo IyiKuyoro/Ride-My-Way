@@ -11,7 +11,6 @@ chai.expect();
 //  James helped me understand how Chai works.
 describe('Server', () => {
   describe('Challenge two tests', () => {
-    const data = {};
     it('GET /', (done) => {
       chai.request(server)
         .get('/')
@@ -119,7 +118,7 @@ describe('Server', () => {
     });
     it('Post ride request', (done) => {
       chai.request(server)
-        .post('/api/rides/R_0000000001')
+        .post('/api/rides/R_0000000001/requests')
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
         .send({
           requesterID: 'U_5677440769',
