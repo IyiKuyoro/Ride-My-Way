@@ -78,7 +78,6 @@ const controller = {
     try {
       const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.EmailAddress}'`;
       client.query(sql, (err, result) => {
-        console.log(result);
         if (err || result.rowCount === 0) {
           throw err;
         } else {
