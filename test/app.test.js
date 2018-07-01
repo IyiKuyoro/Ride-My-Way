@@ -129,6 +129,9 @@ describe('Server', () => {
     });
   });
   describe('', () => {
+    after((done) => {
+      controller.deleteTestUser('test.user@example.com', done);
+    });
     it('SignUp with complete data = success', (done) => {
       chai.request(server)
         .post('/api/v1/auth/signup')
