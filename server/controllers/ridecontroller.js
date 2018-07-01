@@ -84,7 +84,7 @@ const controller = {
                 message: 'Unauthorized'
               });
             } else {
-              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${result.rows[0].RideID}}') Where "ID" = '${req.params.rideId}';`;
+              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${result.rows[0].ID}}') Where "ID" = '${req.params.rideId}';`;
               client.query(sqlUpdate, (inError) => {
                 if (inError) {
                   console.log(inError);
