@@ -109,6 +109,19 @@ describe('Server', () => {
           done();
         });
     });
+    it('Get Request', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/rides/1/requests')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4MjI2MiwiZXhwIjoxNTMwNDg1ODYyfQ.xX5kkXJ8Z4V92RmRo8FjPg715sfPuafyvX5hs1NyKDc')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body[0]).to.have.property('ID');
+          expect(res.body[0]).to.have.property('RequesterName');
+          expect(res.body[0]).to.have.property('PhoneNumber');
+          expect(res.body[0]).to.have.property('Status');
+          done();
+        });
+    });
   });
   describe('', () => {
     after((done) => {
