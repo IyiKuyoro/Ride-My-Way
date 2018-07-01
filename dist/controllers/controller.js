@@ -23,10 +23,6 @@ var controller = {
     res.send('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
   },
 
-  getRides: function getRides(req, res) {
-    res.json(_ridesmodel2.default);
-  },
-
   getSpecificRide: function getSpecificRide(req, res) {
     var success = false;
     _ridesmodel2.default.forEach(function (element) {

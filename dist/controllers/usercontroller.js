@@ -146,15 +146,9 @@ var controller = {
     }
   },
   deleteTestUser: function deleteTestUser(email, callback) {
-    _helper2.default.validEmail(email, function (response) {
-      if (response) {
-        var sql = 'DELETE FROM public."Users" WHERE "EmailAddress" = \'' + email + '\'';
-        _db2.default.query(sql, function () {
-          callback();
-        });
-      } else {
-        callback();
-      }
+    var sql = 'DELETE FROM public."Users" WHERE "EmailAddress" = \'' + email + '\'';
+    _db2.default.query(sql, function () {
+      callback();
     });
   }
 };
