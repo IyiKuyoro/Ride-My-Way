@@ -44,7 +44,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3ODMzNiwiZXhwIjoxNTMwNDgxOTM2fQ.GEIja8pg5gRnC-y58g1IrsXedXenoZThwL0S-m71Bzs')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -61,7 +61,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3ODMzNiwiZXhwIjoxNTMwNDgxOTM2fQ.GEIja8pg5gRnC-y58g1IrsXedXenoZThwL0S-m71Bzs')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -78,7 +78,7 @@ describe('Server', () => {
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3ODMzNiwiZXhwIjoxNTMwNDgxOTM2fQ.GEIja8pg5gRnC-y58g1IrsXedXenoZThwL0S-m71Bzs')
         .send({
           requesterID: '9'
         })
@@ -92,7 +92,7 @@ describe('Server', () => {
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3ODMzNiwiZXhwIjoxNTMwNDgxOTM2fQ.GEIja8pg5gRnC-y58g1IrsXedXenoZThwL0S-m71Bzs')
         .send({
           driverID: 10,
           origin: 'Magodo',
