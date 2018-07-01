@@ -32,7 +32,6 @@ const controller = {
                 } else {
                   const token = jwt.sign(
                     {
-                      email: result.rows[0].EmailAddress,
                       userId: result.rows[0].ID,
                     },
                     process.env.KEY,
@@ -41,9 +40,9 @@ const controller = {
                     }
                   );
                   const response = {
-                    token,
                     status: 'Success',
                     data: {
+                      token,
                       ID: result.rows[0].ID,
                       FirstName: result.rows[0].FirstName,
                       LastName: result.rows[0].LastName,
@@ -74,6 +73,53 @@ const controller = {
         });
       }
     });
+  },
+  postLogIn: (req, res) => {
+    try {
+      const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = ${req.body.EmailAddress}`;
+      client.query(sql, (err, result) => {
+        if (err || result.rowCount === 0) {
+          throw err;
+        } else {
+          bcrypt.compare(req.body.Password, result.row[0].Password, (error, same) => {
+            if (error || !same) {
+              throw error;
+            } else {
+              const token = jwt.sign(
+                {
+                  userId: result.rows[0].ID,
+                },
+                process.env.KEY,
+                {
+                  expiresIn: '1h',
+                }
+              );
+              const response = {
+                status: 'success',
+                data: {
+                  token,
+                  ID: result.rows[0].ID,
+                  FirstName: result.rows[0].FirstName,
+                  LastName: result.rows[0].LastName,
+                  MobileNumber: result.rows[0].MobileNumber,
+                  EmailAddress: result.rows[0].EmailAddress,
+                  RidesTaken: result.rows[0].RidesTaken,
+                  RidesOffered: result.rows[0].RidesOffered,
+                  Friends: result.rows[0].Friends,
+                }
+              };
+              res.json(response);
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(401);
+      res.json({
+        status: 'fail',
+        message: 'Unauthorized',
+      });
+    }
   },
   deleteTestUser: (email, callback) => {
     helper.validEmail(email, (response) => {
