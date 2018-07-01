@@ -118,10 +118,10 @@ describe('Server', () => {
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.rows[0]).to.have.property('ID');
-          expect(res.body.rows[0]).to.have.property('RequesterName');
-          expect(res.body.rows[0]).to.have.property('MobileNumber');
-          expect(res.body.rows[0]).to.have.property('Status');
+          expect(res.body[0]).to.have.property('ID');
+          expect(res.body[0]).to.have.property('RequesterName');
+          expect(res.body[0]).to.have.property('MobileNumber');
+          expect(res.body[0]).to.have.property('Status');
           done();
         });
     });

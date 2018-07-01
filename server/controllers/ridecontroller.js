@@ -126,7 +126,7 @@ const controller = {
               });
             } else {
               res.status(200);
-              res.json(result);
+              res.json(result.rows);
             }
           });
         }
