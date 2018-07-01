@@ -98,8 +98,8 @@ var controller = {
     try {
       var sql = 'SELECT * FROM public."Users" WHERE "EmailAddress" = \'' + req.body.EmailAddress + '\'';
       _db2.default.query(sql, function (err, result) {
-        if (err || result.rowCount === 0) {
-          throw err;
+        if (err || result.rows.length === 0) {
+          throw err || result;
         } else {
           _bcrypt2.default.compare(req.body.Password, result.rows[0].Password, function (error, same) {
             if (error || !same) {

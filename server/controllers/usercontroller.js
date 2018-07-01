@@ -78,8 +78,8 @@ const controller = {
     try {
       const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.EmailAddress}'`;
       client.query(sql, (err, result) => {
-        if (err || result.rowCount === 0) {
-          throw err;
+        if (err || result.rows.length === 0) {
+          throw err || result;
         } else {
           bcrypt.compare(req.body.Password, result.rows[0].Password, (error, same) => {
             if (error || !same) {
