@@ -99,7 +99,7 @@ const controller = {
                 },
                 process.env.KEY,
                 {
-                  expiresIn: '1h',
+                  expiresIn: '48h',
                 }
               );
               const response = {

@@ -8,16 +8,25 @@ dotenv.config();
 const controller = {
   getRides: (helpers.checkToken, (req, res) => {
     try {
-      const sql = 'SELECT * FROM public."Rides";';
-      client.query(sql, (error, result) => {
-        if (error || result.rowCount === 0) {
-          res.status(401);
+      jwt.verify(req.headers.jwt, process.env.KEY, null, (err, decoded) => {
+        if (err) {
+          res.status(403);
           res.json({
-            message: 'Unauthorized'
+            message: 'Forbiden'
           });
         } else {
-          res.status(200);
-          res.json(result.rows);
+          const sql = 'SELECT * FROM public."Rides";';
+          client.query(sql, (error, result) => {
+            if (error || result.rowCount === 0) {
+              res.status(401);
+              res.json({
+                message: 'Unauthorized'
+              });
+            } else {
+              res.status(200);
+              res.json(result.rows);
+            }
+          });
         }
       });
     } catch (e) {

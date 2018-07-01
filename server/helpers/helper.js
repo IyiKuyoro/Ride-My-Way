@@ -14,18 +14,6 @@ const helpers = {
       });
     }
   },
-  checkToken: (req, res, done) => {
-    try {
-      const decoded = jwt.verify(req.headers.jwt, process.env.KEY);
-      req.userID = decoded;
-      done();
-    } catch (e) {
-      res.status(403);
-      res.json({
-        message: 'Forbiden'
-      });
-    }
-  },
 };
 
 export default helpers;
