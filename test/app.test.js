@@ -19,47 +19,6 @@ describe('Server', () => {
           done();
         });
     });
-    it('POST /api.v1.rides (Success)', (done) => {
-      chai.request(server)
-        .post('/api/v1/rides')
-        .send({
-          origin: 'Magodo',
-          destination: 'Musin',
-          time: '10:20AM',
-          allowStops: true,
-          avaliableSpace: 3,
-          description: 'Musin via Ikeja and Oshodi',
-        })
-        .end((err, res) => {
-          expect(res.body).to.have.property('rideID');
-          expect(res.body).to.have.property('driverID');
-          expect(res.body).to.have.property('origin');
-          expect(res.body).to.have.property('destination');
-          expect(res.body).to.have.property('time');
-          expect(res.body).to.have.property('allowStops');
-          expect(res.body).to.have.property('avaliableSpace');
-          expect(res.body).to.have.property('description');
-          expect(res.body).to.have.property('requests');
-          done();
-        });
-    });
-    it('POST /api/v1/rides (Fail)', (done) => {
-      chai.request(server)
-        .post('/api/v1/rides')
-        .send({
-          time: '10:20AM',
-          allowStops: true,
-          avaliableSpace: 3,
-          description: 'Musin via Ikeja and Oshodi',
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body).to.be.a('object');
-          expect(res.body.status).to.equal('fail');
-          expect(res.body.message).to.equal('The information you provided doesn\'t conform.');
-          done();
-        });
-    });
   });
   describe('Challenge three tests', () => {
     it('LogIn existing user (success)', (done) => {
@@ -127,6 +86,26 @@ describe('Server', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Request Sent');
+          done();
+        });
+    });
+    it('Post users ride', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ3MDcxOSwiZXhwIjoxNTMwNDc0MzE5fQ.2bRpx5UDecdukabTBqro_RItv6Nxa59uWVoaKi3DHQs')
+        .send({
+          driverID: 10,
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'Musin via Ikeja and Oshodi'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Ride offer saved');
           done();
         });
     });
