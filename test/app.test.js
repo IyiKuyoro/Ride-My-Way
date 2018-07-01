@@ -44,7 +44,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4MjI2MiwiZXhwIjoxNTMwNDg1ODYyfQ.xX5kkXJ8Z4V92RmRo8FjPg715sfPuafyvX5hs1NyKDc')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -61,7 +61,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4MjI2MiwiZXhwIjoxNTMwNDg1ODYyfQ.xX5kkXJ8Z4V92RmRo8FjPg715sfPuafyvX5hs1NyKDc')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -78,9 +78,12 @@ describe('Server', () => {
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4MjI2MiwiZXhwIjoxNTMwNDg1ODYyfQ.xX5kkXJ8Z4V92RmRo8FjPg715sfPuafyvX5hs1NyKDc')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
         .send({
-          requesterID: '9'
+          requesterID: '9',
+          FirstName: 'Test',
+          LastName: 'Requester',
+          MobileNumber: '90472865784'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -92,7 +95,7 @@ describe('Server', () => {
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4MjI2MiwiZXhwIjoxNTMwNDg1ODYyfQ.xX5kkXJ8Z4V92RmRo8FjPg715sfPuafyvX5hs1NyKDc')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
         .send({
           driverID: 10,
           origin: 'Magodo',
@@ -106,6 +109,19 @@ describe('Server', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Ride offer saved');
+          done();
+        });
+    });
+    it('Get Request', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/rides/2/requests')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.rows[0]).to.have.property('ID');
+          expect(res.body.rows[0]).to.have.property('RequesterName');
+          expect(res.body.rows[0]).to.have.property('MobileNumber');
+          expect(res.body.rows[0]).to.have.property('Status');
           done();
         });
     });
