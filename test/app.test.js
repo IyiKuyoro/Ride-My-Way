@@ -85,7 +85,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -102,7 +102,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/R_0000000001')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -118,17 +118,15 @@ describe('Server', () => {
     });
     it('Post ride request', (done) => {
       chai.request(server)
-        .post('/api/rides/R_0000000001/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
+        .post('/api/v1/rides/R_0000000001/requests')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NjE2NjMsImV4cCI6MTUzMDQ2NTI2M30.01K4pqwheFdOpZDwtUxpP1gASTzFl5PE1S29vFR3fMA')
         .send({
-          requesterID: 'U_5677440769',
-          destination: 'Mushin',
+          requesterID: 'U_5677440769'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('Requests');
-          expect(res.body.Requests).to.have.property('requesterID');
-          expect(res.body.Requests).to.have.property('destination');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Request Sent');
           done();
         });
     });
