@@ -31,6 +31,7 @@ apiRoutes.post('/api/v1/rides', _controller2.default.postRide);
 apiRoutes.post('/api/v1/rides/:rideId/requests', _ridecontroller2.default.postRideRequest);
 apiRoutes.post('/api/v1/auth/signup', _usercontroller2.default.postSignUp);
 apiRoutes.post('/api/v1/auth/login', _usercontroller2.default.postLogIn);
+apiRoutes.post('/api/v1/users/rides', _usercontroller2.default.postRide);
 
 exports.default = apiRoutes;
 //# sourceMappingURL=routes.js.map

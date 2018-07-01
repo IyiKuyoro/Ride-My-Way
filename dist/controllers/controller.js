@@ -23,45 +23,6 @@ var controller = {
     res.send('Server is running, kindly use the endpoints. /api/v1/rides, /api/v1/rides/:rideId, /api/v1/rides, /api/v1/rides/:rideId/requests');
   },
 
-  getSpecificRide: function getSpecificRide(req, res) {
-    var success = false;
-    _ridesmodel2.default.forEach(function (element) {
-      if (element.rideID === req.params.rideId) {
-        success = true;
-        res.json(element);
-      }
-    });
-
-    if (!success) {
-      res.status(404);
-      res.json({
-        status: 'fail',
-        message: 'Information not found. Perhaps try to get the avaliable rides first and select an ID.'
-      });
-    }
-  },
-
-  postRequest: function postRequest(req, res) {
-    var request = req.body;
-    var hasRequesterID = Object.prototype.hasOwnProperty.call(request, 'requesterID');
-    var hasDestination = Object.prototype.hasOwnProperty.call(request, 'destination');
-
-    if (hasRequesterID && hasDestination) {
-      _ridesmodel2.default.forEach(function (element) {
-        if (element.rideID === req.params.rideId) {
-          element.addRequest(request);
-        }
-      });
-      res.json(_ridesmodel2.default);
-    } else {
-      res.status(400);
-      res.json({
-        status: 'fail',
-        message: 'Invalid data.'
-      });
-    }
-  },
-
   postRide: function postRide(req, res) {
     var ride = req.body;
     var hasOrigin = Object.prototype.hasOwnProperty.call(ride, 'origin');

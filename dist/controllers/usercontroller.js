@@ -142,6 +142,51 @@ var controller = {
       });
     }
   },
+  postRide: function postRide(req, res) {
+    try {
+      var sqlInsert = 'INSERT INTO public."Rides" ("DirverID", "Origin", "Destination", "Time", "AllowStops", "AvaliableSpace", "Description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+      var values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
+      _db2.default.query(sqlInsert, values, function (error) {
+        if (error) {
+          res.status(500);
+          res.json({
+            status: 'fail',
+            message: 'Cannot save ride offer'
+          });
+        } else {
+          var sqlSelect = 'SELECT * FROM public."Rides" Where "DirverID" = ' + req.body.driverID + ';';
+          _db2.default.query(sqlSelect, function (er, re) {
+            if (er) {
+              res.status(500);
+              res.json({
+                status: 'fail',
+                message: 'Cannot save ride offer'
+              });
+            } else {
+              var sqlUpdate = 'UPDATE public."Users" SET "RidesOffered" = ' + re.rowCount + ' Where "ID" = \'' + req.body.driverID + '\';';
+              _db2.default.query(sqlUpdate, function (inError) {
+                if (inError) {
+                  res.json({
+                    message: 'Something went wrong'
+                  });
+                } else {
+                  res.status(200);
+                  res.json({
+                    message: 'Ride offer saved'
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.json({
+        status: 'fail',
+        message: 'Cannot save ride offer'
+      });
+    }
+  },
   deleteTestUser: function deleteTestUser(email, callback) {
     var sql = 'DELETE FROM public."Users" WHERE "EmailAddress" = \'' + email + '\'';
     _db2.default.query(sql, function () {
