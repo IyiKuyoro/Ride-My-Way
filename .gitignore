@@ -1,3 +1,5 @@
 *.env
 *.eslintrc
 node_modules/
+.nyc_output/
+.vscode/
