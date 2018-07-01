@@ -20,33 +20,6 @@ describe('Server', () => {
           done();
         });
     });
-    it('POST /api.v1.rides/:rideID/requests (Success)', (done) => {
-      chai.request(server)
-        .post(`/api/v1/rides/${data.body[0].rideID}/requests`)
-        .send({
-          requesterID: 'U_4782937582',
-          destination: 'Mushin',
-        })
-        .end((err, res) => {
-          expect(res.body[0].requests[0]).to.have.property('requesterID');
-          expect(res.body[0].requests[0]).to.have.property('destination');
-          done();
-        });
-    });
-    it('POST /api/v1/rides/:rideID/requests (Fail)', (done) => {
-      chai.request(server)
-        .post(`/api/v1/rides/${data.body[0].rideID}/requests`)
-        .send({
-          destination: 'Mushin',
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body).to.be.a('object');
-          expect(res.body.status).to.equal('fail');
-          expect(res.body.message).to.equal('Invalid data.');
-          done();
-        });
-    });
     it('POST /api.v1.rides (Success)', (done) => {
       chai.request(server)
         .post('/api/v1/rides')
@@ -113,7 +86,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTM2MTgsImV4cCI6MTUzMDQ1NzIxOH0.nvSFvUbXS9iVsstMZDLa8hYVl5UUQTsBkGROym-PQMU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -130,7 +103,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/R_0000000001')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTM2MTgsImV4cCI6MTUzMDQ1NzIxOH0.nvSFvUbXS9iVsstMZDLa8hYVl5UUQTsBkGROym-PQMU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -141,6 +114,22 @@ describe('Server', () => {
           expect(res.body).to.have.property('AllowStops');
           expect(res.body).to.have.property('AvaliableSpace');
           expect(res.body).to.have.property('Description');
+          done();
+        });
+    });
+    it('Post ride request', (done) => {
+      chai.request(server)
+        .post('/api/rides/R_0000000001')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJVXzcwNDUyOTA2MzUiLCJpYXQiOjE1MzA0NTc3NzYsImV4cCI6MTUzMDQ2MTM3Nn0.lkjg8SSVg85PqE2RqMZt0aRKIx-PPJvGPXx3HZYUwA8')
+        .send({
+          requesterID: 'U_5677440769',
+          destination: 'Mushin',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.have.property('Requests');
+          expect(res.body.Requests).to.have.property('requesterID');
+          expect(res.body.Requests).to.have.property('destination');
           done();
         });
     });
