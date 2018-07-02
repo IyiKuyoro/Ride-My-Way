@@ -129,6 +129,9 @@ describe('Server', () => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .send({
+          newStatus: 'accepted'
+        })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('message');
