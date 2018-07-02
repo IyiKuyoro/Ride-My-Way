@@ -14,5 +14,6 @@ apiRoutes.post('/api/v1/auth/signup', userController.postSignUp);
 apiRoutes.post('/api/v1/auth/login', userController.postLogIn);
 apiRoutes.post('/api/v1/users/rides', userController.postRide);
 apiRoutes.get('/api/v1/users/rides/:rideId/requests', rideController.getRequests);
+apiRoutes.put('/api/v1/users/rides/:rideId/requests/:requestId', rideController.putResponse);
 
 export default apiRoutes;

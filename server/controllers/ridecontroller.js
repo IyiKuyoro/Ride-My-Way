@@ -137,6 +137,38 @@ const controller = {
         message: 'Application error'
       });
     }
+  },
+  putResponse: (req, res) => {
+    try {
+      jwt.verify(req.headers.jwt, process.env.KEY, null, (err) => {
+        if (err) {
+          res.status(403);
+          res.json({
+            message: 'Forbiden'
+          });
+        } else {
+          const sql = `UPDATE public."Requests" SET "Status" = '${req.body.newStatus}' Where "ID" = '${req.params.requestId}';`;
+          client.query(sql, (error, result) => {
+            if (error || result.rowCount === 0) {
+              res.status(400);
+              res.json({
+                message: 'Cannot put response'
+              });
+            } else {
+              res.status(200);
+              res.json({
+                message: 'Response recorded'
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(500);
+      res.json({
+        message: 'Application error'
+      });
+    }
   }
 };
 
