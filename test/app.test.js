@@ -44,7 +44,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -61,7 +61,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -78,7 +78,7 @@ describe('Server', () => {
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .send({
           requesterID: '9',
           FirstName: 'Test',
@@ -95,7 +95,7 @@ describe('Server', () => {
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .send({
           driverID: 10,
           origin: 'Magodo',
@@ -115,7 +115,7 @@ describe('Server', () => {
     it('Get Request', (done) => {
       chai.request(server)
         .get('/api/v1/users/rides/2/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -128,7 +128,7 @@ describe('Server', () => {
     it('Put Response', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ4NzkzNCwiZXhwIjoxNTMwNDkxNTM0fQ.dlhPVQ-JId8V6bYwTAyI09Pm7IP29uM-yPFvYXLhhlU')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
         .send({
           newStatus: 'accepted'
         })

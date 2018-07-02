@@ -153,6 +153,38 @@ var controller = {
         message: 'Application error'
       });
     }
+  },
+  putResponse: function putResponse(req, res) {
+    try {
+      _jsonwebtoken2.default.verify(req.headers.jwt, process.env.KEY, null, function (err) {
+        if (err) {
+          res.status(403);
+          res.json({
+            message: 'Forbiden'
+          });
+        } else {
+          var sql = 'UPDATE public."Requests" SET "Status" = \'' + req.body.newStatus + '\' Where "ID" = \'' + req.params.requestId + '\';';
+          _db2.default.query(sql, function (error, result) {
+            if (error || result.rowCount === 0) {
+              res.status(400);
+              res.json({
+                message: 'Cannot put response'
+              });
+            } else {
+              res.status(200);
+              res.json({
+                message: 'Response recorded'
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      res.status(500);
+      res.json({
+        message: 'Application error'
+      });
+    }
   }
 };
 
