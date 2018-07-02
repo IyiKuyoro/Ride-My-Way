@@ -130,37 +130,32 @@ const controller = {
   },
   postRide: (req, res) => {
     try {
-      const sqlInsert = 'INSERT INTO public."Rides" ("DirverID", "Origin", "Destination", "Time", "AllowStops", "AvaliableSpace", "Description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
-      const values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
-      client.query(sqlInsert, values, (error) => {
-        if (error) {
-          res.status(500);
+      jwt.verify(req.headers.jwt, process.env.KEY, null, (er) => {
+        if (er) {
+          res.status(403);
           res.json({
-            status: 'fail',
-            message: 'Cannot save ride offer'
+            message: 'Forbiden',
           });
         } else {
-          const sqlSelect = `SELECT * FROM public."Rides" Where "DirverID" = ${req.body.driverID};`;
-          client.query(sqlSelect, (er, re) => {
-            if (er) {
+          const sqlInsert = 'INSERT INTO public."Rides" ("DirverID", "Origin", "Destination", "Time", "AllowStops", "AvaliableSpace", "Description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+          const values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
+          client.query(sqlInsert, values, (error) => {
+            if (error) {
               res.status(500);
               res.json({
                 status: 'fail',
                 message: 'Cannot save ride offer'
               });
             } else {
-              const sqlUpdate = `UPDATE public."Users" SET "RidesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverID}';`;
-              client.query(sqlUpdate, (inError) => {
-                if (inError) {
-                  res.json({
-                    message: 'Something went wrong'
-                  });
-                } else {
+              const sqlSelect = `SELECT * FROM public."Rides" Where "DirverID" = ${req.body.driverID};`;
+              client.query(sqlSelect, (err, re) => {
+                const sqlUpdate = `UPDATE public."Users" SET "RidesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverID}';`;
+                client.query(sqlUpdate, () => {
                   res.status(200);
                   res.json({
                     message: 'Ride offer saved'
                   });
-                }
+                });
               });
             }
           });

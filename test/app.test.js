@@ -41,10 +41,24 @@ describe('Server', () => {
           done();
         });
     });
+    it('LogIn existing user (password error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/login')
+        .send({
+          EmailAddress: 'FirstTestDriver@example.com',
+          Password: 'qwy'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Unauthorized');
+          done();
+        });
+    });
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -61,7 +75,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('ID');
@@ -75,10 +89,32 @@ describe('Server', () => {
           done();
         });
     });
+    it('Get specific ride (token error)', (done) => {
+      chai.request(server)
+        .get('/api/v1/rides/1')
+        .set('jwt', 'vnsdvlcjibvasdlvjbhui')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Forbiden');
+          done();
+        });
+    });
+    it('Get specific ride (rideId error)', (done) => {
+      chai.request(server)
+        .get('/api/v1/rides/0')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Unauthorized');
+          done();
+        });
+    });
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
           requesterID: '9',
           FirstName: 'Test',
@@ -92,10 +128,48 @@ describe('Server', () => {
           done();
         });
     });
+    it('Post users ride (query error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .send({
+          drirID: 10,
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'Musin via Ikeja and Oshodi'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Cannot save ride offer');
+          done();
+        });
+    });
+    it('Post users ride (token error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', 'eyJnR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .send({
+          driverID: 10,
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'Musin via Ikeja and Oshodi'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Forbiden');
+          done();
+        });
+    });
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
           driverID: 10,
           origin: 'Magodo',
@@ -115,7 +189,7 @@ describe('Server', () => {
     it('Get Request', (done) => {
       chai.request(server)
         .get('/api/v1/users/rides/2/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('ID');
@@ -128,7 +202,7 @@ describe('Server', () => {
     it('Put Response', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDQ5MDM5MiwiZXhwIjoxNTMwNDkzOTkyfQ.eMHJPRgHTJ8aeSIzJmKr-MTRCqID8Zw7GDhEbX2Jk40')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
           newStatus: 'accepted'
         })
@@ -136,6 +210,34 @@ describe('Server', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Response recorded');
+          done();
+        });
+    });
+    it('Put response (query error)', (done) => {
+      chai.request(server)
+        .put('/api/v1/users/rides/0/requests/0')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .send({
+          newStatu: 'accepted'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Cannot put response');
+          done();
+        });
+    });
+    it('Put response (token error', (done) => {
+      chai.request(server)
+        .put('/api/v1/users/rides/0/requests/0')
+        .set('jwt', 'eyJJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .send({
+          newStatu: 'accepted'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Forbiden');
           done();
         });
     });
@@ -166,6 +268,23 @@ describe('Server', () => {
           expect(res.body.data).to.have.property('RidesTaken');
           expect(res.body.data).to.have.property('RidesOffered');
           expect(res.body.data).to.have.property('Friends');
+          done();
+        });
+    });
+    it('SignUp (query error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          FirstName: 'Test',
+          LastName: 'User',
+          Sex: 'Male',
+          EmailAddress: 'test.user@example.com',
+          Password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Could not add user to database');
           done();
         });
     });
