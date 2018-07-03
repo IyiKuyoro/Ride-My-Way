@@ -20,7 +20,7 @@ const controller = {
                 throw err;
               }
               const text = 'INSERT INTO public."Users" ("FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesTaken", "RidesOffered", "Friends", "AccountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
-              const values = [req.body.FirstName, req.body.LastName, req.body.Sex, req.body.DOB, req.body.PhoneNumber, req.body.EmailAddress, hash, 0, 0, 0, 'Active'];
+              const values = [req.body.firstName, req.body.lastName, req.body.sex, req.body.dob, req.body.phoneNumber, req.body.emailAddress, hash, 0, 0, 0, 'Active'];
               client.query(text, values, (error1, result) => {
                 if (error1) {
                   res.status(400);
@@ -42,14 +42,14 @@ const controller = {
                     status: 'Success',
                     data: {
                       token,
-                      iD: result.rows[0].ID,
-                      firstName: result.rows[0].FirstName,
-                      lastName: result.rows[0].LastName,
-                      mobileNumber: result.rows[0].MobileNumber,
-                      emailAddress: result.rows[0].EmailAddress,
-                      ridesTaken: result.rows[0].RidesTaken,
-                      ridesOffered: result.rows[0].RidesOffered,
-                      friends: result.rows[0].Friends,
+                      iD: result.rows[0].id,
+                      firstName: result.rows[0].firstName,
+                      lastName: result.rows[0].lastName,
+                      mobileNumber: result.rows[0].mobileNumber,
+                      emailAddress: result.rows[0].emailAddress,
+                      ridesTaken: result.rows[0].ridesTaken,
+                      ridesOffered: result.rows[0].ridesOffered,
+                      friends: result.rows[0].friends,
                     },
                   };
                   res.json(response);
@@ -75,7 +75,7 @@ const controller = {
   },
   postLogIn: (req, res) => {
     try {
-      const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.EmailAddress}'`;
+      const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.emailAddress}'`;
       client.query(sql, (err, result) => {
         if (err || result.rows.length === 0) {
           res.status(401);
@@ -84,7 +84,7 @@ const controller = {
             message: 'Unauthorized',
           });
         } else {
-          bcrypt.compare(req.body.Password, result.rows[0].Password, (error, same) => {
+          bcrypt.compare(req.body.password, result.rows[0].password, (error, same) => {
             if (error || !same) {
               res.status(401);
               res.json({
@@ -94,7 +94,7 @@ const controller = {
             } else {
               const token = jwt.sign(
                 {
-                  userId: result.rows[0].ID,
+                  userId: result.rows[0].id,
                 },
                 process.env.KEY,
                 {
@@ -105,14 +105,14 @@ const controller = {
                 status: 'success',
                 data: {
                   token,
-                  iD: result.rows[0].ID,
-                  firstName: result.rows[0].FirstName,
-                  lastName: result.rows[0].LastName,
-                  mobileNumber: result.rows[0].MobileNumber,
-                  emailAddress: result.rows[0].EmailAddress,
-                  ridesTaken: result.rows[0].RidesTaken,
-                  ridesOffered: result.rows[0].RidesOffered,
-                  friends: result.rows[0].Friends,
+                  iD: result.rows[0].id,
+                  firstName: result.rows[0].firstName,
+                  lastName: result.rows[0].lastName,
+                  mobileNumber: result.rows[0].mobileNumber,
+                  emailAddress: result.rows[0].emailAddress,
+                  ridesTaken: result.rows[0].ridesTaken,
+                  ridesOffered: result.rows[0].ridesOffered,
+                  friends: result.rows[0].friends,
                 }
               };
               res.json(response);

@@ -25,19 +25,19 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          EmailAddress: 'FirstTestDriver@example.com',
-          Password: 'qwerty'
+          emailAddress: 'FirstTestDriver@example.com',
+          password: 'qwerty'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.data).to.have.property('token');
-          expect(res.body.data).to.have.property('FirstName');
-          expect(res.body.data).to.have.property('LastName');
-          expect(res.body.data).to.have.property('MobileNumber');
-          expect(res.body.data).to.have.property('EmailAddress');
-          expect(res.body.data).to.have.property('RidesTaken');
-          expect(res.body.data).to.have.property('RidesOffered');
-          expect(res.body.data).to.have.property('Friends');
+          expect(res.body.data).to.have.property('firstName');
+          expect(res.body.data).to.have.property('lastName');
+          expect(res.body.data).to.have.property('mobileNumber');
+          expect(res.body.data).to.have.property('emailAddress');
+          expect(res.body.data).to.have.property('ridesTaken');
+          expect(res.body.data).to.have.property('ridesOffered');
+          expect(res.body.data).to.have.property('friends');
           done();
         });
     });
@@ -250,24 +250,24 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/signup')
         .send({
-          FirstName: 'Test',
-          LastName: 'User',
-          Sex: 'Male',
-          DOB: '05/01/1872',
-          PhoneNumber: 9054387612,
-          EmailAddress: 'test.user@example.com',
-          Password: 'qwerty',
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.data).to.have.property('token');
-          expect(res.body.data).to.have.property('FirstName');
-          expect(res.body.data).to.have.property('LastName');
-          expect(res.body.data).to.have.property('MobileNumber');
-          expect(res.body.data).to.have.property('EmailAddress');
-          expect(res.body.data).to.have.property('RidesTaken');
-          expect(res.body.data).to.have.property('RidesOffered');
-          expect(res.body.data).to.have.property('Friends');
+          expect(res.body.data).to.have.property('firstName');
+          expect(res.body.data).to.have.property('lastName');
+          expect(res.body.data).to.have.property('mobileNumber');
+          expect(res.body.data).to.have.property('emailAddress');
+          expect(res.body.data).to.have.property('ridesTaken');
+          expect(res.body.data).to.have.property('ridesOffered');
+          expect(res.body.data).to.have.property('friends');
           done();
         });
     });
@@ -275,11 +275,11 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/signup')
         .send({
-          FirstName: 'Test',
-          LastName: 'User',
-          Sex: 'Male',
-          EmailAddress: 'test.user@example.com',
-          Password: 'qwerty',
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
