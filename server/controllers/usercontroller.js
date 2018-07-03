@@ -19,7 +19,7 @@ const controller = {
               if (err) {
                 throw err;
               }
-              const text = 'INSERT INTO public."Users" ("FirstName", "LastName", "Sex", "DOB", "MobileNumber", "EmailAddress", "Password", "RidesTaken", "RidesOffered", "Friends", "AccountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
+              const text = 'INSERT INTO public."Users" ("firstName", "lastName", "sex", "dob", "mobileNumber", "emailAddress", "password", "ridesTaken", "ridesOffered", "friends", "accountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
               const values = [req.body.firstName, req.body.lastName, req.body.sex, req.body.dob, req.body.phoneNumber, req.body.emailAddress, hash, 0, 0, 0, 'Active'];
               client.query(text, values, (error1, result) => {
                 if (error1) {
@@ -75,7 +75,7 @@ const controller = {
   },
   postLogIn: (req, res) => {
     try {
-      const sql = `SELECT * FROM public."Users" WHERE "EmailAddress" = '${req.body.emailAddress}'`;
+      const sql = `SELECT * FROM public."Users" WHERE "emailAddress" = '${req.body.emailAddress}'`;
       client.query(sql, (err, result) => {
         if (err || result.rows.length === 0) {
           res.status(401);
@@ -137,7 +137,7 @@ const controller = {
             message: 'Forbiden',
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Rides" ("DirverID", "Origin", "Destination", "Time", "AllowStops", "AvaliableSpace", "Description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+          const sqlInsert = 'INSERT INTO public."Rides" ("dirverID", "origin", "destination", "time", "allowStops", "avaliableSpace", "description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
           const values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
           client.query(sqlInsert, values, (error) => {
             if (error) {
@@ -147,9 +147,9 @@ const controller = {
                 message: 'Cannot save ride offer'
               });
             } else {
-              const sqlSelect = `SELECT * FROM public."Rides" Where "DirverID" = ${req.body.driverID};`;
+              const sqlSelect = `SELECT * FROM public."rides" Where "driverId" = ${req.body.driverId};`;
               client.query(sqlSelect, (err, re) => {
-                const sqlUpdate = `UPDATE public."Users" SET "RidesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverID}';`;
+                const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
                 client.query(sqlUpdate, () => {
                   res.status(200);
                   res.json({
@@ -169,7 +169,7 @@ const controller = {
     }
   },
   deleteTestUser: (email, callback) => {
-    const sql = `DELETE FROM public."Users" WHERE "EmailAddress" = '${email}'`;
+    const sql = `DELETE FROM public."Users" WHERE "emailAddress" = '${email}'`;
     client.query(sql, () => {
       callback();
     });

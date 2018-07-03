@@ -74,7 +74,7 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Requests" ("RideID", "RequesterID", "Status", "RequesterName", "MobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+          const sqlInsert = 'INSERT INTO public."Requests" ("rideId", "requesterId", "status", "requesterName", "mobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
           const values = [req.params.rideId, req.body.requesterID, 'pending', `${req.body.FirstName} ${req.body.LastName}`, req.body.MobileNumber];
           client.query(sqlInsert, values, (error, result) => {
             if (error) {
@@ -83,7 +83,7 @@ const controller = {
                 message: 'Unauthorized'
               });
             } else {
-              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("Requests", '{${result.rows[0].ID}}') Where "ID" = '${req.params.rideId}';`;
+              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("requests", '{${result.rows[0].ID}}') Where "id" = '${req.params.rideId}';`;
               client.query(sqlUpdate, (inError) => {
                 if (inError) {
                   res.status(403);
@@ -117,7 +117,7 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sql = `SELECT * FROM public."Requests" Where "RideID" = '${req.params.rideId}';`;
+          const sql = `SELECT * FROM public."Requests" Where "rideId" = '${req.params.rideId}';`;
           client.query(sql, (error, result) => {
             if (error || result.rowCount === 0) {
               res.status(400);
@@ -147,7 +147,7 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sql = `UPDATE public."Requests" SET "Status" = '${req.body.newStatus}' Where "ID" = '${req.params.requestId}';`;
+          const sql = `UPDATE public."Requests" SET "status" = '${req.body.newStatus}' Where "id" = '${req.params.requestId}';`;
           client.query(sql, (error, result) => {
             if (error || result.rowCount === 0) {
               res.status(400);

@@ -45,8 +45,8 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          EmailAddress: 'FirstTestDriver@example.com',
-          Password: 'qwy'
+          emailAddress: 'FirstTestDriver@example.com',
+          password: 'qwy'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
@@ -61,14 +61,14 @@ describe('Server', () => {
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body[0]).to.have.property('ID');
-          expect(res.body[0]).to.have.property('DirverID');
-          expect(res.body[0]).to.have.property('Origin');
-          expect(res.body[0]).to.have.property('Destination');
-          expect(res.body[0]).to.have.property('Time');
-          expect(res.body[0]).to.have.property('AllowStops');
-          expect(res.body[0]).to.have.property('AvaliableSpace');
-          expect(res.body[0]).to.have.property('Description');
+          expect(res.body[0]).to.have.property('id');
+          expect(res.body[0]).to.have.property('driverId');
+          expect(res.body[0]).to.have.property('origin');
+          expect(res.body[0]).to.have.property('destination');
+          expect(res.body[0]).to.have.property('time');
+          expect(res.body[0]).to.have.property('allowStops');
+          expect(res.body[0]).to.have.property('avaliableSpace');
+          expect(res.body[0]).to.have.property('description');
           done();
         });
     });
@@ -78,14 +78,14 @@ describe('Server', () => {
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('ID');
-          expect(res.body).to.have.property('DirverID');
-          expect(res.body).to.have.property('Origin');
-          expect(res.body).to.have.property('Destination');
-          expect(res.body).to.have.property('Time');
-          expect(res.body).to.have.property('AllowStops');
-          expect(res.body).to.have.property('AvaliableSpace');
-          expect(res.body).to.have.property('Description');
+          expect(res.body).to.have.property('id');
+          expect(res.body).to.have.property('driverId');
+          expect(res.body).to.have.property('origin');
+          expect(res.body).to.have.property('destination');
+          expect(res.body).to.have.property('time');
+          expect(res.body).to.have.property('allowStops');
+          expect(res.body).to.have.property('avaliableSpace');
+          expect(res.body).to.have.property('description');
           done();
         });
     });
@@ -116,10 +116,10 @@ describe('Server', () => {
         .post('/api/v1/rides/1/requests')
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
-          requesterID: '9',
-          FirstName: 'Test',
-          LastName: 'Requester',
-          MobileNumber: '90472865784'
+          requesterId: '9',
+          firstName: 'Test',
+          lastName: 'Requester',
+          mobileNumber: '90472865784'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -133,7 +133,7 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
-          drirID: 10,
+          drirId: 10,
           time: '10:20AM',
           allowStops: true,
           avaliableSpace: 3,
@@ -151,7 +151,7 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', 'eyJnR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
-          driverID: 10,
+          driverId: 10,
           origin: 'Magodo',
           destination: 'Musin',
           time: '10:20AM',
@@ -171,7 +171,7 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .send({
-          driverID: 10,
+          driverId: 10,
           origin: 'Magodo',
           destination: 'Musin',
           time: '10:20AM',
@@ -192,10 +192,10 @@ describe('Server', () => {
         .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body[0]).to.have.property('ID');
-          expect(res.body[0]).to.have.property('RequesterName');
-          expect(res.body[0]).to.have.property('MobileNumber');
-          expect(res.body[0]).to.have.property('Status');
+          expect(res.body[0]).to.have.property('id');
+          expect(res.body[0]).to.have.property('requesterName');
+          expect(res.body[0]).to.have.property('mobileNumber');
+          expect(res.body[0]).to.have.property('status');
           done();
         });
     });
