@@ -44,7 +44,7 @@ const controller = {
             message: 'Forbiden'
           });
         } else {
-          const sql = `SELECT * FROM public."Rides" Where "ID" = '${req.params.rideId}';`;
+          const sql = `SELECT * FROM public."Rides" Where "id" = '${req.params.rideId}';`;
           client.query(sql, (error, result) => {
             if (error || result.rowCount === 0) {
               res.status(401);
@@ -75,7 +75,7 @@ const controller = {
           });
         } else {
           const sqlInsert = 'INSERT INTO public."Requests" ("rideId", "requesterId", "status", "requesterName", "mobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
-          const values = [req.params.rideId, req.body.requesterID, 'pending', `${req.body.FirstName} ${req.body.LastName}`, req.body.MobileNumber];
+          const values = [req.params.rideId, req.body.requesterId, 'pending', `${req.body.firstName} ${req.body.lastName}`, req.body.mobileNumber];
           client.query(sqlInsert, values, (error, result) => {
             if (error) {
               res.status(403);
@@ -83,7 +83,7 @@ const controller = {
                 message: 'Unauthorized'
               });
             } else {
-              const sqlUpdate = `UPDATE public."Rides" SET "Requests" = array_cat("requests", '{${result.rows[0].ID}}') Where "id" = '${req.params.rideId}';`;
+              const sqlUpdate = `UPDATE public."Rides" SET "requests" = array_cat("requests", '{${result.rows[0].id}}') Where "id" = '${req.params.rideId}';`;
               client.query(sqlUpdate, (inError) => {
                 if (inError) {
                   res.status(403);

@@ -8,14 +8,14 @@ dotenv.config();
 
 const controller = {
   postSignUp: (req, res) => {
-    helper.validEmail(req.body.EmailAddress, (valid) => {
+    helper.validEmail(req.body.emailAddress, (valid) => {
       try {
         if (valid) {
           bcrypt.genSalt(10, (err, salt) => {
             if (err) {
               throw err;
             }
-            bcrypt.hash(req.body.Password, salt, (error, hash) => {
+            bcrypt.hash(req.body.password, salt, (error, hash) => {
               if (err) {
                 throw err;
               }
@@ -137,8 +137,8 @@ const controller = {
             message: 'Forbiden',
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Rides" ("dirverID", "origin", "destination", "time", "allowStops", "avaliableSpace", "description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
-          const values = [req.body.driverID, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
+          const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+          const values = [req.body.driverId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
           client.query(sqlInsert, values, (error) => {
             if (error) {
               res.status(500);
@@ -147,7 +147,7 @@ const controller = {
                 message: 'Cannot save ride offer'
               });
             } else {
-              const sqlSelect = `SELECT * FROM public."rides" Where "driverId" = ${req.body.driverId};`;
+              const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.body.driverId};`;
               client.query(sqlSelect, (err, re) => {
                 const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
                 client.query(sqlUpdate, () => {

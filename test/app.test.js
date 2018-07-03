@@ -58,7 +58,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('id');
@@ -75,7 +75,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('id');
@@ -103,7 +103,7 @@ describe('Server', () => {
     it('Get specific ride (rideId error)', (done) => {
       chai.request(server)
         .get('/api/v1/rides/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body).to.have.property('message');
@@ -114,7 +114,7 @@ describe('Server', () => {
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .send({
           requesterId: '9',
           firstName: 'Test',
@@ -131,7 +131,7 @@ describe('Server', () => {
     it('Post users ride (query error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .send({
           drirId: 10,
           time: '10:20AM',
@@ -149,7 +149,7 @@ describe('Server', () => {
     it('Post users ride (token error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJnR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0r')
         .send({
           driverId: 10,
           origin: 'Magodo',
@@ -169,7 +169,7 @@ describe('Server', () => {
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .send({
           driverId: 10,
           origin: 'Magodo',
@@ -189,7 +189,7 @@ describe('Server', () => {
     it('Get Request', (done) => {
       chai.request(server)
         .get('/api/v1/users/rides/2/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body[0]).to.have.property('id');
@@ -202,7 +202,7 @@ describe('Server', () => {
     it('Put Response', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .send({
           newStatus: 'accepted'
         })
@@ -216,7 +216,7 @@ describe('Server', () => {
     it('Put response (query error)', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/0/requests/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
         .send({
           newStatu: 'accepted'
         })
@@ -227,10 +227,10 @@ describe('Server', () => {
           done();
         });
     });
-    it('Put response (token error', (done) => {
+    it('Put response (token error)', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/0/requests/0')
-        .set('jwt', 'eyJJ9.eyJ1c2VySWQiOiIxMSIsImlhdCI6MTUzMDUxOTE0NCwiZXhwIjoxNTMwNTIyNzQ0fQ.ukZqTxDI_CT2clnQc7vX0HBC_1MMZ4mkkyqzhYSD1Xk')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As30')
         .send({
           newStatu: 'accepted'
         })
