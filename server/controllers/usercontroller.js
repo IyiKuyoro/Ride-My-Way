@@ -42,14 +42,14 @@ const controller = {
                     status: 'Success',
                     data: {
                       token,
-                      ID: result.rows[0].ID,
-                      FirstName: result.rows[0].FirstName,
-                      LastName: result.rows[0].LastName,
-                      MobileNumber: result.rows[0].MobileNumber,
-                      EmailAddress: result.rows[0].EmailAddress,
-                      RidesTaken: result.rows[0].RidesTaken,
-                      RidesOffered: result.rows[0].RidesOffered,
-                      Friends: result.rows[0].Friends,
+                      iD: result.rows[0].ID,
+                      firstName: result.rows[0].FirstName,
+                      lastName: result.rows[0].LastName,
+                      mobileNumber: result.rows[0].MobileNumber,
+                      emailAddress: result.rows[0].EmailAddress,
+                      ridesTaken: result.rows[0].RidesTaken,
+                      ridesOffered: result.rows[0].RidesOffered,
+                      friends: result.rows[0].Friends,
                     },
                   };
                   res.json(response);
@@ -105,14 +105,14 @@ const controller = {
                 status: 'success',
                 data: {
                   token,
-                  ID: result.rows[0].ID,
-                  FirstName: result.rows[0].FirstName,
-                  LastName: result.rows[0].LastName,
-                  MobileNumber: result.rows[0].MobileNumber,
-                  EmailAddress: result.rows[0].EmailAddress,
-                  RidesTaken: result.rows[0].RidesTaken,
-                  RidesOffered: result.rows[0].RidesOffered,
-                  Friends: result.rows[0].Friends,
+                  iD: result.rows[0].ID,
+                  firstName: result.rows[0].FirstName,
+                  lastName: result.rows[0].LastName,
+                  mobileNumber: result.rows[0].MobileNumber,
+                  emailAddress: result.rows[0].EmailAddress,
+                  ridesTaken: result.rows[0].RidesTaken,
+                  ridesOffered: result.rows[0].RidesOffered,
+                  friends: result.rows[0].Friends,
                 }
               };
               res.json(response);
