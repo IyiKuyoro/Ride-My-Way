@@ -23,8 +23,7 @@ const controller = {
               const values = [req.body.firstName, req.body.lastName, req.body.sex, req.body.dob, req.body.phoneNumber, req.body.emailAddress, hash, 0, 0, 0, 'Active'];
               client.query(text, values, (error1, result) => {
                 if (error1) {
-                  res.status(400);
-                  res.json({
+                  res.status(400).json({
                     status: 'fail',
                     message: 'Could not add user to database',
                   });
@@ -58,17 +57,15 @@ const controller = {
             });
           });
         } else {
-          res.status(400);
-          res.json({
+          res.status(400).json({
             status: 'fail',
             message: 'Could not add user to database',
           });
         }
       } catch (e) {
-        res.status(400);
-        res.json({
+        res.status(500).json({
           status: 'fail',
-          message: 'Could not add user to database',
+          message: 'Oops, seems like something went wrong here'
         });
       }
     });
@@ -78,18 +75,16 @@ const controller = {
       const sql = `SELECT * FROM public."Users" WHERE "emailAddress" = '${req.body.emailAddress}'`;
       client.query(sql, (err, result) => {
         if (err || result.rows.length === 0) {
-          res.status(401);
-          res.json({
+          res.status(401).json({
             status: 'fail',
-            message: 'Unauthorized',
+            message: 'Wrong login details',
           });
         } else {
           bcrypt.compare(req.body.password, result.rows[0].password, (error, same) => {
             if (error || !same) {
-              res.status(401);
-              res.json({
+              res.status(401).json({
                 status: 'fail',
-                message: 'Unauthorized',
+                message: 'Wrong login details',
               });
             } else {
               const token = jwt.sign(
@@ -121,10 +116,9 @@ const controller = {
         }
       });
     } catch (e) {
-      res.status(401);
-      res.json({
+      res.status(500).json({
         status: 'fail',
-        message: 'Unauthorized',
+        message: 'Oops, seems like something went wrong here'
       });
     }
   },
@@ -132,27 +126,26 @@ const controller = {
     try {
       jwt.verify(req.headers.jwt, process.env.KEY, null, (er) => {
         if (er) {
-          res.status(403);
-          res.json({
-            message: 'Forbiden',
+          res.status(401).json({
+            status: 'fail',
+            message: 'This token is either wrong or has expired'
           });
         } else {
           const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
           const values = [req.body.driverId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description];
           client.query(sqlInsert, values, (error) => {
             if (error) {
-              res.status(500);
-              res.json({
+              res.status(404).json({
                 status: 'fail',
-                message: 'Cannot save ride offer'
+                message: 'Ride not found'
               });
             } else {
               const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.body.driverId};`;
               client.query(sqlSelect, (err, re) => {
                 const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
                 client.query(sqlUpdate, () => {
-                  res.status(200);
-                  res.json({
+                  res.status(200).json({
+                    status: 'success',
                     message: 'Ride offer saved'
                   });
                 });
@@ -162,9 +155,9 @@ const controller = {
         }
       });
     } catch (e) {
-      res.json({
+      res.status(500).json({
         status: 'fail',
-        message: 'Cannot save ride offer',
+        message: 'Oops, seems like something went wrong here'
       });
     }
   },

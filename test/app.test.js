@@ -51,41 +51,41 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Unauthorized');
+          expect(res.body.message).to.equal('Wrong login details');
           done();
         });
     });
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body[0]).to.have.property('id');
-          expect(res.body[0]).to.have.property('driverId');
-          expect(res.body[0]).to.have.property('origin');
-          expect(res.body[0]).to.have.property('destination');
-          expect(res.body[0]).to.have.property('time');
-          expect(res.body[0]).to.have.property('allowStops');
-          expect(res.body[0]).to.have.property('avaliableSpace');
-          expect(res.body[0]).to.have.property('description');
+          expect(res.body.data.rides[0]).to.have.property('id');
+          expect(res.body.data.rides[0]).to.have.property('driverId');
+          expect(res.body.data.rides[0]).to.have.property('origin');
+          expect(res.body.data.rides[0]).to.have.property('destination');
+          expect(res.body.data.rides[0]).to.have.property('time');
+          expect(res.body.data.rides[0]).to.have.property('allowStops');
+          expect(res.body.data.rides[0]).to.have.property('avaliableSpace');
+          expect(res.body.data.rides[0]).to.have.property('description');
           done();
         });
     });
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.property('id');
-          expect(res.body).to.have.property('driverId');
-          expect(res.body).to.have.property('origin');
-          expect(res.body).to.have.property('destination');
-          expect(res.body).to.have.property('time');
-          expect(res.body).to.have.property('allowStops');
-          expect(res.body).to.have.property('avaliableSpace');
-          expect(res.body).to.have.property('description');
+          expect(res.body.data.ride).to.have.property('id');
+          expect(res.body.data.ride).to.have.property('driverId');
+          expect(res.body.data.ride).to.have.property('origin');
+          expect(res.body.data.ride).to.have.property('destination');
+          expect(res.body.data.ride).to.have.property('time');
+          expect(res.body.data.ride).to.have.property('allowStops');
+          expect(res.body.data.ride).to.have.property('avaliableSpace');
+          expect(res.body.data.ride).to.have.property('description');
           done();
         });
     });
@@ -94,27 +94,27 @@ describe('Server', () => {
         .get('/api/v1/rides/1')
         .set('jwt', 'vnsdvlcjibvasdlvjbhui')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(403);
+          expect(res.statusCode).to.equal(401);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Forbiden');
+          expect(res.body.message).to.equal('This token is either wrong or has expired');
           done();
         });
     });
     it('Get specific ride (rideId error)', (done) => {
       chai.request(server)
         .get('/api/v1/rides/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
+          expect(res.statusCode).to.equal(404);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Unauthorized');
+          expect(res.body.message).to.equal('Ride not found');
           done();
         });
     });
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .send({
           requesterId: '9',
           firstName: 'Test',
@@ -131,7 +131,7 @@ describe('Server', () => {
     it('Post users ride (query error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .send({
           drirId: 10,
           time: '10:20AM',
@@ -140,16 +140,16 @@ describe('Server', () => {
           description: 'Musin via Ikeja and Oshodi'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(500);
+          expect(res.statusCode).to.equal(404);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Cannot save ride offer');
+          expect(res.body.message).to.equal('Ride not found');
           done();
         });
     });
     it('Post users ride (token error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0r')
+        .set('jwt', 'eyJhQ3NjgsImV4cCI6MTUzMDYzODM2OH0.QsX36Ay9pkfs7B0pruwyGw4YB5u_M8sEcOuT4PIpVAg')
         .send({
           driverId: 10,
           origin: 'Magodo',
@@ -160,16 +160,16 @@ describe('Server', () => {
           description: 'Musin via Ikeja and Oshodi'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(403);
+          expect(res.statusCode).to.equal(401);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Forbiden');
+          expect(res.body.message).to.equal('This token is either wrong or has expired');
           done();
         });
     });
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .send({
           driverId: 10,
           origin: 'Magodo',
@@ -189,20 +189,20 @@ describe('Server', () => {
     it('Get Request', (done) => {
       chai.request(server)
         .get('/api/v1/users/rides/2/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body[0]).to.have.property('id');
-          expect(res.body[0]).to.have.property('requesterName');
-          expect(res.body[0]).to.have.property('mobileNumber');
-          expect(res.body[0]).to.have.property('status');
+          expect(res.body.data.requests[0]).to.have.property('id');
+          expect(res.body.data.requests[0]).to.have.property('requesterName');
+          expect(res.body.data.requests[0]).to.have.property('mobileNumber');
+          expect(res.body.data.requests[0]).to.have.property('status');
           done();
         });
     });
     it('Put Response', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .send({
           newStatus: 'accepted'
         })
@@ -216,7 +216,7 @@ describe('Server', () => {
     it('Put response (query error)', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/0/requests/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As302RZ0rKYxieqrR6h0KPR7iNy2c1teY_XmqYNXqj4')
+        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NDQ5MTcsImV4cCI6MTUzMDY0ODUxN30.1r_p1EK-XOZhdiDmJkCXgnxRcAsKDFi7V4S0n0YMsiU')
         .send({
           newStatu: 'accepted'
         })
@@ -230,14 +230,14 @@ describe('Server', () => {
     it('Put response (token error)', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/0/requests/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As30')
+        .set('jwt', 'QiOjE1MzA2MjAzNDEsImV4cCI6MTUzMDYyMzk0MX0.As30')
         .send({
           newStatu: 'accepted'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(403);
+          expect(res.statusCode).to.equal(401);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Forbiden');
+          expect(res.body.message).to.equal('This token is either wrong or has expired');
           done();
         });
     });

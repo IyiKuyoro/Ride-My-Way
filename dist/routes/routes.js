@@ -25,12 +25,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var apiRoutes = _express2.default.Router();
 
 apiRoutes.get('/', _controller2.default.get);
-apiRoutes.get('/api/v1/rides', _ridecontroller2.default.getRides);
-apiRoutes.get('/api/v1/rides/:rideId', _ridecontroller2.default.getSpecificRide);
-apiRoutes.post('/api/v1/rides', _controller2.default.postRide);
-apiRoutes.post('/api/v1/rides/:rideId/requests', _ridecontroller2.default.postRideRequest);
 apiRoutes.post('/api/v1/auth/signup', _usercontroller2.default.postSignUp);
 apiRoutes.post('/api/v1/auth/login', _usercontroller2.default.postLogIn);
+apiRoutes.get('/api/v1/rides', _ridecontroller2.default.getRides);
+apiRoutes.get('/api/v1/rides/:rideId', _ridecontroller2.default.getSpecificRide);
+apiRoutes.post('/api/v1/rides/:rideId/requests', _ridecontroller2.default.postRideRequest);
 apiRoutes.post('/api/v1/users/rides', _usercontroller2.default.postRide);
 apiRoutes.get('/api/v1/users/rides/:rideId/requests', _ridecontroller2.default.getRequests);
 apiRoutes.put('/api/v1/users/rides/:rideId/requests/:requestId', _ridecontroller2.default.putResponse);

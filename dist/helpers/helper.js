@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var helpers = {
   validEmail: function validEmail(email, callback) {
     if (email) {
-      var sql = 'SELECT * FROM public."Users" WHERE "EmailAddress" = \'' + email + '\';';
+      var sql = 'SELECT * FROM public."Users" WHERE "emailAddress" = \'' + email + '\';';
       _db2.default.query(sql, function (err, res) {
         if (res.rowCount === 1) {
           callback(false);
