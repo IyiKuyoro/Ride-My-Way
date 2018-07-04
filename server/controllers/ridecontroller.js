@@ -57,7 +57,7 @@ const controller = {
     try {
       const sqlSelect = `SELECT "driverId" FROM public."Rides" Where "id" = '${req.params.rideId}'`;
       client.query(sqlSelect, (er, re) => {
-        if (er) {
+        if (er || re.rowCount === 0) {
           res.status(404).json({
             status: 'fail',
             message: 'cannot find the specified ride'
@@ -66,7 +66,7 @@ const controller = {
           const sqlInsert = 'INSERT INTO public."Requests" ("rideId", "requesterId", "status", "requesterName", "mobileNumber", "driverId") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
           const values = [req.params.rideId, req.body.requesterId, 'pending', `${req.body.firstName} ${req.body.lastName}`, req.body.mobileNumber, re.rows[0].driverId];
           client.query(sqlInsert, values, (error, result) => {
-            if (error) {
+            if (error || result.rowCount === 0) {
               res.status(404).json({
                 status: 'fail',
                 message: 'Some information provided is not of the right type'
