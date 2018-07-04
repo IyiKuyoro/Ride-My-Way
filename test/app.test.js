@@ -26,7 +26,7 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          emailAddress: 'FirstTestDriver@example.com',
+          emailAddress: 'SecondTestDriver@example.com',
           password: 'qwerty'
         })
         .end((err, res) => {
@@ -47,7 +47,7 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          emailAddress: 'FirstTestDriver@example.com',
+          emailAddress: 'SecondTestDriver@example.com',
           password: 'qwy'
         })
         .end((err, res) => {

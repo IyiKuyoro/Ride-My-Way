@@ -81,26 +81,36 @@ const controller = {
             message: 'This token is either wrong or has expired'
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Requests" ("rideId", "requesterId", "status", "requesterName", "mobileNumber") VALUES ($1, $2, $3, $4, $5) RETURNING *;';
-          const values = [req.params.rideId, req.body.requesterId, 'pending', `${req.body.firstName} ${req.body.lastName}`, req.body.mobileNumber];
-          client.query(sqlInsert, values, (error, result) => {
-            if (error) {
-              res.status(400).json({
+          const sqlSelect = `SELECT "driverId" FROM public."Rides" Where "id" = '${req.params.rideId}'`;
+          client.query(sqlSelect, (er, re) => {
+            if (er) {
+              res.status(404).json({
                 status: 'fail',
-                message: 'Some information provided is not of the right type'
+                message: 'cannot find the specified ride'
               });
             } else {
-              const sqlUpdate = `UPDATE public."Rides" SET "requests" = array_cat("requests", '{${result.rows[0].id}}') Where "id" = '${req.params.rideId}';`;
-              client.query(sqlUpdate, (inError) => {
-                if (inError) {
-                  res.status(400).json({
+              const sqlInsert = 'INSERT INTO public."Requests" ("rideId", "requesterId", "status", "requesterName", "mobileNumber", "driverId") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
+              const values = [req.params.rideId, req.body.requesterId, 'pending', `${req.body.firstName} ${req.body.lastName}`, req.body.mobileNumber, re.rows[0].driverId];
+              client.query(sqlInsert, values, (error, result) => {
+                if (error) {
+                  res.status(404).json({
                     status: 'fail',
                     message: 'Some information provided is not of the right type'
                   });
                 } else {
-                  res.status(200).json({
-                    status: 'success',
-                    message: 'Request Sent'
+                  const sqlUpdate = `UPDATE public."Rides" SET "requests" = array_cat("requests", '{${result.rows[0].id}}') Where "id" = '${req.params.rideId}';`;
+                  client.query(sqlUpdate, (inError) => {
+                    if (inError) {
+                      res.status(400).json({
+                        status: 'fail',
+                        message: 'Some information provided is not of the right type'
+                      });
+                    } else {
+                      res.status(200).json({
+                        status: 'success',
+                        message: 'Request Sent'
+                      });
+                    }
                   });
                 }
               });
@@ -117,19 +127,20 @@ const controller = {
   },
   getRequests: (req, res) => {
     try {
-      jwt.verify(req.headers.jwt, process.env.KEY, null, (err) => {
+      jwt.verify(req.headers.jwt, process.env.KEY, null, (err, decoded) => {
+        const { userId } = decoded;
         if (err) {
           res.status(401).json({
             status: 'fail',
             message: 'This token is either wrong or has expired'
           });
         } else {
-          const sql = `SELECT * FROM public."Requests" Where "rideId" = '${req.params.rideId}';`;
+          const sql = `SELECT * FROM public."Requests" Where "rideId" = '${req.params.rideId}' AND "driverId" = ${userId};`;
           client.query(sql, (error, result) => {
             if (error || result.rowCount === 0) {
-              res.status(400).json({
+              res.status(404).json({
                 status: 'fail',
-                message: 'Cannot get requests'
+                message: 'There are no requests for this ride'
               });
             } else {
               res.status(200).json({
