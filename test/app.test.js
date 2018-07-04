@@ -26,7 +26,7 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          emailAddress: 'FirstTestDriver@example.com',
+          emailAddress: 'SecondTestDriver@example.com',
           password: 'qwerty'
         })
         .end((err, res) => {
@@ -47,7 +47,7 @@ describe('Server', () => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
-          emailAddress: 'FirstTestDriver@example.com',
+          emailAddress: 'SecondTestDriver@example.com',
           password: 'qwy'
         })
         .end((err, res) => {
@@ -62,6 +62,7 @@ describe('Server', () => {
         .get('/api/v1/rides')
         .set('jwt', token)
         .end((err, res) => {
+          console.log(res.body.data.rides);
           expect(res.statusCode).to.equal(200);
           expect(res.body.data.rides[0]).to.have.property('id');
           expect(res.body.data.rides[0]).to.have.property('driverId');
