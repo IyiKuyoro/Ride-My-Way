@@ -62,7 +62,6 @@ describe('Server', () => {
         .get('/api/v1/rides')
         .set('jwt', token)
         .end((err, res) => {
-          console.log(res.body.data.rides);
           expect(res.statusCode).to.equal(200);
           expect(res.body.data.rides[0]).to.have.property('id');
           expect(res.body.data.rides[0]).to.have.property('driverId');
