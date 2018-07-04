@@ -124,33 +124,24 @@ const controller = {
   },
   postRide: (req, res) => {
     try {
-      jwt.verify(req.headers.jwt, process.env.KEY, null, (er) => {
-        if (er) {
-          res.status(401).json({
+      const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description", "requests") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;';
+      const values = [req.body.driverId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description, new Array()];
+      client.query(sqlInsert, values, (error) => {
+        if (error) {
+          res.status(404).json({
             status: 'fail',
-            message: 'This token is either wrong or has expired'
+            message: 'Ride not found'
           });
         } else {
-          const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description", "requests") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;';
-          const values = [req.body.driverId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description, new Array()];
-          client.query(sqlInsert, values, (error) => {
-            if (error) {
-              res.status(404).json({
-                status: 'fail',
-                message: 'Ride not found'
+          const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.body.driverId};`;
+          client.query(sqlSelect, (err, re) => {
+            const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
+            client.query(sqlUpdate, () => {
+              res.status(200).json({
+                status: 'success',
+                message: 'Ride offer saved'
               });
-            } else {
-              const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.body.driverId};`;
-              client.query(sqlSelect, (err, re) => {
-                const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
-                client.query(sqlUpdate, () => {
-                  res.status(200).json({
-                    status: 'success',
-                    message: 'Ride offer saved'
-                  });
-                });
-              });
-            }
+            });
           });
         }
       });
