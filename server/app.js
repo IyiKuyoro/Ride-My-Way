@@ -4,6 +4,7 @@ import apiRoutes from './routes/routes';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.use(apiRoutes);
 
