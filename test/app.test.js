@@ -2,6 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server/app';
 import controller from '../server/controllers/usercontroller';
+import client from '../server/model/db';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -22,6 +23,15 @@ describe('Server', () => {
     });
   });
   describe('Challenge three tests', () => {
+    after((done) => {
+      const sql = 'DELETE FROM public."Rides" WHERE "description" = \'This is a test data\';';
+      const sqlRequests = 'DELETE FROM public."Requests" WHERE "driverId" = 10;';
+      const sqlUpdate = 'UPDATE public."Rides" SET "requests" = \'{}\' WHERE "id" = 1;';
+      client.query(sql);
+      client.query(sqlRequests);
+      client.query(sqlUpdate);
+      done();
+    });
     it('LogIn existing user (success)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/login')
@@ -179,7 +189,7 @@ describe('Server', () => {
           time: '10:20AM',
           allowStops: true,
           avaliableSpace: 3,
-          description: 'Musin via Ikeja and Oshodi'
+          description: 'This is a test data'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
