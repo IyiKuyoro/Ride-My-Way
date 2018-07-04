@@ -10,6 +10,7 @@ chai.expect();
 
 //  James helped me understand how Chai works.
 describe('Server', () => {
+  let token = '';
   describe('Challenge two tests', () => {
     it('GET /', (done) => {
       chai.request(server)
@@ -29,6 +30,7 @@ describe('Server', () => {
           password: 'qwerty'
         })
         .end((err, res) => {
+          ({ token } = res.body.data);
           expect(res.statusCode).to.equal(200);
           expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('firstName');
@@ -58,7 +60,7 @@ describe('Server', () => {
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.data.rides[0]).to.have.property('id');
@@ -75,7 +77,7 @@ describe('Server', () => {
     it('Get specific ride', (done) => {
       chai.request(server)
         .get('/api/v1/rides/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.data.ride).to.have.property('id');
@@ -103,7 +105,7 @@ describe('Server', () => {
     it('Get specific ride (rideId error)', (done) => {
       chai.request(server)
         .get('/api/v1/rides/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.have.property('message');
@@ -114,7 +116,7 @@ describe('Server', () => {
     it('Post ride request', (done) => {
       chai.request(server)
         .post('/api/v1/rides/1/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .send({
           requesterId: '9',
           firstName: 'Test',
@@ -131,7 +133,7 @@ describe('Server', () => {
     it('Post users ride (query error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .send({
           drirId: 10,
           time: '10:20AM',
@@ -169,7 +171,7 @@ describe('Server', () => {
     it('Post users ride', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .send({
           driverId: 10,
           origin: 'Magodo',
@@ -189,7 +191,7 @@ describe('Server', () => {
     it('Get Request', (done) => {
       chai.request(server)
         .get('/api/v1/users/rides/2/requests')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.data.requests[0]).to.have.property('id');
@@ -202,7 +204,7 @@ describe('Server', () => {
     it('Put Response', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/2/requests/1')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .send({
           newStatus: 'accepted'
         })
@@ -216,7 +218,7 @@ describe('Server', () => {
     it('Put response (query error)', (done) => {
       chai.request(server)
         .put('/api/v1/users/rides/0/requests/0')
-        .set('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzA2NTI1MjIsImV4cCI6MTUzMDY1NjEyMn0.AV-Erf41OJpEoffidy5hjywRfkNrqVEeca9zye7gwOM')
+        .set('jwt', token)
         .send({
           newStatu: 'accepted'
         })
