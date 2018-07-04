@@ -8,7 +8,7 @@ dotenv.config();
 
 const controller = {
   postSignUp: (req, res) => {
-    helper.validEmail(req.body.emailAddress, (valid) => {
+    helper.validEmail(req.body.emailAddress || '', (valid) => {
       try {
         if (valid) {
           bcrypt.genSalt(10, (err, salt) => {

@@ -11,6 +11,8 @@ const helpers = {
           callback(true);
         }
       });
+    } else {
+      callback(false);
     }
   },
 };
