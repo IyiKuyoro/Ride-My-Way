@@ -16,6 +16,7 @@ const controller = {
           });
         } else {
           res.status(200).json({
+            status: 'success',
             data: {
               rides: result.rows
             }
