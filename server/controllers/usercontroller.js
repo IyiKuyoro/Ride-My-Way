@@ -84,56 +84,59 @@ const controller = {
     });
   },
   postLogIn: (req, res) => {
-    try {
-      const sql = `SELECT * FROM public."Users" WHERE "emailAddress" = '${req.body.emailAddress}'`;
-      client.query(sql, (err, result) => {
-        if (err || result.rows.length === 0) {
-          res.status(401).json({
+    helper.validateLogIn(req.body, (stat, eMessage) => {
+      if (stat === 200) {
+        const sql = `SELECT * FROM public."Users" WHERE "emailAddress" = '${req.body.emailAddress}'`;
+        client.query(sql, (err, result) => {
+          if (err || result.rows.length === 0) {
+            res.status(401).json({
+              status: 'fail',
+              message: 'Wrong login details',
+            });
+          } else {
+            bcrypt.compare(req.body.password, result.rows[0].password, (error, same) => {
+              if (error || !same) {
+                res.status(401).json({
+                  status: 'fail',
+                  message: 'Wrong login details',
+                });
+              } else {
+                const token = jwt.sign(
+                  {
+                    userId: result.rows[0].id,
+                  },
+                  process.env.KEY,
+                  {
+                    expiresIn: '1h',
+                  }
+                );
+                const response = {
+                  status: 'success',
+                  data: {
+                    token,
+                    iD: result.rows[0].id,
+                    firstName: result.rows[0].firstName,
+                    lastName: result.rows[0].lastName,
+                    mobileNumber: result.rows[0].mobileNumber,
+                    emailAddress: result.rows[0].emailAddress,
+                    ridesTaken: result.rows[0].ridesTaken,
+                    ridesOffered: result.rows[0].ridesOffered,
+                    friends: result.rows[0].friends,
+                  }
+                };
+                res.json(response);
+              }
+            });
+          }
+        });
+      } else {
+        res.status(stat)
+          .json({
             status: 'fail',
-            message: 'Wrong login details',
+            message: eMessage
           });
-        } else {
-          bcrypt.compare(req.body.password, result.rows[0].password, (error, same) => {
-            if (error || !same) {
-              res.status(401).json({
-                status: 'fail',
-                message: 'Wrong login details',
-              });
-            } else {
-              const token = jwt.sign(
-                {
-                  userId: result.rows[0].id,
-                },
-                process.env.KEY,
-                {
-                  expiresIn: '1h',
-                }
-              );
-              const response = {
-                status: 'success',
-                data: {
-                  token,
-                  iD: result.rows[0].id,
-                  firstName: result.rows[0].firstName,
-                  lastName: result.rows[0].lastName,
-                  mobileNumber: result.rows[0].mobileNumber,
-                  emailAddress: result.rows[0].emailAddress,
-                  ridesTaken: result.rows[0].ridesTaken,
-                  ridesOffered: result.rows[0].ridesOffered,
-                  friends: result.rows[0].friends,
-                }
-              };
-              res.json(response);
-            }
-          });
-        }
-      });
-    } catch (e) {
-      res.status(500).json({
-        status: 'fail',
-        message: 'Oops, seems like something went wrong here'
-      });
-    }
+      }
+    });
   },
   postRide: (req, res) => {
     try {
