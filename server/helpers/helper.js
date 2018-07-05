@@ -15,12 +15,36 @@ const helpers = {
       callback(false);
     }
   },
-  validSignUp: (data) => {
-    if (data.firstName || data.lastName || data.sex || data.dob
-    || data.phoneNumber || data.emailAddress || data.password) {
-      return true;
+  validSignUp: (data, callback) => {
+    if (data.firstName) {
+      if (data.lastName) {
+        if (data.sex) {
+          if (data.dob) {
+            if (data.phoneNumber) {
+              if (data.emailAddress) {
+                if (data.password) {
+                  callback(200);
+                } else {
+                  callback(400, 'password is a required field');
+                }
+              } else {
+                callback(400, 'emailAddress is a required field');
+              }
+            } else {
+              callback(400, 'phoneNumber is a required field');
+            }
+          } else {
+            callback(400, 'dob is a required field');
+          }
+        } else {
+          callback(400, 'sex is a required field');
+        }
+      } else {
+        callback(400, 'lastName is a required field');
+      }
+    } else {
+      callback(400, 'firstName is a required field');
     }
-    return false;
   }
 };
 
