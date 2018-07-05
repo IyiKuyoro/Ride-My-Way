@@ -62,7 +62,7 @@ const controller = {
               } else {
                 res.status(400).json({
                   status: 'fail',
-                  message: 'Could not add user to database',
+                  message: 'This email address is already in use',
                 });
               }
             });
