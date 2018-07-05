@@ -8,6 +8,12 @@ dotenv.config();
 
 const controller = {
   postSignUp: (req, res) => {
+    if (helper.validSignUp(req.body) === false) {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Body doesn\'t contain the right properties'
+      });
+    }
     helper.validEmail(req.body.emailAddress || '', (valid) => {
       try {
         if (valid) {

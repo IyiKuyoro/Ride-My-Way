@@ -15,6 +15,13 @@ const helpers = {
       callback(false);
     }
   },
+  validSignUp: (data) => {
+    if (data.firstName || data.lastName || data.sex || data.dob
+    || data.phoneNumber || data.emailAddress || data.password) {
+      return true;
+    }
+    return false;
+  }
 };
 
 export default helpers;
