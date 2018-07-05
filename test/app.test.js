@@ -296,7 +296,6 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Could not add user to database');
           done();
         });
     });
