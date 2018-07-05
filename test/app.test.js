@@ -299,5 +299,270 @@ describe('Server', () => {
           done();
         });
     });
+    it('SignUp (firstNameError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstNae: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('firstName is a required field');
+          done();
+        });
+    });
+    it('SignUp (lastNameError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastNae: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('lastName is a required field');
+          done();
+        });
+    });
+    it('SignUp (sexError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastName: 'User',
+          ex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('sex is a required field');
+          done();
+        });
+    });
+    it('SignUp (dobError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('dob is a required field');
+          done();
+        });
+    });
+    it('SignUp (phoneNumberError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          pheNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('phoneNumber is a required field');
+          done();
+        });
+    });
+    it('SignUp (emailError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emaAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('emailAddress is a required field');
+          done();
+        });
+    });
+    it('SignUp (passwordError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Test',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          pasord: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('password is a required field');
+          done();
+        });
+    });
+    it('SignUp (firstNameError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: '453dscev',
+          lastName: 'User',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('firstName must be a string');
+          done();
+        });
+    });
+    it('SignUp (lastNameError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: '1234',
+          sex: 'Male',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('lastName must be a string');
+          done();
+        });
+    });
+    it('SignUp (sexError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: 'sdvsfs',
+          sex: '345sd',
+          dob: '05/01/1872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('sex must be a string');
+          done();
+        });
+    });
+    it('SignUp (dobError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: 'sdvsfs',
+          sex: 'male',
+          dob: '05/011872',
+          phoneNumber: 9054387612,
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('dob must be in a this format mm/dd/yy');
+          done();
+        });
+    });
+    it('SignUp (phoneNumberError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: 'sdvsfs',
+          sex: 'male',
+          dob: '05/01/1872',
+          phoneNumber: '905sdcsf12',
+          emailAddress: 'test.user@example.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('phoneNumber must be a number');
+          done();
+        });
+    });
+    it('SignUp (emailError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: 'sdvsfs',
+          sex: 'male',
+          dob: '05/01/1872',
+          phoneNumber: '90512',
+          emailAddress: 'test.userexample.com',
+          password: 'qwerty',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('emailAddress must be an email');
+          done();
+        });
+    });
+    it('SignUp (passwordError)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'scdasdf',
+          lastName: 'sdvsfs',
+          sex: 'male',
+          dob: '05/01/1872',
+          phoneNumber: '90512',
+          emailAddress: 'test.user@example.com',
+          password: {},
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('password must be a string');
+          done();
+        });
+    });
   });
 });
