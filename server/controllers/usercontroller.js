@@ -10,58 +10,68 @@ const controller = {
   postSignUp: (req, res) => {
     helper.validSignUp(req.body, (stat, eMessage) => {
       if (stat === 200) {
-        helper.validEmail(req.body.emailAddress || '', (valid) => {
-          if (valid) {
-            bcrypt.genSalt(10, (err, salt) => {
-              if (err) {
-                throw err;
-              }
-              bcrypt.hash(req.body.password, salt, (error, hash) => {
-                if (err) {
-                  throw err;
-                }
-                const text = 'INSERT INTO public."Users" ("firstName", "lastName", "sex", "dob", "mobileNumber", "emailAddress", "password", "ridesTaken", "ridesOffered", "friends", "accountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
-                const values = [req.body.firstName, req.body.lastName, req.body.sex, req.body.dob, req.body.phoneNumber, req.body.emailAddress, hash, 0, 0, 0, 'Active'];
-                client.query(text, values, (error1, result) => {
-                  if (error1) {
-                    res.status(400).json({
-                      status: 'fail',
-                      message: 'Could not add user to database',
-                    });
-                  } else {
-                    const token = jwt.sign(
-                      {
-                        userId: result.rows[0].ID,
-                      },
-                      process.env.KEY,
-                      {
-                        expiresIn: '1h',
-                      }
-                    );
-                    const response = {
-                      status: 'Success',
-                      data: {
-                        token,
-                        iD: result.rows[0].id,
-                        firstName: result.rows[0].firstName,
-                        lastName: result.rows[0].lastName,
-                        mobileNumber: result.rows[0].mobileNumber,
-                        emailAddress: result.rows[0].emailAddress,
-                        ridesTaken: result.rows[0].ridesTaken,
-                        ridesOffered: result.rows[0].ridesOffered,
-                        friends: result.rows[0].friends,
-                      },
-                    };
-                    res.json(response);
+        helper.validSignUpDataType(req.body, (statT, eMessageT) => {
+          if (statT === 200) {
+            helper.validEmail(req.body.emailAddress || '', (valid) => {
+              if (valid) {
+                bcrypt.genSalt(10, (err, salt) => {
+                  if (err) {
+                    throw err;
                   }
+                  bcrypt.hash(req.body.password, salt, (error, hash) => {
+                    if (err) {
+                      throw err;
+                    }
+                    const text = 'INSERT INTO public."Users" ("firstName", "lastName", "sex", "dob", "mobileNumber", "emailAddress", "password", "ridesTaken", "ridesOffered", "friends", "accountStatus") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
+                    const values = [req.body.firstName, req.body.lastName, req.body.sex, req.body.dob, req.body.phoneNumber, req.body.emailAddress, hash, 0, 0, 0, 'Active'];
+                    client.query(text, values, (error1, result) => {
+                      if (error1) {
+                        res.status(400).json({
+                          status: 'fail',
+                          message: 'Could not add user to database',
+                        });
+                      } else {
+                        const token = jwt.sign(
+                          {
+                            userId: result.rows[0].ID,
+                          },
+                          process.env.KEY,
+                          {
+                            expiresIn: '1h',
+                          }
+                        );
+                        const response = {
+                          status: 'Success',
+                          data: {
+                            token,
+                            iD: result.rows[0].id,
+                            firstName: result.rows[0].firstName,
+                            lastName: result.rows[0].lastName,
+                            mobileNumber: result.rows[0].mobileNumber,
+                            emailAddress: result.rows[0].emailAddress,
+                            ridesTaken: result.rows[0].ridesTaken,
+                            ridesOffered: result.rows[0].ridesOffered,
+                            friends: result.rows[0].friends,
+                          },
+                        };
+                        res.json(response);
+                      }
+                    });
+                  });
                 });
-              });
+              } else {
+                res.status(400).json({
+                  status: 'fail',
+                  message: 'Could not add user to database',
+                });
+              }
             });
           } else {
-            res.status(400).json({
-              status: 'fail',
-              message: 'Could not add user to database',
-            });
+            res.status(statT)
+              .json({
+                status: 'fail',
+                message: eMessageT
+              });
           }
         });
       } else {

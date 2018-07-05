@@ -45,6 +45,42 @@ const helpers = {
     } else {
       callback(400, 'firstName is a required field');
     }
+  },
+  validSignUpDataType: (data, callback) => {
+    // The following regex were gotten from stack over-flow accross several links
+    // https://stackoverflow.com/questions/23476532/check-if-string-contains-only-letters-in-javascript
+    if (/^[a-zA-Z -]+$/.test(data.firstName)) {
+      if (/^[a-zA-Z -]+$/.test(data.lastName)) {
+        if (/^[a-zA-Z]+$/.test(data.sex)) {
+          // https://stackoverflow.com/questions/5465375/javascript-date-regex-dd-mm-yyyy
+          if (/(\d+)(-|\/)(\d+)(?:-|\/)(?:(\d+)\s+(\d+):(\d+)(?::(\d+))?(?:\.(\d+))?)?/.test(data.dob)) {
+            if (!isNaN(Number(data.phoneNumber))) {
+              // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+              const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              if (regex.test(data.emailAddress)) {
+                if (typeof data.password === 'string') {
+                  callback(200);
+                } else {
+                  callback(400, 'password must be a string');
+                }
+              } else {
+                callback(400, 'emailAddress must be an email');
+              }
+            } else {
+              callback(400, 'phoneNumber must be a number');
+            }
+          } else {
+            callback(400, 'dob must be in a this format mm/dd/yy');
+          }
+        } else {
+          callback(400, 'sex must be a string');
+        }
+      } else {
+        callback(400, 'lastName must be a string');
+      }
+    } else {
+      callback(400, 'firstName must be a string');
+    }
   }
 };
 
