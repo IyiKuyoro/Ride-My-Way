@@ -67,6 +67,34 @@ describe('Server', () => {
           done();
         });
     });
+    it('LogIn existing user (password error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/login')
+        .send({
+          emailAddress: 'SecondTestDriver@example.com',
+          passwod: 'qwy'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('password is required');
+          done();
+        });
+    });
+    it('LogIn existing user (email error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/login')
+        .send({
+          emaildress: 'SecondTestDriver@example.com',
+          password: 'qwy'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('emailAddress is required');
+          done();
+        });
+    });
     it('Get all avaliable ride (success)', (done) => {
       chai.request(server)
         .get('/api/v1/rides')

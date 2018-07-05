@@ -81,6 +81,17 @@ const helpers = {
     } else {
       callback(400, 'firstName must be a string');
     }
+  },
+  validateLogIn: (data, callback) => {
+    if (data.emailAddress) {
+      if (data.password) {
+        callback(200);
+      } else {
+        callback(400, 'password is required');
+      }
+    } else {
+      callback(400, 'emailAddress is required');
+    }
   }
 };
 
