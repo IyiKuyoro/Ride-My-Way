@@ -92,6 +92,60 @@ const helpers = {
     } else {
       callback(400, 'emailAddress is required');
     }
+  },
+  validateRidesOfferData: (data, callback) => {
+    if (data.origin) {
+      if (data.destination) {
+        if (data.time) {
+          if (data.allowStops) {
+            if (data.avaliableSpace) {
+              if (data.description) {
+                callback(200);
+              } else {
+                callback(400, 'description is required');
+              }
+            } else {
+              callback(400, 'avaliableSpace is required');
+            }
+          } else {
+            callback(400, 'allowStops is required');
+          }
+        } else {
+          callback(400, 'time is required');
+        }
+      } else {
+        callback(400, 'destination is required');
+      }
+    } else {
+      callback(400, 'origin is required');
+    }
+  },
+  validateRidesOfferTypes: (data, callback) => {
+    if (typeof data.origin === 'string') {
+      if (typeof data.destination === 'string') {
+        if (/^([0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(data.time)) {
+          if (typeof data.allowStops === 'string') {
+            if (!isNaN(data.avaliableSpace)) {
+              if (typeof data.description === 'string') {
+                callback(200);
+              } else {
+                callback(400, 'description must be a string');
+              }
+            } else {
+              callback(400, 'avaliableSpace must be an integer');
+            }
+          } else {
+            callback(400, 'allowStops must be a string type');
+          }
+        } else {
+          callback(400, 'time must be in the format hh:mm');
+        }
+      } else {
+        callback(400, 'destination must be a string');
+      }
+    } else {
+      callback(400, 'origin must be a string');
+    }
   }
 };
 

@@ -29,7 +29,7 @@ apiRoutes.use((req, res, done) => {
 apiRoutes.get('/api/v1/rides', rideController.getRides);
 apiRoutes.get('/api/v1/rides/:rideId', rideController.getSpecificRide);
 apiRoutes.post('/api/v1/rides/:rideId/requests', rideController.postRideRequest);
-apiRoutes.post('/api/v1/users/rides', userController.postRide);
+apiRoutes.post('/api/v1/users/rides', rideController.postRide);
 apiRoutes.get('/api/v1/users/rides/:rideId/requests', rideController.getRequests);
 apiRoutes.put('/api/v1/users/rides/:rideId/requests/:requestId', rideController.putResponse);
 

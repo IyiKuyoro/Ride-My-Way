@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import client from '../model/db';
+import helpers from '../helpers/helper';
 
 dotenv.config();
 
@@ -53,6 +54,47 @@ const controller = {
         message: 'Oops, seems like something went wrong here'
       });
     }
+  },
+  postRide: (req, res) => {
+    helpers.validateRidesOfferData(req.body, (stat, eMessage) => {
+      if (stat === 200) {
+        helpers.validateRidesOfferTypes(req.body, (statT, eMessageT) => {
+          if (statT === 200) {
+            const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description", "requests") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;';
+            const values = [req.decoded.userId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description, new Array()];
+            client.query(sqlInsert, values, (error) => {
+              if (error) {
+                res.status(500).json({
+                  status: 'fail',
+                  message: 'Oops, could not post ride offer'
+                });
+              } else {
+                const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.decoded.userId};`;
+                client.query(sqlSelect, (err, re) => {
+                  const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.decoded.userId}';`;
+                  client.query(sqlUpdate, () => {
+                    res.status(200).json({
+                      status: 'success',
+                      message: 'Ride offer saved'
+                    });
+                  });
+                });
+              }
+            });
+          } else {
+            res.status(statT).json({
+              status: 'fail',
+              message: eMessageT
+            });
+          }
+        });
+      } else {
+        res.status(stat).json({
+          status: 'fail',
+          message: eMessage
+        });
+      }
+    });
   },
   postRideRequest: (req, res) => {
     try {
