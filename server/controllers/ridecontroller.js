@@ -174,27 +174,44 @@ const controller = {
     }
   },
   putResponse: (req, res) => {
-    try {
-      const sql = `UPDATE public."Requests" SET "status" = '${req.body.newStatus}' Where "id" = '${req.params.requestId}';`;
-      client.query(sql, (error, result) => {
-        if (error || result.rowCount === 0) {
-          res.status(400).json({
-            status: 'fail',
-            message: 'Cannot put response'
-          });
-        } else {
-          res.status(200).json({
-            status: 'success',
-            message: 'Response recorded'
-          });
-        }
-      });
-    } catch (e) {
-      res.status(500).json({
-        status: 'fail',
-        message: 'Oops, seems like something went wrong here'
-      });
-    }
+    helpers.validatePutRequest(req.body, (stat, eMessage) => {
+      if (stat === 200) {
+        const sqlSelect = `SELECT * FROM public."Requests" WHERE "driverId" = ${req.decoded.userId} AND "id" = ${req.params.requestId};`;
+        client.query(sqlSelect, (err, response) => {
+          if (err) {
+            res.stat(500).json({
+              status: 'fail',
+              message: 'Error trying to access database'
+            });
+          } else if (response.rowCount === 0) {
+            res.status(403).json({
+              status: 'fail',
+              message: 'You are not the creator of this ride'
+            });
+          } else {
+            const sql = `UPDATE public."Requests" SET "status" = '${req.body.newStatus}' Where "id" = '${req.params.requestId}';`;
+            client.query(sql, (error, result) => {
+              if (error || result.rowCount === 0) {
+                res.status(500).json({
+                  status: 'fail',
+                  message: 'Could not update the database'
+                });
+              } else {
+                res.status(200).json({
+                  status: 'success',
+                  message: 'Response recorded'
+                });
+              }
+            });
+          }
+        });
+      } else {
+        res.status(stat).json({
+          status: 'fail',
+          message: eMessage
+        });
+      }
+    });
   }
 };
 
