@@ -138,36 +138,6 @@ const controller = {
       }
     });
   },
-  postRide: (req, res) => {
-    try {
-      const sqlInsert = 'INSERT INTO public."Rides" ("driverId", "origin", "destination", "time", "allowStops", "avaliableSpace", "description", "requests") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;';
-      const values = [req.body.driverId, req.body.origin, req.body.destination, req.body.time, req.body.allowStops, req.body.avaliableSpace, req.body.description, new Array()];
-      client.query(sqlInsert, values, (error) => {
-        if (error) {
-          res.status(404).json({
-            status: 'fail',
-            message: 'Ride not found'
-          });
-        } else {
-          const sqlSelect = `SELECT * FROM public."Rides" Where "driverId" = ${req.body.driverId};`;
-          client.query(sqlSelect, (err, re) => {
-            const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.body.driverId}';`;
-            client.query(sqlUpdate, () => {
-              res.status(200).json({
-                status: 'success',
-                message: 'Ride offer saved'
-              });
-            });
-          });
-        }
-      });
-    } catch (e) {
-      res.status(500).json({
-        status: 'fail',
-        message: 'Oops, seems like something went wrong here'
-      });
-    }
-  },
   deleteTestUser: (email, callback) => {
     const sql = `DELETE FROM public."Users" WHERE "emailAddress" = '${email}'`;
     client.query(sql, () => {

@@ -168,21 +168,231 @@ describe('Server', () => {
           done();
         });
     });
-    it('Post users ride (query error)', (done) => {
+    it('Post users ride (origin error)', (done) => {
       chai.request(server)
         .post('/api/v1/users/rides')
         .set('jwt', token)
         .send({
-          drirId: 10,
+          orign: 'Magodo',
+          destination: 'Musin',
           time: '10:20AM',
           allowStops: true,
           avaliableSpace: 3,
-          description: 'Musin via Ikeja and Oshodi'
+          description: 'This is a test data'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
+          expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Ride not found');
+          expect(res.body.message).to.equal('origin is required');
+          done();
+        });
+    });
+    it('Post users ride (origin error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: {},
+          destination: 'Musin',
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('origin must be a string');
+          done();
+        });
+    });
+    it('Post users ride (destination error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destintion: 'Musin',
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('destination is required');
+          done();
+        });
+    });
+    it('Post users ride (destination error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: {},
+          time: '10:20AM',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('destination must be a string');
+          done();
+        });
+    });
+    it('Post users ride (time error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          tie: '10:20',
+          allowStops: 'true',
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('time is required');
+          done();
+        });
+    });
+    it('Post users ride (time error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20AM',
+          allowStops: 'true',
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('time must be in the format hh:mm');
+          done();
+        });
+    });
+    it('Post users ride (allowStops error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allwStops: 'true',
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('allowStops is required');
+          done();
+        });
+    });
+    it('Post users ride (allowStops error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allowStops: true,
+          avaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('allowStops must be a string type');
+          done();
+        });
+    });
+    it('Post users ride (avaliableSpace error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allowStops: 'true',
+          aaliableSpace: 3,
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('avaliableSpace is required');
+          done();
+        });
+    });
+    it('Post users ride (avaliableSpace error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allowStops: 'true',
+          avaliableSpace: 'hhfd',
+          description: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('avaliableSpace must be an integer');
+          done();
+        });
+    });
+    it('Post users ride (description error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allowStops: 'true',
+          avaliableSpace: 3,
+          desription: 'This is a test data'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('description is required');
+          done();
+        });
+    });
+    it('Post users ride (description error)', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/rides')
+        .set('jwt', token)
+        .send({
+          origin: 'Magodo',
+          destination: 'Musin',
+          time: '10:20',
+          allowStops: 'true',
+          avaliableSpace: 3,
+          description: {}
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('description must be a string');
           done();
         });
     });
@@ -191,7 +401,6 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', 'eyJhQ3NjgsImV4cCI6MTUzMDYzODM2OH0.QsX36Ay9pkfs7B0pruwyGw4YB5u_M8sEcOuT4PIpVAg')
         .send({
-          driverId: 10,
           origin: 'Magodo',
           destination: 'Musin',
           time: '10:20AM',
@@ -211,11 +420,10 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', token)
         .send({
-          driverId: 10,
           origin: 'Magodo',
           destination: 'Musin',
-          time: '10:20AM',
-          allowStops: true,
+          time: '10:20',
+          allowStops: 'true',
           avaliableSpace: 3,
           description: 'This is a test data'
         })
