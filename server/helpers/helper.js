@@ -146,6 +146,17 @@ const helpers = {
     } else {
       callback(400, 'origin must be a string');
     }
+  },
+  validatePutRequest: (data, callback) => {
+    if (data.newStatus) {
+      if (data.newStatus === 'accepted' || data.newStatus === 'declined') {
+        callback(200);
+      } else {
+        callback(400, 'newStatus can only be "accpeted" or "declined"');
+      }
+    } else {
+      callback(400, 'newStatus is a required field');
+    }
   }
 };
 

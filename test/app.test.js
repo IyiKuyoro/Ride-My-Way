@@ -471,7 +471,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('Cannot put response');
+          expect(res.body.message).to.equal('newStatus is a required field');
           done();
         });
     });
