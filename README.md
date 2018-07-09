@@ -2,6 +2,8 @@
 This is a simple web application that helps users find riders or drivers typically going in the same direction
 Drivers can add ride offers, riders can view and request rides and drivers can accept or decline rider requests.
 
+You can view the API documentation here: https://app.swaggerhub.com/apis/Iyi-Kuyoro/RideMyWayAPI/1.0.0
+
 # Features
   * Sign-Up
   * Sign-In
