@@ -7,6 +7,8 @@ import rideController from '../controllers/ridecontroller';
 dotenv.config();
 const apiRoutes = express.Router();
 
+apiRoutes.get('/', controller.get);
+
 apiRoutes.use((req, res, done) => {
   res.header('Accept', 'application/json, text/plain, */*');
   res.header('Access-Control-Allow-Origin', '*');
@@ -15,7 +17,6 @@ apiRoutes.use((req, res, done) => {
   done();
 });
 
-apiRoutes.get('/', controller.get);
 apiRoutes.post('/api/v1/auth/signup', userController.postSignUp);
 apiRoutes.post('/api/v1/auth/login', userController.postLogIn);
 apiRoutes.get('/api/v1/rides', rideController.getRides);
