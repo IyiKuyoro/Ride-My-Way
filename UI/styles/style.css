@@ -1,11 +1,15 @@
 body{
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    line-height: 1.5;
-    background: white;
-    height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  background: white;
+  height: 100%;
+}
+
+.index-body {
+  background: url(../Images/welcomeimage.jpg) no-repeat fixed;
 }
 
 .diff-bg{
@@ -525,7 +529,6 @@ tr:hover {
 
 /* Welcome message section */
 #welcome{
-    background: url("../images/welcomeimage.jpg") no-repeat fixed;
     background-size: 100%;
     color: black;
     float: left;
@@ -785,110 +788,194 @@ footer ul{
 }
 
 @media(max-width: 800px){
-    header .container{
-        padding: 0 5px 0 5px;
-    }
-    
-    header #brand{
-        display: none;
-    }
-    
-    header #logo{
-        height: 50px;
-        float: left;
-        margin: 10px 0 0 10px;
-    }
+  #signup-form {
+    margin-top: 100px;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+  }
 
-    header li{
-        display: inline;
-        font-size: 15px;
-        margin: 0;
-    }
-    
-    header nav{
-        float: right;
-        padding: 0;
-        margin-right: -5px;
-        margin-top: 25px;
-    }
+  #signup-form h2 {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
 
-    #welcome{
-        margin-top: 55px;
-        width: 100%;
-        background-size: 310%;
-    }
-    
-    #welcome .container{
-        width: 72.5%;    
-        margin-left: 13%;
-        text-align: center;
-        font-size: 15px;
-    }
+  #signup-form button {
+    margin-left: 0;
+    width: 89%;
+  }
 
-    aside{
-        float: none;
-        display: flow-root;
-        width: 72.5%;
-        min-height: 280px;
-        margin: 0 10% 0 12.5%;
-        font-size: 17px;
-    }
-    
-    section .service-card{
-        width: 100%;
-        float: none;
-        min-height: fit-content;
-        margin-right: 5%;
-        font-size: 18px;
-    }
+  header .container{
+      padding: 0 5px 0 5px;
+  }
+  
+  header #brand{
+      display: none;
+  }
+  
+  header #logo{
+      height: 50px;
+      float: left;
+      margin: 10px 0 0 10px;
+  }
 
-    .userfeatures{
-        width: 50px; 
-    }
-    
-    .userfeatures .features-icon{
-        width: 25px;
-        padding-bottom: 0;
-        margin: 0;
-    }
-    
-    .userfeatures ul{
-        margin: 0;
-        margin-left: -10%;
-        width: 90%;
-    }
-    
-    .userfeatures li{
-        left: 0;
-        margin: 10% 0 10% 0;
-        overflow: hidden;
-    }
-    
-    #profile-pics{
-        max-width: 50px;
-        position: relative;
-        left: -6px;
-    }
+  header li{
+      display: inline;
+      font-size: 15px;
+      margin: 0;
+  }
+  
+  header nav{
+      float: right;
+      padding: 0;
+      margin-right: -5px;
+      margin-top: 25px;
+  }
 
-    .diff-bg{
-        background-size: 310%;
-    }
+  #welcome{
+      margin-top: 55px;
+      width: 100%;
+      background-size: 310%;
+  }
+  
+  #welcome .container{
+      width: 72.5%;    
+      margin-left: 13%;
+      text-align: center;
+      font-size: 15px;
+  }
 
-    #find-rd #search{
-        margin-left: 30%;
-    }
+  aside{
+      float: none;
+      display: flow-root;
+      width: 72.5%;
+      min-height: 280px;
+      margin: 0 10% 0 12.5%;
+      font-size: 17px;
+  }
+  
+  section .service-card{
+      width: 100%;
+      float: none;
+      min-height: fit-content;
+      margin-right: 5%;
+      font-size: 18px;
+  }
 
-    #ridesTbl{
-        position: relative;
-        z-index: 0;
-    }
+  .userfeatures{
+      width: 50px; 
+  }
+  
+  .userfeatures .features-icon{
+      width: 25px;
+      padding-bottom: 0;
+      margin: 0;
+  }
+  
+  .userfeatures ul{
+      margin: 0;
+      margin-left: -10%;
+      width: 90%;
+  }
+  
+  .userfeatures li{
+      left: 0;
+      margin: 10% 0 10% 0;
+      overflow: hidden;
+  }
+  
+  #profile-pics{
+      max-width: 50px;
+      position: relative;
+      left: -6px;
+  }
 
-    #find-rd{
-        overflow-x: scroll;
-    }
+  .diff-bg{
+      background-size: 310%;
+  }
 
-    #find-rd form{
-        margin-left: 18%;
-        width: 70%;
-    }
+  #find-rd #search{
+      margin-left: 30%;
+  }
+
+  #ridesTbl{
+      position: relative;
+      z-index: 0;
+  }
+
+  #find-rd{
+      overflow-x: scroll;
+  }
+
+  #find-rd form{
+      margin-left: 18%;
+      width: 70%;
+  }
+}
+
+@media(max-width: 412px) {
+  #logo2 {
+    height: 45px;
+    margin-left: 0;
+  }
+
+  #signup-form {
+    margin-top: 90px;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+  }
+
+  #signup-form h2 {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+
+  #signup-form div {
+    width: 100%;
+    text-align: center;
+  }
+
+  #signup-form button {
+    margin-left: 0;
+    width: 89%;
+  }
+
+  header nav, #nonhomeheader nav{
+    margin-top: 0;
+    height: fit-content;
+  }
+
+  header ul {
+    margin: 23px 5px 0 0;
+  }
+
+  header li {
+    margin: 0;
+    font-size: 12px;
+  }
+  
+  #welcome {
+    margin-top: 0;
+  }
+
+  #sign-in-container {
+    float: left;
+  }
+
+  .norm-foot {
+    text-align: center;
+  }
+
+  footer p {
+    float: none;
+    margin-left: 0;
+  }
+}
+
+@media(min-height: 722px) {
+  .norm-foot {
+    position: absolute;
+    bottom: 0;
+  }
 }
