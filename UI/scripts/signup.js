@@ -80,7 +80,7 @@ signUp.addEventListener('submit', (event) => {
       })
         .then(res => res.json())
         .then((data) => {
-          signUpError.innerHTML = 'Signup success!';
+          signUpError.innerHTML = data.message || 'Success!';
           sessionStorage.token = data.data.token;
           window.location.replace('dashboard.html');
         })
