@@ -60,10 +60,24 @@ const controller = {
                 message: 'Ride not found'
               });
             } else {
-              res.status(200).json({
-                data: {
-                  ride: result.rows[0]
-                }
+              const sqlSelectUser = `SELECT "firstName", "lastName" FROM public."Users" Where "id" = '${result.rows[0].driverId}'`;
+              client.query(sqlSelectUser, (inError, response) => {
+                res.status(200).json({
+                  status: 'success',
+                  data: {
+                    ride: {
+                      id: result.rows[0].id,
+                      driverId: result.rows[0].driverId,
+                      driverName: `${response.rows[0].firstName} ${response.rows[0].lastName}`,
+                      origin: result.rows[0].origin,
+                      destination: result.rows[0].destination,
+                      time: result.rows[0].time,
+                      allowStops: result.rows[0].allowStops,
+                      avaliableSpace: result.rows[0].avaliableSpace,
+                      description: result.rows[0].description
+                    }
+                  }
+                });
               });
             }
           });
