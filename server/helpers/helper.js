@@ -123,7 +123,7 @@ const helpers = {
   validateRidesOfferTypes: (data, callback) => {
     if (typeof data.origin === 'string') {
       if (typeof data.destination === 'string') {
-        if (/^([0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(data.time)) {
+        if (/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(data.time)) {
           if (typeof data.allowStops === 'string') {
             if (!isNaN(data.avaliableSpace)) {
               if (typeof data.description === 'string') {
