@@ -67,7 +67,7 @@ describe('Server', () => {
           done();
         });
     });
-    it('LogIn existing user (password error)', (done) => {
+    it('LogIn existing user (password required)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
@@ -77,11 +77,11 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('password is required');
+          expect(res.body.message).to.equal('password is required\n');
           done();
         });
     });
-    it('LogIn existing user (email error)', (done) => {
+    it('LogIn existing user (email required)', (done) => {
       chai.request(server)
         .post('/api/v1/auth/login')
         .send({
@@ -91,7 +91,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('emailAddress is required');
+          expect(res.body.message).to.equal('emailAddress is required\n');
           done();
         });
     });
@@ -183,7 +183,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('origin is required');
+          expect(res.body.message).to.equal('origin is required\n');
           done();
         });
     });
@@ -192,17 +192,17 @@ describe('Server', () => {
         .post('/api/v1/users/rides')
         .set('jwt', token)
         .send({
-          origin: {},
+          origin: '      ',
           destination: 'Musin',
-          time: '10:20AM',
-          allowStops: true,
+          time: '10:20',
+          allowStops: 'true',
           avaliableSpace: 3,
           description: 'This is a test data'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('origin must be a string');
+          expect(res.body.message).to.equal('origin must be a string\n');
           done();
         });
     });
@@ -221,7 +221,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('destination is required');
+          expect(res.body.message).to.equal('destination is required\n');
           done();
         });
     });
@@ -231,16 +231,16 @@ describe('Server', () => {
         .set('jwt', token)
         .send({
           origin: 'Magodo',
-          destination: {},
-          time: '10:20AM',
-          allowStops: true,
+          destination: '     ',
+          time: '10:20',
+          allowStops: 'true',
           avaliableSpace: 3,
           description: 'This is a test data'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('destination must be a string');
+          expect(res.body.message).to.equal('destination must be a string\n');
           done();
         });
     });
@@ -259,7 +259,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('time is required');
+          expect(res.body.message).to.equal('time is required\n');
           done();
         });
     });
@@ -278,7 +278,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('time must be in the format hh:mm');
+          expect(res.body.message).to.equal('time must be in the format hh:mm\n');
           done();
         });
     });
@@ -297,7 +297,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('allowStops is required');
+          expect(res.body.message).to.equal('allowStops is required\n');
           done();
         });
     });
@@ -316,7 +316,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('allowStops must be a string type');
+          expect(res.body.message).to.equal('allowStops must be a boolean type\n');
           done();
         });
     });
@@ -335,7 +335,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('avaliableSpace is required');
+          expect(res.body.message).to.equal('avaliableSpace is required\n');
           done();
         });
     });
@@ -354,7 +354,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('avaliableSpace must be an integer');
+          expect(res.body.message).to.equal('avaliableSpace must be a number\n');
           done();
         });
     });
@@ -366,14 +366,14 @@ describe('Server', () => {
           origin: 'Magodo',
           destination: 'Musin',
           time: '10:20',
-          allowStops: 'true',
+          allowStops: true,
           avaliableSpace: 3,
           desription: 'This is a test data'
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('description is required');
+          expect(res.body.message).to.equal('description is required\n');
           done();
         });
     });
@@ -387,12 +387,12 @@ describe('Server', () => {
           time: '10:20',
           allowStops: 'true',
           avaliableSpace: 3,
-          description: {}
+          description: '        '
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('description must be a string');
+          expect(res.body.message).to.equal('description must be a string\n');
           done();
         });
     });
@@ -502,7 +502,7 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
@@ -543,14 +543,14 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('firstName is a required field');
+          expect(res.body.message).to.equal('firstName is a required field\n');
           done();
         });
     });
@@ -562,14 +562,14 @@ describe('Server', () => {
           lastNae: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('lastName is a required field');
+          expect(res.body.message).to.equal('lastName is a required field\n');
           done();
         });
     });
@@ -581,14 +581,14 @@ describe('Server', () => {
           lastName: 'User',
           ex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('sex is a required field');
+          expect(res.body.message).to.equal('sex is a required field\n');
           done();
         });
     });
@@ -599,14 +599,14 @@ describe('Server', () => {
           firstName: 'Test',
           lastName: 'User',
           sex: 'Male',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('dob is a required field');
+          expect(res.body.message).to.equal('dob is a required field\n');
           done();
         });
     });
@@ -618,14 +618,14 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          pheNumber: 9054387612,
+          pheNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('phoneNumber is a required field');
+          expect(res.body.message).to.equal('phoneNumber is a required field\n');
           done();
         });
     });
@@ -637,14 +637,14 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emaAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('emailAddress is a required field');
+          expect(res.body.message).to.equal('emailAddress is a required field\n');
           done();
         });
     });
@@ -656,14 +656,14 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           pasord: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('password is a required field');
+          expect(res.body.message).to.equal('password is a required field\n');
           done();
         });
     });
@@ -675,14 +675,14 @@ describe('Server', () => {
           lastName: 'User',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('firstName must be a string');
+          expect(res.body.message).to.equal('firstName must be a string\n');
           done();
         });
     });
@@ -694,14 +694,14 @@ describe('Server', () => {
           lastName: '1234',
           sex: 'Male',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('lastName must be a string');
+          expect(res.body.message).to.equal('lastName must be a string\n');
           done();
         });
     });
@@ -713,14 +713,14 @@ describe('Server', () => {
           lastName: 'sdvsfs',
           sex: '345sd',
           dob: '05/01/1872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('sex must be a string');
+          expect(res.body.message).to.equal('sex must be male or female\n');
           done();
         });
     });
@@ -732,14 +732,14 @@ describe('Server', () => {
           lastName: 'sdvsfs',
           sex: 'male',
           dob: '05/011872',
-          phoneNumber: 9054387612,
+          phoneNumber: '9054387612',
           emailAddress: 'test.user@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('dob must be in a this format mm/dd/yy');
+          expect(res.body.message).to.equal('dob must be in a this format mm/dd/yyyy\n');
           done();
         });
     });
@@ -751,14 +751,14 @@ describe('Server', () => {
           lastName: 'sdvsfs',
           sex: 'male',
           dob: '05/01/1872',
-          phoneNumber: '905sdcsf12',
-          emailAddress: 'test.user@example.com',
+          phoneNumber: '      ',
+          emailAddress: 'test.user123@example.com',
           password: 'qwerty',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('phoneNumber must be a number');
+          expect(res.body.message).to.equal('phoneNumber must be a string\n');
           done();
         });
     });
@@ -777,7 +777,7 @@ describe('Server', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('emailAddress must be an email');
+          expect(res.body.message).to.equal('emailAddress must be an email\n');
           done();
         });
     });
@@ -790,13 +790,13 @@ describe('Server', () => {
           sex: 'male',
           dob: '05/01/1872',
           phoneNumber: '90512',
-          emailAddress: 'test.user@example.com',
-          password: {},
+          emailAddress: 'test.userss@example.com',
+          password: '         ',
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('password must be a string');
+          expect(res.body.message).to.equal('password must be a string\n');
           done();
         });
     });
