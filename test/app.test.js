@@ -162,7 +162,7 @@ describe('Server', () => {
           mobileNumber: '90472865784'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(201);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Request Sent');
           done();
@@ -428,7 +428,7 @@ describe('Server', () => {
           description: 'This is a test data'
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(201);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Ride offer saved');
           done();
@@ -507,7 +507,7 @@ describe('Server', () => {
           password: 'qwerty',
         })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(201);
           expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('firstName');
           expect(res.body.data).to.have.property('lastName');
