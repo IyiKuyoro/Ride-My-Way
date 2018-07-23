@@ -116,7 +116,7 @@ const controller = {
                     client.query(sqlSelect, (err, re) => {
                       const sqlUpdate = `UPDATE public."Users" SET "ridesOffered" = ${re.rowCount} Where "ID" = '${req.decoded.userId}';`;
                       client.query(sqlUpdate, () => {
-                        res.status(200).json({
+                        res.status(201).json({
                           status: 'success',
                           message: 'Ride offer saved'
                         });
@@ -188,7 +188,7 @@ const controller = {
                           message: 'Oops, something seems to have broken here'
                         });
                       } else {
-                        res.status(200).json({
+                        res.status(201).json({
                           status: 'success',
                           message: 'Request Sent'
                         });

@@ -54,6 +54,7 @@ const controller = {
                             friends: result.rows[0].friends,
                           },
                         };
+                        res.status(201);
                         res.json(response);
                       }
                     });
