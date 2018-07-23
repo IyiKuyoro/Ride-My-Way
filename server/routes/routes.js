@@ -23,6 +23,12 @@ apiRoutes.post('/api/v1/auth/signup', userController.postSignUp);
 apiRoutes.post('/api/v1/auth/login', userController.postLogIn);
 
 apiRoutes.use((req, res, done) => {
+  res.header('Accept', 'application/json, text/plain, */*');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, jwt');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET');
+  res.header('Content-Type', 'application/json');
+
   jwt.verify(req.headers.jwt, process.env.KEY, null, (err, decoded) => {
     if (err) {
       res.status(401).json({
