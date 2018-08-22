@@ -77,8 +77,7 @@ You can view the API documentation here: https://app.swaggerhub.com/apis/Iyi-Kuy
   * Bootcamp Assistant Facilitators (Maranatha, Sasiliyu and others)
   * All fellow bootcampers
 # Contributing
-  * If you intend to contribute to the development of this project, I will be more than happy to welcome you on board
-  * Just send fork the repo, or send me a mail if you want to be added as a contributor.
+I am currently not accepting request to collaborate on this project, as it is a graded project work at Andela.
 # Author
 This project was done by myself Opeoluwa Anthony iyi-Kuyoro, with a lot of help from colleagues.
 # License & Copyright
