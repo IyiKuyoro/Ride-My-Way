@@ -71,12 +71,6 @@ const helpers = {
     if (!(/(\d+)(-|\/)(\d+)(?:-|\/)(?:(\d+)\s+(\d+):(\d+)(?::(\d+))?(?:\.(\d+))?)?/.test(data.dob.trim())) || data.dob.length > 10) {
       updateError(400, 'dob must be in a this format mm/dd/yyyy');
     }
-    if (Number(data.dob.trim().substring(0, 2)) > 12) {
-      updateError(400, 'dob month cannot be greater than 12');
-    }
-    if (Number(data.dob.trim().substring(3, 5)) > 31) {
-      updateError(400, 'dob day cannot be greater than 31');
-    }
     const curYear = new Date().getFullYear();
     if (curYear - Number(data.dob.trim().substring(6, 10)) < 18) {
       updateError(400, 'This user cannot drive yet');
