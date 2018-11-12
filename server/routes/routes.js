@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import controller from '../controllers/controller';
 import userController from '../controllers/usercontroller';
 import rideController from '../controllers/ridecontroller';
+import slackController from '../controllers/slackcontroller';
 
 dotenv.config();
 const apiRoutes = express.Router();
@@ -11,6 +12,7 @@ const apiRoutes = express.Router();
 apiRoutes.get('/', controller.get);
 apiRoutes.post('/api/v1/auth/signup', userController.postSignUp);
 apiRoutes.post('/api/v1/auth/login', userController.postLogIn);
+apiRoutes.post('/api/v1/slack', slackController.ijapa);
 
 apiRoutes.use((req, res, done) => {
   jwt.verify(req.headers.jwt, process.env.KEY, null, (err, decoded) => {
